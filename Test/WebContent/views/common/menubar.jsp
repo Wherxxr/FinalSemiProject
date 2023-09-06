@@ -1,8 +1,10 @@
 <%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <% String contextPath = request.getContextPath(); 
+     <% 
+     String contextPath = request.getContextPath(); 
      Member loginMember = (Member)session.getAttribute("loginMember");
+     String alertMsg = (String)session.getAttribute("alertMsg");
      %>
 <!DOCTYPE html>
 <html>
@@ -151,7 +153,12 @@
     </style>
 </head>
 <body>
-
+	<% if(alertMsg != null) {%>
+		<script>
+			alert("<%= alertMsg%>");
+			<% session.removeAttribute("alertMsg"); %>
+		</script>
+	<%} %>
     <div class="mb_outer">
         <div class="mb_menu-area">
             <div id="mb_logo"  onclick="main();">
