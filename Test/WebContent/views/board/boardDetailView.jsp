@@ -180,8 +180,8 @@
             <%}else{ %>
             <div id="bar" align="right">
                 <button type="button" data-toggle="modal" data-target="#reportBoard">신고</button>
-                <button id="like1" onclick="insertLike();">좋아요 🤍</button>
-                <button id="like2" style="display: none;" onclick="deleteLike();">좋아요 💚</button>
+                <button id="like1" onclick="insertLike();">🤍 <span class="countLike" style="font-size:15px;">0</span></button>
+                <button id="like2" style="display: none;" onclick="deleteLike();">💚 <span class="countLike" style="font-size:15px;">10</span></button>
                 <button id="bookmark1" onclick="insertBook();"><img src="resources/image/bookmark_blank.png" width="25" height="25"></button>
                 <button id="bookmark2" onclick="deleteBook();" style="display: none;"><img src="resources/image/bookmark.png" width="25" height="25"></button>
             </div>
@@ -228,6 +228,7 @@
 	                if(result == 'Y'){
 	                	$("#like1").css("display", "none");
 	                    $("#like2").css("display", "");
+		                likeCount(); 
 	                }
 	            },
 	            error:function(){
@@ -247,6 +248,7 @@
                          if(result == 'Y'){
                          	$("#like2").css("display", "none");
                              $("#like1").css("display", "");
+	                         likeCount();
                          }
                      },
                      error:function(){
@@ -298,8 +300,20 @@
             	
         }
         
+        function likeCount(){
+        	
+        	$.ajax({
+        		url:"countLike.bo",
+        		data:{boardNo:bno},
+        		success:function(count){
+        			$(".countLike").text(count);
+        		}
+        	})
+        }
+        
         $(function(){
         	selectReplyList();
+        	likeCount();
             	
         // 북마크, 좋아요 체크 함수
 	            $.ajax({
@@ -337,6 +351,8 @@
 	                    console.log("실패");
 	                }
 	            })
+	            
+	            
         })   
         
 	    	function selectReplyList(){

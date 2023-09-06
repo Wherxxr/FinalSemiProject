@@ -408,4 +408,9 @@ SELECT
 	      )
 	WHERE  ROWNUM &lt;= 5;
 </entry>
+<entry key="countLike">
+	SELECT COUNT(*) "COUNT"
+	  FROM LIKES
+	 WHERE BOARD_NO = ?
+</entry>
 </properties>
