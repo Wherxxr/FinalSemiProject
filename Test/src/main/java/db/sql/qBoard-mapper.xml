@@ -36,7 +36,7 @@
         )
         VALUES
         (
-          SEQ_BNO.NEXTVAL
+          SEQ_QNO.NEXTVAL
         , ?
         , ?
         , 2
