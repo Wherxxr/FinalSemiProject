@@ -29,7 +29,7 @@
             }
 
             #addon_input>input {
-                width: 250px;
+                width: 410px;
                 border-top-width: 0;
                 border-left-width: 0;
                 border-right-width: 0;
@@ -358,7 +358,6 @@
             function validate() {
                 const idInput = document.getElementById("userId");
                 const pwdInput1 = document.getElementById("userPwd");
-                const pwdInput2 = document.getElementById("userPwd2");
                 const nameInput = document.getElementById("userName");
 
                 // 1) 아이디 검사
@@ -380,27 +379,14 @@
                     return false;
                 }
 
-                // 3) 비밀번호 일치
-               <!-- if (pwdInput1.value != pwdInput2.value) {
-                    alert("동일한 비밀번호를 입력해주세요!");
-                    pwdInput2.value = "";
-                    pwdInput2.focus();
-                    return false;
-                } -->
+              
 
-                // 4) 이름 
-                //    한글(결합형태)로만 두글자 이상
-                regExp = /^[가-힣]{2,}$/;
-                if (!regExp.test(nameInput.value)) {
-                    alert("유효한 이름을 입력해주세요!")
-                    nameInput.select();
-                    return false;
-                }
+               
 
             } 
 
 
-        </script> -->
+        </script> 
 
         <%@ include file="../common/footerbar.jsp" %>
 

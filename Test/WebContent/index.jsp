@@ -224,6 +224,7 @@
         }
         
         #navi a{
+        	width: 65%;
             font-weight: bolder;
             font-size: 19px;
             color: rgb(58,58,58);
@@ -340,17 +341,17 @@
                   <div class="carousel-item active">
                     <!--가로-->
                     <img class="d-block w-100" 
-                      src="resources/image/mt.jpg"
+                      src="resources/image/cha2.png"
                       alt="First slide">
                   </div>
                   <div class="carousel-item">
                     <img class="d-block w-100"
-                      src="resources/image/bag.jpg"
+                      src="resources/image/snow5.jpg"
                       alt="Second slide">
                   </div>
                   <div class="carousel-item">
                     <img class="d-block w-100"
-                      src="resources/image/purple.jpg"
+                      src="resources/image/cha1.png"
                       alt="Third slide">
                  </div>
                 </div>

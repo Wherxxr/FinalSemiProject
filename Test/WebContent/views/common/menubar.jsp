@@ -229,18 +229,18 @@
     
                 
             <% }else { %>
-                <div id="user_1">
+                <div id="mb_user_1">
 
                     <table align="center">
                         <tr height="75">
                             <th width="100"><img src="<%= loginMember.getProfileImg()%>" class="pImg"></th>
-                            <td width="100" style="font-size: 20px"><b><%= loginMember.getUserName()%>님</b></td>
+                            <td width="100" style="font-size: 20px;"><b><%= loginMember.getUserName()%>님</b></td>
                         </tr>
                     </table>
     
     
                 </div>
-                <div id="user_2">
+                <div id="mb_user_2">
                     <table align="center">
                         <tr height="75" align="center">
                             <td width="80">

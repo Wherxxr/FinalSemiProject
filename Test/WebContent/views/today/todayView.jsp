@@ -250,7 +250,7 @@
                     <div id="box-search">
                         <input type="text" placeholder=" 검색어를 입력하세요" id="searchkeyword">
                         <button type="submit" class="img-button">
-                            <img src="views/resources/img/search.png" alt="">
+                            <img src="resources/image/search.png" alt="">
                             </button>
                             <!-- <button type="submit">검색</button> -->
                         </div>
