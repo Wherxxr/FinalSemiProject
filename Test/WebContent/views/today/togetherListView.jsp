@@ -25,6 +25,8 @@
             /* border: 1px solid red; */
             margin: auto;
             font-family: 'NanumBarunGothic';
+            overflow: hidden;
+            padding-bottom:150px;
         }
        
         .list>div{
@@ -139,7 +141,7 @@
             </div>
         </div>
     </div>
-    
+    <%@ include file="../common/footerbar.jsp" %>
     <script>
 
         // 게시글 상세보기

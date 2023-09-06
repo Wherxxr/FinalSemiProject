@@ -357,7 +357,7 @@ public int insertLike(int userNo, String todayNo) {
 			Connection conn = getConnection();
 			
 			int result1 = new TodayDao().enrollTogether(conn, uno, tno);
-			int result2 = 1;
+			int result2 = 0;
 			if(result1 > 0) {
 				result2 = new TodayDao().togetherCount(conn, tno);
 			}
@@ -427,5 +427,44 @@ public int insertLike(int userNo, String todayNo) {
 			
 			return count;
 			
+		}
+		
+		public int togetherDropOut(int uno, String tno) {
+			
+			Connection conn = getConnection();
+			
+			int result1 = new TodayDao().togetherDropOut(conn, uno, tno);
+				
+			int result2 = 0;
+			if(result1 > 0) {
+				result2 = new TodayDao().countDecrease(conn, tno);
+			}
+			
+			if(result1 > 0 && result2 > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result1 * result2;
+		}
+		
+		public int updateTogether(Today t) {
+			
+			Connection conn = getConnection();
+			
+			int result = new TodayDao().updateTogether(conn, t);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
 		}
 }
