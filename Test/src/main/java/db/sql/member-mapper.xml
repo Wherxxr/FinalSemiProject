@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="loginMember">
+	SELECT 
+	       USER_NO
+	     , USER_ID
+	     , USER_PWD
+	     , USER_NAME
+	     , NICKNAME
+	     , EMAIL
+	     , GENDER
+	     , PHONE
+	     , DESCRIPTION
+	     , PROFILE_IMG
+	     , GRADE_NO
+	     , STATUS
+	     , COMPLETE_MT
+	     , INSTA_ID
+    FROM MEMBER
+	WHERE USER_ID = ? 
+    AND USER_PWD = ? 
+    AND STATUS = 'Y'
+</entry>
+<entry key="selectMember">
+	SELECT 
+	       USER_NO
+	     , USER_ID
+	     , USER_PWD
+	     , USER_NAME
+	     , NICKNAME
+	     , EMAIL
+	     , GENDER
+	     , PHONE
+	     , DESCRIPTION
+	     , PROFILE_IMG
+	     , GRADE_NO
+	     , STATUS
+	     , COMPLETE_MT
+	     , INSTA_ID
+	    FROM MEMBER
+	    WHERE USER_ID = ?
+	    AND STATUS = 'Y'
+</entry>
+<entry key="idCheck">
+	SELECT 
+	        COUNT(*) "COUNT"
+	  FROM MEMBER
+	 WHERE USER_ID = ?
+</entry>
+<entry key="nickCheck">
+	SELECT 
+	        COUNT(*) "COUNT"
+	  FROM MEMBER
+	 WHERE NICKNAME = ?
+</entry>
+<entry key="insertMember">
+	INSERT 
+	    INTO MEMBER
+	    (
+	      USER_NO
+	    , USER_ID
+	    , USER_PWD
+	    , USER_NAME
+	    , NICKNAME
+	    , EMAIL
+	    , GENDER
+	    , PHONE
+	    , DESCRIPTION
+	    , PROFILE_IMG
+	    , GRADE_NO
+	    , INSTA_ID
+	    )
+	    VALUES
+	    ( 
+	      SEQ_MNO.NEXTVAL
+	    , ?
+	    , ?
+	    , ?
+	    , ?
+	    , ?
+	    , ?
+	    , ?
+	    , ?
+	    , ?
+	    , ?
+	    , ?
+	    )
+</entry>
+<entry key="findId">
+	SELECT USER_ID
+	  FROM MEMBER
+	 WHERE EMAIL = ?
+</entry>
+<entry key="findPwd">
+	SELECT USER_PWD
+	  FROM MEMBER
+	 WHERE EMAIL = ?
+</entry>
+<entry key="updateCompleteMt">
+UPDATE MEMBER
+   SET COMPLETE_MT = ?
+ WHERE USER_NO = ?
+</entry>
+
+<entry key="selectProfile">
+	SELECT 
+	       USER_NO
+	     , USER_ID
+	     , USER_PWD
+	     , USER_NAME
+	     , NICKNAME
+	     , EMAIL
+	     , GENDER
+	     , PHONE
+	     , DESCRIPTION
+	     , PROFILE_IMG
+	     , GRADE_NO
+	     , STATUS
+	     , COMPLETE_MT
+	     , INSTA_ID
+	    FROM MEMBER
+    WHERE USER_NO = ?
+</entry>
+
+<entry key="selectProfileImg">
+SELECT 
+       FILE_NO
+     , ORIGIN_NAME
+     , CHANGE_NAME
+     , FILE_PATH
+  FROM ATTACHMENT
+ WHERE REF_NO = ?
+   AND STATUS = 'Y'
+</entry>
+
+<entry key="updatePwd">
+UPDATE MEMBER
+   SET USER_PWD = ?
+ WHERE USER_ID = ?
+</entry>
+
+<entry key="updateEmail">
+ UPDATE MEMBER
+   SET EMAIL = ?
+ WHERE USER_ID = ?
+</entry>
+
+<entry key="updatePhone">
+ UPDATE MEMBER
+   SET PHONE = ?
+ WHERE USER_ID = ?	
+</entry>
+
+<entry key="getImageCount">
+    SELECT COUNT(FILE_NO) "COUNT"
+      FROM ATTACHMENT
+      WHERE REF_NO = ?
+</entry>
+
+<entry key="updateProfile">
+UPDATE MEMBER
+    SET NICKNAME = ?
+      , DESCRIPTION = ?
+      , INSTA_ID = ?
+      , PROFILE_IMG = ?
+      , GRADE_NO = ?
+    WHERE USER_NO = ?
+</entry>
+
+<entry key="selectProImg">
+SELECT PROFILE_IMG 
+  FROM MEMBER   
+ WHERE USER_NO = ?
+</entry>
+
+
+<entry key="updatePostImg">
+UPDATE
+       ATTACHMENT
+   SET ORIGIN_NAME = ?
+     , CHANGE_NAME = ?
+     , FILE_PATH = ?
+ WHERE FILE_NO = ?
+</entry>
+
+<entry key="insertPostImg">
+  INSERT
+  INTO ATTACHMENT
+  (
+    FILE_NO
+  , REF_NO
+  , ORIGIN_NAME
+  , CHANGE_NAME
+  , FILE_PATH
+  , FILE_LEVEL
+  )
+  VALUES
+  (
+    SEQ_FNO.NEXTVAL
+  , ?
+  , ?
+  , ?
+  , ?
+  , 1
+  )
+
+</entry>
+
+
+
+<entry key="selectMpList">
+	SELECT *
+		  FROM (
+		        SELECT ROWNUM AS "RNUM", A.*
+		          FROM (
+		                SELECT
+	        BOARD_TITLE
+	      , BOARD_CONTENT
+	      , NICKNAME
+	      , TO_CHAR(CREATE_DATE, 'YY/MM/DD') AS "CREATE_DATE"
+	  FROM BOARD B
+	  JOIN MEMBER ON (BOARD_WRITER = USER_NO)
+	 WHERE USER_NO = ?
+		                 ORDER
+		                    BY BOARD_NO DESC
+		                ) A
+		        )
+		WHERE RNUM BETWEEN 1 AND 5
+</entry>
+
+<entry key="selectMpListCount">
+		 SELECT COUNT(*) "COUNT"
+	        FROM BOARD
+	        WHERE BOARD_WRITER = ?
+</entry>
+<entry key="selectBookmark">		
+SELECT *
+  FROM (
+        SELECT ROWNUM AS "RNUM", A.*
+          FROM (
+               SELECT BOARD_TITLE
+, BOARD_CONTENT
+, NICKNAME
+, TO_CHAR(CREATE_DATE, 'YY/MM/DD') AS "CREATE_DATE"
+, PROFILE_IMG
+FROM BOARD B
+JOIN BOOKMARK BM ON (B.BOARD_NO = BM.BOARD_NO)
+JOIN MEMBER M ON (M.USER_NO = B.BOARD_WRITER)
+WHERE BM.USER_NO = ?
+UNION ALL
+SELECT TODAY_TITLE
+    , TODAY_CONTENT
+    , NICKNAME
+    , TO_CHAR(CREATE_DATE, 'YY/MM/DD') AS "CREATE_DATE"
+    , PROFILE_IMG
+ FROM TODAY
+ JOIN BOOKMARK BM ON (TODAY_NO = BM.BOARD_NO)
+ JOIN MEMBER M ON (M.USER_NO = TODAY_WRITER)
+ WHERE BM.USER_NO = ?
+ORDER BY CREATE_DATE DESC
+                ) A
+        )
+WHERE RNUM BETWEEN 1 AND 5
+</entry>
+<entry key="insertLike">
+INSERT
+  INTO LIKES
+ (?, ?)
+VALUES
+(USER_NO, BOARD_NO)
+</entry>
+
+<entry key="deleteLike">
+DELETE
+  FROM LIKES
+ WHERE USER_NO = ?
+   AND BOARD_NO = ?
+</entry>
+
+<entry key="selectLike">		
+SELECT COUNT(BOARD_NO)
+  FROM LIKES
+ WHERE BOARD_NO = ?
+</entry>
+
+
+
+
+<entry key="deleteMember">
+	UPDATE MEMBER
+		SET STATUS = 'N'
+	WHERE USER_ID = ?
+	  AND USER_PWD = ?
+</entry>
+
+
+
+</properties>

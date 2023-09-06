@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectListCount">
+SELECT 
+       COUNT(*) count
+  FROM TODAY
+ WHERE TODAY_TYPE = 1
+</entry>
+
+<entry key="selectTodayList">
+SELECT
+        TODAY_NO
+         , TODAY_TITLE
+         , TODAY_CONTENT
+         , COUNT
+         , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+         , (
+         SELECT COUNT(*)
+           FROM LIKES L
+         WHERE L.BOARD_NO = TODAY_NO
+       ) AS "LIKE_COUNT"
+      FROM TODAY T
+      JOIN ATTACHMENT AT ON (TODAY_NO = REF_NO)
+     WHERE TODAY_TYPE = 1
+       AND T.STATUS = 'Y'
+       AND AT.STATUS = 'Y'
+       AND FILE_LEVEL = 1
+ ORDER
+    BY TO_NUMBER(SUBSTR(TODAY_NO,2)) DESC
+</entry>
+
+<entry key="toincreaseCount">
+UPDATE
+       TODAY
+   SET COUNT = COUNT + 1
+ WHERE TODAY_NO = ?
+</entry>
+
+<entry key="selectToday">
+SELECT 
+       TODAY_NO
+     , TODAY_TITLE
+     , TODAY_CONTENT
+     , NICKNAME
+     , TODAY_TIP
+     , HASHTAG
+     , TODAY_NAME
+     , TODAY_DATE
+     , TODAY_TIME
+     , TODAY_COURSE
+     , LEV
+     , TODAY_VEHICLE
+     , CREATE_DATE
+     , COUNT
+     , (SELECT COUNT(*)
+	      FROM REPLY
+	     WHERE REF_BNO = TODAY_NO
+	       AND STATUS = 'Y'
+	   )AS "REPLY_COUNT"
+	   ,(SELECT COUNT(*)
+	           FROM LIKES L
+	         WHERE L.BOARD_NO = TODAY_NO)
+	     AS "LIKE_COUNT"
+  FROM TODAY
+  JOIN MEMBER ON (TODAY_WRITER = USER_NO)
+ WHERE TODAY_NO = ?
+</entry>
+
+<entry key="selectAttachment">
+SELECT 
+       FILE_NO
+     , ORIGIN_NAME
+     , CHANGE_NAME
+     , FILE_PATH
+  FROM ATTACHMENT
+ WHERE REF_NO = ?
+   AND STATUS = 'Y'
+</entry>
+
+
+<entry key="insertToday">
+INSERT
+  INTO TODAY
+  (
+      TODAY_NO
+    , TODAY_TITLE
+    , TODAY_CONTENT
+    , TODAY_TIP
+    , HASHTAG
+    , TODAY_NAME
+    , TODAY_DATE
+    , TODAY_TIME
+    , TODAY_COURSE
+    , LEV
+    , TODAY_VEHICLE
+    , TODAY_WRITER
+    , TODAY_TYPE
+  )
+  VALUES
+  (
+    'T'||SEQ_TNO.NEXTVAL
+    , ?
+    , ?
+    , ?
+    , ?
+    , ?
+    , ?
+    , ?
+    , ?
+    , ?
+    , ?
+    , ?
+    , 1
+   )
+</entry>
+
+<entry key="insertAttachment">
+INSERT
+  INTO ATTACHMENT
+  (
+    FILE_NO
+  , REF_NO
+  , ORIGIN_NAME
+  , CHANGE_NAME
+  , FILE_PATH
+  , FILE_LEVEL
+  )
+  VALUES
+  (
+    SEQ_FNO.NEXTVAL
+  , 'T'||SEQ_TNO.CURRVAL
+  , ?
+  , ?
+  , ?
+  , 1
+  )
+</entry>
+
+<entry key="updateToday">
+UPDATE
+       TODAY
+   SET TODAY_TITLE = ?
+     , TODAY_CONTENT = ?
+ WHERE TODAY_NO = ?
+</entry>
+
+<entry key="updateAttachment">
+UPDATE
+       ATTACHMENT
+   SET ORIGIN_NAME = ?
+     , CHANGE_NAME = ?
+     , FILE_PATH = ?
+ WHERE FILE_NO = ?
+</entry>
+
+<entry key="insertNewAttachment">
+  INSERT
+  INTO ATTACHMENT
+  (
+    FILE_NO
+  , REF_NO
+  , ORIGIN_NAME
+  , CHANGE_NAME
+  , FILE_PATH
+  )
+  VALUES
+  (
+    SEQ_FNO.NEXTVAL
+  , ?
+  , ?
+  , ?
+  , ?
+  )
+</entry>
+
+<entry key="deleteToday">
+UPDATE ATTACHMENT
+   SET STATUS = 'N'
+   WHERE REF_NO = ?
+</entry>
+
+<entry key="searchTodayTiCon">
+SELECT 
+	   TODAY_NO
+     , TODAY_TITLE
+     , TODAY_CONTENT
+     , COUNT
+     , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+     , (
+         SELECT COUNT(*)
+           FROM LIKES L
+         WHERE L.BOARD_NO = TODAY_NO
+       ) AS "LIKE_COUNT"
+  FROM TODAY T
+  JOIN ATTACHMENT ON (TODAY_NO = REF_NO)
+ WHERE TODAY_TYPE = 1
+   AND T.STATUS = 'Y'
+   AND FILE_LEVEL = 1
+   AND (TODAY_TITLE LIKE ? OR TODAY_CONTENT LIKE ?)
+ ORDER 
+    BY TODAY_NO DESC
+</entry>
+<entry key="searchTodayTi">
+SELECT 
+	   TODAY_NO
+     , TODAY_TITLE
+     , TODAY_CONTENT
+     , COUNT
+     , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+     , (
+         SELECT COUNT(*)
+           FROM LIKES L
+         WHERE L.BOARD_NO = TODAY_NO
+       ) AS "LIKE_COUNT"
+  FROM TODAY T
+  JOIN ATTACHMENT ON (TODAY_NO = REF_NO)
+ WHERE TODAY_TYPE = 1
+   AND T.STATUS = 'Y'
+   AND FILE_LEVEL = 1
+   AND today_title LIKE ?
+ ORDER 
+    BY TODAY_NO DESC
+</entry>
+<entry key="searchTodayWri">
+SELECT 
+	   TODAY_NO
+     , TODAY_TITLE
+     , TODAY_CONTENT
+     , COUNT
+     , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+     , (
+         SELECT COUNT(*)
+           FROM LIKES L
+         WHERE L.BOARD_NO = TODAY_NO
+       ) AS "LIKE_COUNT"
+  FROM TODAY T
+  JOIN ATTACHMENT ON (TODAY_NO = REF_NO)
+  JOIN MEMBER ON (USER_NO = TODAY_WRITER)
+ WHERE TODAY_TYPE = 1
+   AND T.STATUS = 'Y'
+   AND FILE_LEVEL = 1
+   AND NICKNAME LIKE ?
+ ORDER 
+    BY TODAY_NO DESC
+</entry>
+<entry key="searchTodayRep">
+SELECT 
+	   TODAY_NO
+     , TODAY_TITLE
+     , TODAY_CONTENT
+     , COUNT
+     , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+     , (
+         SELECT COUNT(*)
+           FROM LIKES L
+         WHERE L.BOARD_NO = TODAY_NO
+       ) AS "LIKE_COUNT"
+  FROM TODAY T
+  JOIN REPLY ON (TODAY_NO = REF_BNO)
+ WHERE TODAY_TYPE = 1
+   AND T.STATUS = 'Y'
+   AND FILE_LEVEL = 1
+   AND REPLY_CONTENT LIKE ?
+ ORDER 
+    BY TODAY_NO DESC
+</entry>
+
+
+<entry key="selectReplyList">
+SELECT
+       REPLY_NO
+     , USER_NO
+     , REPLY_CONTENT
+     , NICKNAME
+     , TO_CHAR(CREATE_DATE,'YY/MM/DD HH:mm') "CREATE_DATE"
+  FROM REPLY R
+  JOIN MEMBER ON (USER_NO = REPLY_WRITER)
+ WHERE R.STATUS = 'Y'
+   AND REF_BNO = ?
+ ORDER 
+    BY REPLY_NO DESC
+</entry>
+
+<entry key="countReply">
+	SELECT COUNT(*) "COUNT"
+	 FROM REPLY
+	WHERE REF_BNO = ?
+	  AND STATUS = 'Y'
+</entry>
+
+<entry key="insertReply">
+ INSERT 
+  INTO REPLY
+     (
+       REPLY_NO
+     , REPLY_CONTENT
+     , REF_BNO
+     , REPLY_WRITER
+     ) 
+VALUES 
+ (
+    SEQ_RPLNO.NEXTVAL
+  , ?
+  , ?
+  , ?
+ )
+</entry>
+<entry key="sortDate">
+SELECT *
+  FROM (
+	SELECT ROWNUM RNUM, A.*
+	  FROM (
+		SELECT 
+			   TODAY_NO
+		     , TODAY_TITLE
+		     , TODAY_CONTENT
+		     , COUNT
+		     , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+		  FROM TODAY T
+		  JOIN ATTACHMENT AT ON (TODAY_NO = REF_NO)
+		 WHERE TODAY_TYPE = 1
+		   AND T.STATUS = 'Y'
+		   AND AT.STATUS = 'Y'
+		   AND FILE_LEVEL = 1
+		 ORDER 
+		    BY TO_NUMBER(SUBSTR(TODAY_NO,2)) DESC
+	     )  A
+       )
+ WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="deleteReply">
+	UPDATE REPLY
+	   SET STATUS = 'N'
+	 WHERE REPLY_NO = ?
+</entry>
+
+
+<entry key="sortDate">
+		SELECT 
+			   TODAY_NO
+		     , TODAY_TITLE
+		     , TODAY_CONTENT
+		     , COUNT
+		     , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+		     , (
+         SELECT COUNT(*)
+           FROM LIKES L
+         WHERE L.BOARD_NO = TODAY_NO
+       ) AS "LIKE_COUNT"
+		  FROM TODAY T
+		  JOIN ATTACHMENT AT ON (TODAY_NO = REF_NO)
+		 WHERE TODAY_TYPE = 1
+		   AND T.STATUS = 'Y'
+		   AND AT.STATUS = 'Y'
+		   AND FILE_LEVEL = 1
+		 ORDER 
+		    BY TO_NUMBER(SUBSTR(TODAY_NO,2)) DESC
+</entry>
+
+
+<entry key="sortReply">
+	SELECT 
+           TODAY_NO
+         , TODAY_TITLE
+         , TODAY_CONTENT
+         , T.COUNT
+         , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+         , (
+         SELECT COUNT(*)
+           FROM LIKES L
+         WHERE L.BOARD_NO = TODAY_NO
+       ) AS "LIKE_COUNT"
+      FROM TODAY T
+      JOIN ATTACHMENT AT ON (TODAY_NO = REF_NO)
+ LEFT JOIN REPLY ON (REF_BNO = TODAY_NO) 
+  WHERE TODAY_TYPE = 1
+       AND T.STATUS = 'Y'
+       AND AT.STATUS = 'Y'
+       AND FILE_LEVEL = 1
+ group by TODAY_NO, TODAY_TITLE, TODAY_CONTENT, T.COUNT, FILE_PATH || '/' || CHANGE_NAME 
+     ORDER 
+        BY COUNT(REPLY_NO) DESC, TO_NUMBER(SUBSTR(TODAY_NO,2)) DESC
+</entry>
+
+<entry key="sortLike">
+SELECT 
+       TODAY_NO
+     , TODAY_TITLE
+     , TODAY_CONTENT
+     , COUNT
+     , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+     , (
+         SELECT COUNT(*)
+           FROM LIKES L
+         WHERE L.BOARD_NO = TODAY_NO
+       ) AS "LIKE_COUNT"
+  FROM TODAY T
+  JOIN ATTACHMENT AT ON (TODAY_NO = REF_NO)
+  LEFT JOIN LIKES L ON (L.BOARD_NO = TODAY_NO)
+ WHERE TODAY_TYPE = 1
+   AND T.STATUS = 'Y'
+   AND AT.STATUS = 'Y'
+   AND FILE_LEVEL = 1
+    group by TODAY_NO, TODAY_TITLE, TODAY_CONTENT, T.COUNT, FILE_PATH || '/' || CHANGE_NAME 
+ ORDER 
+    BY COUNT(L.USER_NO) DESC
+</entry>
+
+<entry key="sortCount">
+ SELECT 
+       TODAY_NO
+      , TODAY_TITLE
+      , TODAY_CONTENT
+      , COUNT
+      , FILE_PATH || '/' || CHANGE_NAME "TITLEIMG"
+      , (
+         SELECT COUNT(*)
+           FROM LIKES L
+         WHERE L.BOARD_NO = TODAY_NO
+       ) AS "LIKE_COUNT"
+   FROM TODAY T
+   JOIN ATTACHMENT AT ON (TODAY_NO = REF_NO)
+  WHERE TODAY_TYPE = 1
+    AND T.STATUS = 'Y'
+    AND AT.STATUS = 'Y'
+    AND FILE_LEVEL = 1
+  ORDER 
+     BY COUNT DESC
+</entry>
+
+<entry key="insertLike">
+	INSERT INTO LIKES
+	VALUES 
+	(
+	  ?
+	, ?
+	)  
+</entry>
+<entry key="deleteLike">
+	DELETE LIKES
+	 WHERE USER_NO = ?
+	   AND BOARD_NO = ?
+</entry>
+<entry key="checkLike">
+	SELECT BOARD_NO
+	FROM LIKES
+	WHERE USER_NO = ?
+	AND BOARD_NO = ?
+</entry>
+<entry key="insertBook">
+	INSERT INTO BOOKMARK
+	VALUES
+	(
+	  ?
+	, ?
+	)
+</entry>
+<entry key="deleteBook">
+	DELETE BOOKMARK
+	WHERE USER_NO = ?
+	  AND BOARD_NO = 'B'|| ?
+</entry>
+<entry key="checkBook">
+	SELECT BOARD_NO
+	FROM BOOKMARK
+	WHERE USER_NO = ?
+	AND BOARD_NO = ?
+</entry>
+<entry key="selectList">
+	SELECT
+	        TODAY_NO
+	      , TODAY_TITLE
+          , TODAY_NAME
+          , TODAY_TIME
+	      , NICKNAME
+	      , MEM_COUNT
+	      , LEV
+	      , TO_CHAR(TODAY_DATE, 'YY/MM/DD') AS "TODAY_DATE"
+	  FROM TODAY T
+	  JOIN MEMBER ON (TODAY_WRITER = USER_NO)
+	 WHERE TODAY_TYPE = 2
+	   AND T.STATUS = 'Y'
+	 ORDER
+	    BY TODAY_NO DESC
+</entry>
+<entry key="selectTogether">
+	SELECT
+	        TODAY_NO
+	      , TODAY_TITLE
+	      , TODAY_CONTENT
+	      , NICKNAME
+          , TODAY_NAME
+          , TO_CHAR(CREATE_DATE, 'YY/MM/DD HH:MI') AS "CREATE_DATE"
+          , TODAY_VEHICLE
+          , TODAY_TIME
+          , TODAY_COURSE
+	      , MEM_COUNT
+	      , LEV
+	      , TO_CHAR(TODAY_DATE, 'YY/MM/DD') AS "TODAY_DATE"
+	      , USER_NO
+          , (
+	          SELECT COUNT(*)
+	            FROM REPLY
+	           WHERE REF_BNO = TODAY_NO
+	             AND STATUS = 'Y'
+	        ) AS "REPLY_COUNT"
+	  FROM TODAY T
+	  JOIN MEMBER ON (TODAY_WRITER = USER_NO)
+      WHERE TODAY_NO = ?
+	    AND T.STATUS = 'Y'
+</entry>
+<entry key="insertTogether">
+	INSERT INTO TODAY
+	(
+	  TODAY_NO
+	, TODAY_TITLE
+	, TODAY_CONTENT
+	, TODAY_NAME
+	, TODAY_DATE
+	, TODAY_TIME
+	, TODAY_COURSE
+	, TODAY_VEHICLE
+	, TODAY_WRITER
+	, LEV
+	, TODAY_TYPE
+	)
+	VALUES
+	(
+	  'T' || SEQ_TNO.NEXTVAL
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	, ?
+	, 2
+	)
+</entry>
+<entry key="insertEnrollTogether">
+   INSERT INTO TOGETHER
+   VALUES
+   (
+     'T' || SEQ_TNO.CURRVAL
+   , ?
+   )
+</entry>
+<entry key="deleteTogether">
+	UPDATE TODAY
+	   SET STATUS = 'N'
+	 WHERE TODAY_NO = ?
+</entry>
+<entry key="togetherCount">
+	UPDATE TODAY
+	   SET MEM_COUNT = MEM_COUNT +1
+	 WHERE TODAY_NO = ?
+</entry>
+<entry key="enrollTogether">
+	INSERT INTO TOGETHER
+	VALUES
+	(
+	  ?
+	, ?
+	)
+</entry>
+<entry key="togetherMemList">
+	SELECT MEM_NO
+	  FROM TOGETHER
+	 WHERE REF_NO = ?
+</entry>
+</properties>

@@ -1,0 +1,197 @@
+<%@page import="notice.model.vo.Notice"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Notice n = (Notice)request.getAttribute("n");
+%>
+<!DOCTYPE html>
+        <html>
+
+        <head>
+            <meta charset="UTF-8">
+            <title>Insert title here</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+            <style>
+                .outer {
+                    background-color: white;
+                    /*border: 1px solid #000;*/
+                    width: 1000px;
+                    height: 100%;
+                    margin: auto;
+                    margin-top: 50px;
+                }
+
+                #update-form table {
+                    border: 1px solid white;
+                }
+
+                #update-form input,
+                #update-form textarea {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
+                .input_box textarea.input {
+                    padding: 15px 0;
+                    height: auto;
+                    resize: none;
+                }
+
+                .Write_btn_area {
+                    float: right;
+                }
+
+                .wrap>div {
+                    width: 100%;
+                    padding: 3px;
+                }
+
+                #header {
+                    height: 10%;
+                    border: 1px solid gray;
+                }
+
+                #footer {
+                    height: 10%;
+                    border: 1px solid gray;
+                }
+
+                #navigator {
+                    height: 5%;
+                    border: 1px solid gray;
+                    margin: 10px 0px 5px 0px;
+                }
+
+                #content {
+                    width: 100%;
+                }
+
+                .content_1 {
+                    height: 10%;
+                }
+
+                .content_2 {
+                    height: 15%;
+                }
+
+                #content_3 {
+                    height: 20%;
+                }
+
+                #content_4 {
+                    height: 65%;
+                }
+
+                #topbtn {
+                    position: fixed;
+                    right: 24px;
+                    bottom: 24px;
+                    z-index: 50;
+                }
+
+                div#editor {
+                    padding: 16px 24px;
+                    border: 1px solid #d6d6d6;
+                    border-radius: 4px;
+                }
+
+                div#editor img {
+                    max-width: 100%;
+                }
+
+                button.active {
+                    background-color: purple;
+                    color: #fff;
+                }
+
+                #img-selector {
+                    display: none;
+                }
+
+                [contenteditable=true]:empty:before {
+                    content: attr(placeholder);
+                    display: block;
+                }
+
+                .dropdown-toggle::after {
+                    display: none;
+                }
+
+                .input {
+                    width: 50%;
+                    height: 50px
+                }
+
+                h2{
+                    color: rgb(149, 193, 31);
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+            <%@ include file="../common/menubar.jsp" %>
+
+                <div class="outer">
+                    <br>
+                    <h2 align="center">공지사항 수정</h2>
+                    <br>
+                    <form action="<%= contextPath %>/update.no" id="update-form" method="post">
+						<input type="hidden" name="num" value="<%= n.getNoticeNo() %>">
+                            <div id="content">
+                                <div class="Write_write_sections">
+                                    <div class="Write_container content_1">
+                                        <div class="write_box">
+                                            <p class="title">제목 <span class="color_red">*</span></p>
+                                            <input type="text" name="title" required value="<%= n.getNoticeTitle()%>">
+                                        </div>
+
+                                        <div class="write_box">
+                                             <br>
+                                            <p class="content">본문<span class="color_red">*</span></p>
+                                            <textarea class="summernote" name="content" rows="10" required style="resize: none;" placeholder="내용을 입력해 주세요."><%= n.getNoticeContent() %></textarea>
+                                        </div>
+
+                                    </div>
+									<br>
+                                    <div class="Write_btn_area">
+                                        <button type="reset" class="btn btn-warning" onclick="history.back();">뒤로가기</button>
+                                        <button type="submit" class="btn btn-secondary">수정하기</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                <script>
+                    $('.summernote').summernote({
+                        height: 450,
+                        lang: "ko-KR",
+
+                        toolbar: [
+                            // [groupName, [list of button]]
+                            ['fontname', ['fontname']],
+                            ['fontsize', ['fontsize']],
+                            ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                            ['color', ['forecolor', 'color']],
+                            ['table', ['table']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                            ['height', ['height']],
+                            ['view', ['fullscreen', 'help']]
+                        ],
+                        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+                        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+                    });
+
+                </script>
+                
+            <br><br>
+			<%@ include file="../common/footerbar.jsp" %>
+</body>
+</html>
