@@ -145,9 +145,22 @@
             cursor: pointer;
             font-size:13px;
         }
+        #link>a{
+            /* border: 1px solid black; */
+            border-radius: 5px;
+            display: inline-block;
+            padding: 10px;
+            background-color: rgb(149, 193, 31);
+            color: white;
+            font-weight: bold;
+            margin: 5px;
+            margin-top: 20px;
+            font-size: 17px;
+        }
     </style>
 </head>
 <body>
+	<div id="topbtn"></div>
    <%@ include file="../common/menubar.jsp" %>
    <%
       if(loginMember != null && list != null){
@@ -245,7 +258,9 @@
                     
                     
                 </div>
-                
+                <div id="link" align="center">
+                    <a href="<%= contextPath%>/listView.bo">목록가기</a> <a href="#topbtn">TOP</a>
+                </div>
             </div>
         </div>
     </div>

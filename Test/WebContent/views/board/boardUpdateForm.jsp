@@ -196,6 +196,7 @@
                         input="";
                         $("#hashtag").html("");
                         $("#hashtagDelete").css("display", "none");
+                        $("input[name=hashtagArr]").val("");
                     }
                 </script>
 
