@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import board.model.service.BoardService;
 import board.model.vo.Board;
 import member.model.service.MemberService;
+import today.model.vo.Today;
 
 
 
@@ -36,17 +39,15 @@ public class MypageList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		int listCount= new MemberService().selectMpListCount(userNo);
-		BoardService bService = new BoardService();
-
 		
 			
 			
-		ArrayList<Board> list = new MemberService().selectMpList(userNo);
+		ArrayList<Today> list = new MemberService().selectMpList(userNo);
 		
-		request.setAttribute("listCount", listCount);
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/mypage/mypageList.jsp").forward(request, response);
+		
+		response.setContentType("application/json; charset=UTF-8");
+        new Gson().toJson(list, response.getWriter());
+		
 		
 		
 			

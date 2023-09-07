@@ -10,6 +10,8 @@ import today.model.vo.Attachment;
 import today.model.vo.Reply;
 import today.model.vo.Today;
 import common.model.vo.PageInfo;
+import member.model.dao.MemberDao;
+import member.model.vo.Member;
 
 import static common.JDBCTemplate.*;
 
@@ -428,43 +430,50 @@ public int insertLike(int userNo, String todayNo) {
 			return count;
 			
 		}
-		
-		public int togetherDropOut(int uno, String tno) {
-			
+
+		public ArrayList<Today> selectWeekClimb() {
 			Connection conn = getConnection();
+			ArrayList<Today> list= new TodayDao().selectWeekClimb(conn);
 			
+			close(conn);
+			return list;
+		}
+		public int togetherDropOut(int uno, String tno) {
+
+			Connection conn = getConnection();
+
 			int result1 = new TodayDao().togetherDropOut(conn, uno, tno);
-				
+
 			int result2 = 0;
 			if(result1 > 0) {
 				result2 = new TodayDao().countDecrease(conn, tno);
 			}
-			
+
 			if(result1 > 0 && result2 > 0) {
 				commit(conn);
 			}else {
 				rollback(conn);
 			}
-			
+
 			close(conn);
-			
+
 			return result1 * result2;
 		}
-		
+
 		public int updateTogether(Today t) {
-			
+
 			Connection conn = getConnection();
-			
+
 			int result = new TodayDao().updateTogether(conn, t);
-			
+
 			if(result > 0) {
 				commit(conn);
 			}else {
 				rollback(conn);
 			}
-			
+
 			close(conn);
-			
+
 			return result;
 		}
 }

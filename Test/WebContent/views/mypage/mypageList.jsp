@@ -1,301 +1,381 @@
 <%@page import="java.util.ArrayList" %>
-    <%@page import="board.model.vo.Board" %>
-        <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-            <% ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-            int listCount = (int)request.getAttribute("listCount");
-                    %>
-                    <!DOCTYPE html>
-                    <html lang="en">
+<%@page import="board.model.vo.Board" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Document</title>
+<!DOCTYPE html>
+<html lang="en">
 
-                        <style>
-                            div,
-                            form,
-                            input {
-                                box-sizing: border-box;
-                                /* border: 1px solid red; */
-                            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-                            .wrap {
-                                width: 1200px;
-                                height: 1800px;
-                                margin: auto;
-                            }
+    <style>
+        div,
+        form,
+        input {
+            box-sizing: border-box;
+            /* border: 1px solid red; */
+        }
 
-                            #content {
-                                width: 1000px;
-                                height: 1440px;
-                                margin: auto;
-                            }
+        .wrap {
+            width: 1200px;
+            height: 100%;
+            margin: auto;
+        }
 
-                      
-                            #content_2 {
-                                height: 30px;
-                            }
+        #content {
+            width: 1000px;
+            margin: auto;
+        }
 
-                          
+        .content:hover{
+		cursor: pointer;
+	}
+        #content_2 {
+            height: 30px;
+        }
 
-                            .mplist {
-                                font-size: 20px;
-                                font-weight: bold;
-                            }
+        
 
-                            .mplist::after {
-                                content: "";
-                                display: block;
-                                width: 150px;
-                                border-bottom: 2.5px solid rgb(149, 193, 31);
-                                margin: auto;
-                            }
+        .mplist {
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-                            #content_3 {
-                                height: 300px;
-                                width: 800px;
-                                margin: auto;
-                            }
+        .mplist::after {
+            content: "";
+            display: block;
+            width: 150px;
+            border-bottom: 2.5px solid rgb(149, 193, 31);
+            margin: auto;
+        }
 
-                            #content_3 h3 {
-                                color: gray;
-                            }
+        #content_3 {
+            height: 300px;
+            width: 800px;
+            margin: auto;
+        }
 
-                            #profileImage {
-                                width: 80px;
-                                height: 150px;
-                                float: left;
-                            }
+        #content_3 h3 {
+            color: gray;
+        }
 
-                            .other {
-                                width: 720px;
-                                height: 150px;
-                                float: left;
-                            }
+       
 
-                            .like,
-                            .bookmark {
-                                float: left;
-                                width: 360px;
-                            }
+        .etc img {
+            width: 40px;
+            height: 40px;
+        }
 
-                            .bookmark {
-                                text-align: right;
-                            }
+        #topbtn {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 50;
+        }
+        .listCount{
+            text-align: left;
+            color: gray;
+            margin: 15px 0px 10px 130px;
+            font-size: large;
+        }
+        .content {
+		margin-top: 20px;
+		width: 100%;
+		height: 200px;
+		/* border: 1px solid blue; */
+	}
 
-                            li>div {
-                                height: 300px;
-                            }
+	.content>div {
+		float: left;
+	}
 
-                            .bookmark:hover,
-                            .item:hover {
-                                cursor: pointer;
-                            }
+	.c1 {
+		width: 25%;
+		height: 100%;
+		position: relative;
+		/* border: 1px solid black; */
+	}
 
-                            .profile-image {
-                                margin: 7px;
-                                border-radius: 50%;
-                                width: 50px;
-                                height: 50px;
-                            }
+	.c2 {
+		width: 75%;
+		height: 100%;
+		/* border: 1px solid red; */
+		padding: 20px;
+		padding-bottom: 14px;
+		background-color: rgb(244, 244, 244);
+		border-radius: 5px;
+	}
 
-                            .b-name {
-                                font-weight: 900;
-                                font-size: 20px;
-                            }
+	.c1>img {
+		/* width: 95%;  */
+		/* height: 90%;  */
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		margin: auto;
+	}
 
-                            .b-time {
-                                font-size: 13px;
-                                color: gray;
-                            }
+	.c2>table {
+		width: 100%;
+		height: 100%;
+	}
 
-                            .b-course {
-                                font-size: 17px;
-                                font-weight: 700;
-                                color: rgb(83, 83, 83);
-                            }
+	#c3 {
+		width: 100%;
+		height: 100%;
+		/* border: 1px solid red; */
+		padding: 20px;
+		padding-bottom: 14px;
+		background-color: rgb(244, 244, 244);
+		border-radius: 5px;
+	}
 
-                            .b-content {
-                                font-size: 17px;
-                            }
+	#c3>table {
+		width: 100%;
+		height: 100%;
+	}
 
-                            .b-image>img {
-                                width: 125px;
-                                height: 125px;
-                                padding: 5px;
-                            }
+	.btn-bmk {
+		border: none;
+		border-radius: 5px;
+		background-color: rgb(149, 193, 31);
+		color: white;
+		width: 80px;
+		height: 40px;
+		font-size: 15px;
+	}
+	.todayNo {
+		display: none;
+	}
+	#paging-area {
+		text-align: center;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-right: 0;
+		padding-left :0;
+	
+	}
+	#paging-area li {
+		text-align: center;
+		float: left;
+		list-style:none;
 
-                            .titleprofile>img {
-                                margin-left: 10px;
-                                margin-top: 10px;
-                                border-radius: 50%;
-                                width: 150px;
-                                height: 150px;
-                            }
+	}
 
+	#paging-area li a {
+		display: block;
+		font-size: 14px;
+		color: black;
+		padding: 9px 12px;
+		border-right: solid 1px #ccc;
+		box-sizing: border-box;
+		text-decoration-line:none;
+	}
+	#paging-area li a:hover {
+		cursor: pointer;
+	}	 
+    </style>
+</head>
 
-                            .bookmark:hover,
-                            .item:hover {
-                                cursor: pointer;
-                            }
+<body>
+    <%@ include file="mypageheader.jsp" %>
+        <div class="wrap">
+            <div id="content">
+                <br>
+                <div>
+                    <p class="listCount"></p>
+                </div>
+                <br>
+                <div class="bigCon">
 
-                            .etc img {
-                                width: 40px;
-                                height: 40px;
-                            }
+                </div>
+                <div align="center">
+                    <div id="paging-area" align="center">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 
-                            #topbtn {
-                                position: fixed;
-                                right: 24px;
-                                bottom: 24px;
-                                z-index: 50;
-                            }
-                            .listCount{
-                                text-align: left;
-                                color: gray;
-                                margin: 15px 0px 10px 130px;
-                                font-size: large;
-                            }
-                        </style>
-                    </head>
+        <div id="topbtn">
+            <a href="#"><img
+                    src="https://blog.kakaocdn.net/dn/8Q2Lz/btrcOS9MCg8/GNshUKOnQXIjXq2nKhcYf1/img.png"
+                    style="width: 40px; height: 40px;"></a>
+        </div>
+        <script>
+            let listCount; // 총 게시글 수
+            let boardLimit = 5; // 한 페이지내에 보여질 게시글 최대 개수
+            let pageLimit = 5; // 페이징 최대개수
+            let globalCurrentPage = 1; // 현재 페이지
+            let dataList; // 데이터 리스트
+    
+    
+            $(function() {
+                // list 불러오기
+                $.ajax({
+                    url : "MypageList.me",
+                    data : {userNo:<%= loginMember.getUserNo()%>},
+                    success : function(list) {
+                        listCount = list.length;
+                        toList = list;
+                        
+                        // 글 목록 불러오기 호출
+                        displayData(1, boardLimit);
+                        paging(listCount, boardLimit, pageLimit, 1);
+                    },
+                    error : function() {
+                        
+                    }
+    
+                });
+                
+            })
+            
+           
+            function displayData(currentPage, boardLimit) {
+    
+            let tohtml = "";
+    
+            currentPage = Number(currentPage);
+            boardLimit = Number(boardLimit);
+    
+            let start = (currentPage - 1) * boardLimit;	
+            let end = (currentPage - 1) * boardLimit + boardLimit;
+            
+                
+            // 오늘날짜
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = ('0' + (today.getMonth() + 1)).slice(-2);
+            let day = ('0' + today.getDate()).slice(-2);			
+            let dateString = year + '/' + month  + '/' + day;
+                for (let i = start; i < end && i < toList.length; i++) {
+    
+                    
+                    tohtml += "<div class='content'>" +
+							"<div class='c1'>";
 
-                    <body>
-                        <%@ include file="mypageheader.jsp" %>
-                            <div class="wrap">
-                                <div id="content">
-                                    <% if(list.isEmpty()){ %>
-                                        <!-- case1. 게시글이 없을경우 -->
-                                      조회된 게시글이 없습니다.
-                                        <% } else { %>
-                                            <!-- case2. 게시글이 있을경우 -->
-                                            <br>
-                                            <div>
-                                                <p class="listCount">내 게시물 <%= listCount %>개(최근 5개글만 보입니다.)</p>
-                                            </div>
-                                            <br>
-                                            <ul style="list-style: none; padding: 0;">
-                                                <% for(Board b : list) { %>
-                                                    <div id="content_3">
-                                                        <li>
-                                                            <div>
-                                                                <div id="profileImage">
-                                                                    <img class="profile-image"
-                                                                        src="<%=contextPath %>/<%= loginMember.getProfileImg() %>"
-                                                                        alt="">
-                                                                </div>
-                                                                <div class="other">
-                                                                    <div class="b-name">
-                                                                        <p style="margin: 0;">
-                                                                            <%= b.getBoardWriter() %>
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="b-time">
-                                                                        <p>
-                                                                            <%= b.getCreateDate() %>
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="b-course">
-                                                                        <p>인왕산 등산 코스 : 초보자가 선택했던 경복궁 코스</p>
-                                                                    </div>
-                                                                    <div class="b-content">
-                                                                        <p>
-                                                                            <%= b.getBoardContent() %>
-                                                                        </p>
+				if (toList[i].titleImg != "/") {
+					tohtml += "<img width='230' height='190' alt='사진이 없는 게시글입니다.' src=" + toList[i].titleImg + "></div>";
+				} else {
+					// 사진이 없을 경우 대체 내용 추가
+					tohtml += "<div class='no-image-div'>사진이 없는 게시글입니다.</div></div>";
+				}
 
-                                                                    </div>
-                                                                    <br clear="right">
-                                                                    <div class="etc">
-                                                                        <div class="like">
-                                                                            <img name="likey" class="item"
-                                                                                src="https://cdn-icons-png.flaticon.com/512/14/14815.png"
-                                                                                alt="" onClick="setLike()">
-                                                                            좋아요
-                                                                        </div>
-                                                                        <div class="bookmark">
-                                                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHcKgGArmldqjLgZ3n2HIogmWevXJT4_SXbySqfjm2BGK3PXAWPoaKu0PdbbXUaQNzpUU&usqp=CAU"
-                                                                                alt="공유">
-                                                                            <img name="icon_btn" class="item"
-                                                                                src="https://cdn-icons-png.flaticon.com/512/1174/1174410.png"
-                                                                                alt="북마크" onClick="setImg()">
-                                                                            <img src="https://cdn-icons-png.flaticon.com/512/7066/7066144.png"
-                                                                                alt="설정">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </div>
-                                                        <% } %>
-                                                            <% } %>
-                                            </ul>
-                                </div>
-                            </div>
-                            
+				tohtml += "<div class='c2'>" +
+					"<table class='list-area' border=0>" +
+					"<td class='todayNo'>" + toList[i].todayNo + "</td>" +
+					"<tr height='25%' style='font-size: 20px;'>" +
+					"<th colspan='2' class='title'>" +
+					toList[i].todayTitle +
+					"</th></tr>" +
+					"<tr style='font-size: 15px;'>" +
+					"<td colspan='2' class='todaycontent'>" +
+					toList[i].todayContent +
+					"</td></tr>" +
+					"<tr height='15%' style='font-size: 13px; color: gray;'>" +
+					"<td>조회수 <span>" +
+					toList[i].count + "</span>" +
+					"좋아요 <span>" + toList[i].countLike + "</span> </td>" +
+					"</tr></table></div></div>";
+            }
+                                
+                $(".listCount").html("내 게시물 " + listCount + "개");
+                $(".bigCon").html(tohtml);
+                $(".todaycontent *").removeAttr("style");
+                $(".todaycontent *").removeAttr("color");
+            }
+        
+        $(document).on("click", ".bigCon .content", function () {
+        let todayNo = $(this).find(".todayNo").text();
+        let fileLevel = toList.find(item => item.todayNo === todayNo).fileLevel;
+        let url;
+        
+        if (fileLevel === 1) {
+        url = '<%= contextPath %>/detail.to?bno=' + todayNo;
+        } else if (fileLevel === 2 || fileLevel === 0) {
+            let boardNo = todayNo.substring(1);
+            url = '<%= contextPath %>/detail.bo?bno=' + boardNo;
+        }
+        if (url) {
+            location.href = url;
+        }
+    });
+function paging(listCount, boardLimit, pageLimit, currentPage){
+			
+			
+			maxPage = Math.ceil(listCount/boardLimit); // 총 페이징 수
+			
+			
+			if(maxPage < pageLimit){
+				pageLimit = maxPage;
+			}
+			
+			let pageGroup = Math.ceil(currentPage/pageLimit);
+			
+			
+			let last = pageGroup * pageLimit;
+			
+			if(last > maxPage){
+				last = maxPage;
+			}
+			
+			let first = last - (pageLimit -1); // 화면에 보여질 첫번째 페이지 번호
+			let next = last + 1;
+			let prev = first -1;
 
-                            <div id="topbtn">
-                                <a href="#"><img
-                                        src="https://blog.kakaocdn.net/dn/8Q2Lz/btrcOS9MCg8/GNshUKOnQXIjXq2nKhcYf1/img.png"
-                                        style="width: 40px; height: 40px;"></a>
-                            </div>
+			let pageHtml = "";
+			
+			if(prev > 0){
+				
+				pageHtml += "<li><a id='prev'>이전</a></li>";			
+			}
+			
+			for(let i=first; i<=last; i++){
+				if(currentPage == i){
+					pageHtml += "<li><a id='"+ i +"'>" + i + "</a></li>";
+				}else{
+					pageHtml += "<li><a id='"+ i +"'>" + i + "</a></li>";
+				}
+			}
+			
+			if(last < maxPage){
+				
+				pageHtml += "<li><a id='next'>다음</a></li>";	
+			}
+			
+			$("#paging-area").html(pageHtml);
+			
+			// 페이징 번호 클릭 이벤트
+			$("#paging-area").children("li").children("a").click(function(){
+				
+				let $id = $(this).attr("id");
+				selectedPage = $(this).text();
+				
+				
+				if($id == "next"){
+					selectedPage = next;
+				}
+				if($id == "prev"){
+					selectedPage = prev;
+				}
+				
+				globalCurrentPage = selectedPage;
+				
+				paging(listCount, boardLimit, pageLimit, selectedPage);
+				
+				displayData(selectedPage, boardLimit);
+			});
+			
+		}
+	</script>
 
-                            
+        
+        <%@ include file = "../common/footerbar.jsp" %>
+</body>
 
-                            <script>
-                                var set_state = true;
-
-                                var img_icon = new Array();
-
-                                img_icon[0] = new Image();
-
-                                img_icon[1] = new Image();
-
-                                img_icon[0].src = "https://cdn-icons-png.flaticon.com/512/1174/1174410.png";
-
-                                img_icon[1].src = "https://cdn-icons-png.flaticon.com/512/1174/1174484.png";
-
-
-
-                                function setImg() {
-
-                                    document.all.icon_btn.src = (set_state ? img_icon[0].src : img_icon[1].src);
-                                    if (set_state) {
-                                        set_state = false;
-                                    } else {
-                                        set_state = true;
-                                    }
-
-                                }
-
-                            </script>
-                            <script>
-                                var set_state2 = true;
-
-                                var like = new Array();
-
-                                like[0] = new Image();
-
-                                like[1] = new Image();
-
-                                like[0].src = "https://cdn-icons-png.flaticon.com/512/14/14815.png";
-
-                                like[1].src = "https://cdn-icons-png.flaticon.com/512/138/138533.png";
-
-
-
-                                function setLike() {
-
-                                    document.all.likey.src = (set_state2 ? like[0].src : like[1].src);
-                                    if (set_state2) {
-                                        set_state2 = false;
-                                    } else {
-                                        set_state2 = true;
-                                    }
-
-                                }
-
-                            </script>
-                            <%@ include file = "../common/footerbar.jsp" %>
-                    </body>
-
-                    </html>
+</html>

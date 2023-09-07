@@ -34,7 +34,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
-    
+    <script async src="https://cse.google.com/cse.js?cx=4264174f1840e418b">
+    </script>
     <style>
         div{box-sizing: border-box; /*border: 1px solid red;*/}
         
@@ -235,7 +236,13 @@
         .subtitle{
             font-size: 100px;
         }
-            
+        
+        .btn_submit{
+        background-image:url('https://cdn-icons-png.flaticon.com/128/2801/2801881.png'); 
+        background-repeat: no-repeat; 
+        background-size: 100%;
+        background-position: center;
+        border-style: outset;}
     </style>
     
 </head>
@@ -255,14 +262,16 @@
                 </a>
             </div>
             <div id="h2">
-                <form action="#" id="search_form">
+
+                <form action="https://www.google.com/search" method="GET" id="search_form" target="_blank">
                     <div id="search_text">
-                        <input type="text" name="keyword">
-                    </div>
-                    <div id="search_btn">
-                        <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
-                    </div>
-                </form>
+                    <input type="text" name="q">
+                </div>
+                <div id="search_btn">
+                    <input type="submit" value="" class="btn_submit">
+                    
+                </div>
+            </form>
             </div>
             
                    
@@ -356,18 +365,16 @@
                  </div>
                 </div>
                 
-                <!-- / 슬라이드 쇼 끝 -->
-            
-                <!-- 왼쪽 오른쪽 화살표 버튼 -->
+               
                 <a class="carousel-control-prev" href="#demo" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <!-- <span>Previous</span> -->
+                 
                 </a>
                 <a class="carousel-control-next" href="#demo" data-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <!-- <span>Next</span> -->
                 </a>
-                <!-- / 화살표 버튼 끝 -->
+           
                 
                 <!-- 인디케이터 -->
                 <ul class="carousel-indicators">
@@ -462,25 +469,14 @@
                   </script>
                 <div id="con1_2">
                     <div id="a2" >
-                        <a href="#" style="font-size: 19px; font-weight: bolder;">
+                        <a href="<%=contextPath%>/list.tg" style="font-size: 19px; font-weight: bolder;">
                             이번주 등산 일정
                             <img src="resources/image/location.png" alt="" width="15px">
                         </a>
                     </div>
                     <div id="b2">
                         <table>
-                            <tr>
-                                <td>9/8 금요일 도봉산 19:00 4명</td>
-                            </tr>
-                            <tr>
-                                <td>9/9 토요일 관악산 10:30 5명</td>
-                            </tr>
-                            <tr>
-                                <td>9/10 일요일 아차산 09:00 6명</td>
-                            </tr>
-                            <tr>
-                                <td>9/11 월요일 북한산 18:00 7명</td>
-                            </tr>
+                            
                         </table>
                     </div>
                 </div>
@@ -506,7 +502,7 @@
             <div id="con2">
               <div id="con2_1">
                     <div id="a4">
-						<a href="<%= contextPath %>/best.bo" style="font-size: 19px; font-weight: bolder;">인기글</a>
+						<a href="<%= contextPath %>/listView.bo" style="font-size: 19px; font-weight: bolder;">인기글</a>
                    	<table class="latestBoard" style="margin: 10px 0 0 0;">
 						<% if(list.isEmpty()) {%>
 					
@@ -518,7 +514,15 @@
 						
 						<% for(Board bo : list) { %>
 						<tr>
-							<td><%= bo.getBoardTitle() %></td>
+                            <td>
+                                
+                            </td>
+							<td> <a href="<%=contextPath%>/detail.bo?bno=<%= bo.getBoardNo() %>">
+                                <%= bo.getBoardTitle() %>
+                            </a>
+                            
+                            </td>
+                            <td><%= bo.getCount()%>회 조회</td>
 						</tr>
 						<% } %>
 						<% } %>
@@ -531,7 +535,7 @@
                 
                <div id="con2_2">
                     <div id="a5">
-                        <a href="<%= contextPath %>/recent.no" style="font-size: 19px; font-weight: bolder;">최근 공지사항</a>
+                        <a href="<%= contextPath %>/list.no" style="font-size: 19px; font-weight: bolder;">최근 공지사항</a>
                         <div id="realtime">
                     	<table class="recentNotice" style="margin: 10px 0 0 0;">
 						<tbody>
@@ -544,7 +548,11 @@
 
 						<% for(Notice no : nlist) { %>
 						<tr>
-							<td style="width: 315px; margin: 0 0 0 10px;"><%= no.getNoticeTitle() %></td>
+							<td style="width: 315px; margin: 0 0 0 10px;">
+                                <a href="<%= contextPath %>/detail.no?num=<%=no.getNoticeNo()%>">
+                                    <%= no.getNoticeTitle() %>
+                                </a>
+                            </td>
                             <td><%= no.getCreateDate() %></td>
 						</tr>
 						<% } %>
@@ -568,41 +576,9 @@
                 </div>
                 <div id="con3_3" style="font-size: 18px; font-weight: bolder;">
                     <p id="writers">Top Writers</p>
+                    <p style="font-size: 10px;">기준:1달동안의 글,댓글작성등의 활동</p>
                     	<table>
-                            <tr>
-                                <td style="color: red">1 </td>
-                                <td>&nbsp;</td>
-                                <td><img src="resources/image/my.png" width="25px" id=""></td>
-                                <td style="font-size: small;">모두들 </td>
-                                <td>🥇</td>
-                            </tr>
-                            <tr>
-                                <td style="color: red">2</td>
-                                <td>&nbsp;</td>
-                                <td><img src="resources/image/my.png" width="25px" id=""></td>
-                                <td style="font-size: small;">고생 많았어</td>
-                                <td>🥈</td>
-                            </tr>
-                            <tr>
-                                <td style="color: red">3</td>
-                                <td>&nbsp;</td>
-                                <td><img src="resources/image/my.png" width="25px" id=""></td>
-                                <td style="font-size: small;">마지막까지</td>
-                                <td>🥉</td>
-                            </tr>
-                            <tr>
-                                <td style="color: red">4</td>
-                                <td>&nbsp;</td>
-                                <td><img src="resources/image/my.png" width="25px" id=""></td>
-                                <td style="font-size: small;">힘내보자</td>
-                            </tr>
-                            <tr>
-                                <td style="color: red">5</td>
-                                <td>&nbsp;</td>
-                                <td><img src="resources/image/my.png" width="25px" id=""></td>
-                                <td style="font-size: small;">화이팅</td>
-                            </tr>
-
+                       
                         </table>
                 </div>
             </div>
@@ -622,6 +598,69 @@
     function submitForm() {
         document.getElementById("postForm").submit();
     }
+
+    $(document).ready(function() {
+        let userHtml = ""; 
+        $.ajax({
+            url: 'topUser.ma', 
+            success: function(list) {
+                (list);
+                
+                for (var i = 0; i < list.length && i < 5; i++) {
+                    var rank = i + 1;
+                    
+                    userHtml += '<tr>'
+                    + '<td style="color: red">' + rank + '</td>'
+                    + '<td>&nbsp;</td>'
+                    + '<td><img src="' + list[i].profileImg + '" width="25px" id=""></td>'
+                    + '<td style="font-size: small;">' + list[i].nickname + '</td>'
+                    
+
+                    if (rank === 1) {
+                        userHtml += '<td>🥇</td>'
+                    } else if (rank === 2) {
+                        userHtml += '<td>🥈</td>'
+                    } else if (rank === 3) {
+                        userHtml += '<td>🥉</td>'
+                    } else {
+                        userHtml += '<td></td>'
+                    }
+                    
+                    userHtml += '</tr>'
+                              
+                }
+                (userHtml);
+                $('#con3_3>table').html(userHtml);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching top writers:', error);
+            }
+        });
+    }); $(document).ready(function() {
+        let userHtml = ""; 
+        $.ajax({
+            url: 'weekClimb.ma', 
+            success: function(list) {
+                (list);
+                
+                for (var i = 0; i < list.length; i++) {
+                    userHtml+= "<tr><td>"
+                            + "<a href=<%= contextPath %>/detail.tg?tno="
+                            +list[i].todayNo
+                            +">"
+                            + list[i].weekClimb
+                            + "</a><td></tr>"
+                              
+                }
+                (userHtml);
+                $('#b2>table').html(userHtml);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching top writers:', error);
+            }
+        });
+    });
+
 </script>
     <%@ include file="views/common/footerbar.jsp" %>
 </body>

@@ -60,7 +60,7 @@ public class TodayInsertController extends HttpServlet {
 			String todayContent = multiRequest.getParameter("content");
 			String todayWriter = multiRequest.getParameter("userNo");
 			String tip = multiRequest.getParameter("tip");
-			String hash = multiRequest.getParameter("hash");
+			String hash = multiRequest.getParameter("hashtagArr");
 			String mtName = multiRequest.getParameter("mtname");
 			String dateIn = multiRequest.getParameter("dateIn");
 			String climbTime = multiRequest.getParameter("climbtime");

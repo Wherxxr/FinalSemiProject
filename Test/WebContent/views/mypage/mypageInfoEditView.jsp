@@ -70,7 +70,7 @@
             <div id="pp_write2">
                 <m class="ff4">비밀번호</m><br>
                 <input type="text" id="pp_writein2" name="userPwd" value="<%= loginMember.getUserPwd()%>">
-                <button type="submit" id="pp_btn1" class="btn btn-sm" style="background-color: gainsboro;">비밀번호 변경</button>
+                <button type="submit" id="pp_btn1" class="btn btn-sm" style="background-color: gainsboro;" onclick="return validate();">비밀번호 변경</button>
                 <hr>
             </div>
              </form>
@@ -101,6 +101,26 @@
             </div>
             
     </div>
+    <script>
+
+        function validate() {
+            const pwdInput1 = document.getElementById("pp_writein2");
+
+            regExp = /^[a-z\d!@#$%^&*]{8,15}$/i;
+            if (!regExp.test(pwdInput1.value)) {
+                alert("유효한 비밀번호를 입력해주세요!")
+                pwdInput1.value = ""; // 지움
+                pwdInput1.focus();
+                return false;
+            }
+
+            
+
+            
+
+        } 
+      
+    </script>
     <%@ include file = "../common/footerbar.jsp" %>
 </body>
 </html>

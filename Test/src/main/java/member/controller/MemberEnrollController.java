@@ -59,7 +59,7 @@ public class MemberEnrollController extends HttpServlet {
 			String gender = multiRequest.getParameter("gender");
 			String phone = multiRequest.getParameter("phone");
 			String description = multiRequest.getParameter("description");
-			String profileImg = multiRequest.getFilesystemName("profileImg");
+			String profileImg = "resources/member_upfiles/" +multiRequest.getFilesystemName("profileImg");
 			int gradeNo = Integer.parseInt(multiRequest.getParameter("gradeNo"));	
 			String instaId = multiRequest.getParameter("instaId");
 			

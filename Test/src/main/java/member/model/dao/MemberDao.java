@@ -311,8 +311,8 @@ public class MemberDao {
 			return count;
 		}
 		
-		public ArrayList<Board> selectMpList(Connection conn, int userNo) {
-			ArrayList<Board> list = new ArrayList<Board>();
+		public ArrayList<Today> selectMpList(Connection conn, int userNo) {
+			ArrayList<Today> list = new ArrayList<Today>();
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			String sql = prop.getProperty("selectMpList");
@@ -322,16 +322,23 @@ public class MemberDao {
 				
 				
 				pstmt.setInt(1, userNo);
+				pstmt.setInt(2, userNo);
 				
 				rset = pstmt.executeQuery();
 				
 				while(rset.next()) {
-					list.add(new Board(rset.getString("board_title"),
-									   rset.getString("board_content"),
+					list.add(new Today(rset.getString("today_no"),
+									   rset.getString("today_title"),
+									   rset.getString("today_content"),
 									   rset.getString("nickname"),
-									   rset.getString("create_date")
+									   rset.getString("create_date"),
+									   rset.getString("profile_img"),
+									   rset.getString("titleimg"),
+									   rset.getInt("COUNT"),
+									   rset.getInt("like_count"),
+									   rset.getInt("file_level")
 									   ));
-				}
+		}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -339,7 +346,7 @@ public class MemberDao {
 				close(rset);
 				close(pstmt);
 			}
-			
+			System.out.println(list);
 			return list;
 			
 		}
@@ -403,8 +410,8 @@ public class MemberDao {
 		}
 
 
-		public ArrayList<Board> selectBookmark(Connection conn, int userNo) {
-		ArrayList<Board> list = new ArrayList<Board>();
+		public ArrayList<Today> selectBookmark(Connection conn, int userNo) {
+		ArrayList<Today> list = new ArrayList<Today>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectBookmark");
@@ -419,11 +426,16 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Board(rset.getString("board_title"),
-								   rset.getString("board_content"),
+				list.add(new Today(rset.getString("today_no"),
+								   rset.getString("today_title"),
+								   rset.getString("today_content"),
 								   rset.getString("nickname"),
 								   rset.getString("create_date"),
-								   rset.getString("profile_img")
+								   rset.getString("profile_img"),
+								   rset.getString("titleimg"),
+								   rset.getInt("COUNT"),
+								   rset.getInt("like_count"),
+								   rset.getInt("file_level")
 								   ));
 			}
 			
@@ -728,6 +740,35 @@ public class MemberDao {
 		    }
 
 		    return m;
+		}
+
+
+		public ArrayList<Member> selectTopUser(Connection conn) {
+			ArrayList<Member> list = new ArrayList<Member>();
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("selectTopUser");
+			
+			try { 
+				pstmt = conn.prepareStatement(sql);
+				
+					
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					list.add(new Member(rset.getString("NICKNAME"),
+										rset.getString("PROFILE_IMG")
+									   ));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return list;
 		}
 
 

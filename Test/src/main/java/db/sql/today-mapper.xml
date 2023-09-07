@@ -38,8 +38,8 @@ UPDATE
 </entry>
 
 <entry key="selectToday">
-SELECT 
-       TODAY_NO
+SELECT USER_NO
+     , TODAY_NO
      , TODAY_TITLE
      , TODAY_CONTENT
      , NICKNAME
@@ -571,6 +571,21 @@ SELECT
 	SELECT MEM_NO
 	  FROM TOGETHER
 	 WHERE REF_NO = ?
+</entry>
+<entry key="selectWeekClimb">
+	SELECT today_no, TO_CHAR(TODAY_DATE, 'MM/DD DY')||'요일 '||TODAY_NAME||' '||CASE 
+    WHEN UPPER(TODAY_TIME) LIKE '오후%' THEN 
+      TO_CHAR(TO_DATE(SUBSTR(TODAY_TIME, 4), 'HH24:MI') + INTERVAL '12' HOUR, 'HH24:MI')
+    WHEN UPPER(TODAY_TIME) LIKE '오전%' THEN 
+      TO_CHAR(TO_DATE(SUBSTR(TODAY_TIME, 4), 'HH24:MI'), 'HH24:MI')
+    ELSE
+      TODAY_TIME
+  END||' '||MEM_COUNT||'/'||LEV||'명' AS "weekClimb"
+FROM TODAY
+WHERE TODAY_TYPE = 2
+  AND TODAY_DATE BETWEEN SYSDATE AND SYSDATE + 7
+  AND STATUS = 'Y'
+ ORDER BY TODAY_DATE
 </entry>
 <entry key="togetherDropOut">
 	DELETE TOGETHER

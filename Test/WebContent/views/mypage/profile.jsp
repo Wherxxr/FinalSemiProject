@@ -115,9 +115,7 @@
         form.action = action;
         form.submit();
     		}	
-    $(function(){
-      console.log('<%= loginMember%>');
-    })
+    
       </script>
      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <%@ include file = "../common/footerbar.jsp" %>

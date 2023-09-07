@@ -1,15 +1,17 @@
+<%@page import="member.model.vo.Member"%>
 <%@page import="qBoard.model.vo.Qna"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 
     Qna q = (Qna)request.getAttribute("q");
-    String alertMsg =(String)session.getAttribute("alertMsg");
     %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <style>
         .outer{
             width: 1200px;
@@ -89,7 +91,7 @@
          <div class="wrap">
             <div id="header">
                 <div id="title"><%= q.getqTitle() %></div>
-                <div id="writer"><%= q.getqWriter() %></div>
+                <div id="writer"><%= loginMember.getUserId() %></div>
                 <div id="h_etc">
                     <span><%= q.getqDate() %></span>
                     <span><%= q.getCount() %></span>
@@ -110,21 +112,16 @@
             
             <div id="comment">
                 <div id="comment-area2">
-                    <form action="">
                         <textarea name="comment" class="comment" style="resize: none; border: none; width: 95%; height: 50px;" placeholder="댓글을 입력하세요"></textarea>
                         <div id="cmt_btn" align="right">
                             <button type="reset">취소</button>
                             <button onclick="insertReply();">등록</button>
                         </div>
-                    </form>
                 </div>
-                <b>댓글 1</b>
+                <b>댓글</b>
                 <div id="comment-area1">
-                    <div id="cmt_id">김뫄뫄</div>
-                    <div id="cmt_txt">너무 피곤해유</div>
-                    <div id="cmt_etc">
-                        <span>7시간전</span>
-                    </div>
+                <!-- 여기와서 꽂힘 -->        
+                </div>
                 </div>
                 <!-- 비회원은 disabled -->
             </div>
@@ -132,9 +129,10 @@
     </div>
     <input type="hidden" id="qno"  value="<%= q.getqNo()%>">
 
+
+
 	<script>
     $(function(){
-		console.log($("#qno").val());
     	selectReplyList();
     });
     
@@ -154,7 +152,7 @@
     					$(".comment").val("");
     			}
     		}, error: function(){
-    			console.log("댓글 작성용 ajax 통신 실패")
+    			
     		}
     	})
     }
@@ -181,7 +179,7 @@
 					$("#comment-area1").html(result);
 				},
 				error : function() {
-					console.log("댓글 조회용 ajax 통신 실패!");
+					
 				}
 			})
 		}

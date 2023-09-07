@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,6 +109,7 @@
     </div>
     <div id="itemList">등산완료 산</div>
       <div id="completedMountainsContainer">
+      <% if(loginMember.getCompleteMt() != null) {%>
       <%
         String[] completedMountains = loginMember.getCompleteMt().split(","); // 쉼표로 구분된 산 이름들을 배열로 분리
         for (String mountain : completedMountains) {
@@ -115,6 +117,7 @@
     <button class="dynamic-button" name="mtname" value="<%= mountain.trim() %>"><%= mountain.trim() %></button>
     <%
         }
+      }
     %>
       </div> 
       

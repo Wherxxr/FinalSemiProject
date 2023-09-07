@@ -41,12 +41,12 @@ public class mtSelectController extends HttpServlet {
 		
 		
 		HttpSession session = request.getSession();
-		if(updateMem == null) { //실패
-			session.setAttribute("alertMsg", "등반완료산 변경에 실패했습니다.");
-		} else { // 성공
+		if(updateMem != null) { //실패
 			session.setAttribute("loginMember", updateMem);
 			
 			session.setAttribute("alertMsg", "성공적으로 등반완료산이 변경됐습니다.");
+		} else {
+			session.setAttribute("alertMsg", "등반완료산 변경에 실패했습니다.");
 		}
 		
 		

@@ -5,6 +5,7 @@
      String contextPath = request.getContextPath(); 
      Member loginMember = (Member)session.getAttribute("loginMember");
      String alertMsg = (String)session.getAttribute("alertMsg");
+    
      %>
 <!DOCTYPE html>
 <html>
@@ -185,7 +186,7 @@
                 const c = ["/list.tg", "/detail.tg", "/enrollFormView.tg"];
                 
                 
-                console.log(b[1]);
+                (b[1]);
                 let result = 0;
                 
                 for(let i=0; i<b.length; i++){

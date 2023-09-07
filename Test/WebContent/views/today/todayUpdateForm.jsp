@@ -1,8 +1,20 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="today.model.vo.Attachment" %>
 <%@page import="today.model.vo.Today" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<% Today t=(Today)request.getAttribute("t"); Attachment at=(Attachment)request.getAttribute("at"); %>
+<% Today t=(Today)request.getAttribute("t"); 
+Attachment at=(Attachment)request.getAttribute("at"); 
+String[] hashtagList = new String[20];
+	
+if(t.getHashtag() != null){
+String hashtag = t.getHashtag().trim().replaceAll(" ", "");
+hashtagList = hashtag.split(",");				
+}
+
+
+%>
+
 <!DOCTYPE html>
 <html>
 
@@ -71,6 +83,45 @@
         #dateIn {
             width: 650px;
         }
+        .inHashtag{
+            display: inline-block;
+            border: 1px solid lightgray;
+            padding: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 10%;
+            color:white;
+            background-color: rgb(190, 188, 188);
+            margin-right: 4px;
+            font-size: 15px;
+        }
+
+        #hashtag{
+            padding-left: 10px;
+            display: inline-block;
+        }
+        
+        #ttl {
+			color: rgb(149, 193, 31);
+			font-weight: bolder;
+			margin: 50px;
+			letter-spacing: 5px;
+		}
+		
+		#hashtagDelete{
+			border:none;
+            height: 30px;
+            width: 50px;
+            border-radius: 3px;
+            font-size: 10px;
+            margin-left: 25px;
+		}
+		#tag{margin-bottom: 5px;}
+		#hashtag{
+            margin: 0px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 
@@ -114,31 +165,34 @@
                 <br>
                 <div id="write4">
                     <p id="ff4">하이킹팁 <em style="color: red;">*</em></p><br><input type="text"
-                        style="width: 650px; height: 100px; margin: 5px 0 0 0;" name="tip" required>
+                        style="width: 650px; height: 100px; margin: 5px 0 0 0;" name="tip" required value="<%= t.getTodayTip()%>">
                 </div>
                 <br>
                 <div id="write5">
-                    <p id="ff4">해시태그</p><input type="text" style="width: 650px; margin: 5px 0 0 0;"
-                        placeholder="# 해시태그 입력(15자),(스페이스바)를 눌러주세요." name="hash"
-                        value="<%= t.hashCode() %>" required>
-                    <br><br><button class="btn btn-l"
-                        style="border: 0px; background-color: rgb(175, 212, 133);">#아차산</button>
-                    <br>
-                    <h9 style="font-size: small; color: gray;">스페이스바를 누르면 해시태그가 완성돼요. 최대
-                        5개</h9>
+                   <div id="tag">
+                    <label>태그</label><br>
+                    <input name="hashtag" type="text" placeholder="해시태그 입력 후 스페이스바">
+                </div>
+                <div id="hashtag">
+                    <!-- <div class="inHashtag"></div> -->
+                    <% if(hashtagList[0] != null){%>
+                        <% for(String s:hashtagList){%>
+                            <div class='inHashtag'># <%= s%></div>
+                        <%} %>
+                </div>
+                    <button type="button" id="hashtagDelete" onclick="hashtagReset();" style="display:'';">지우기</button>
+                    <%}%>
+                <button type="button" id="hashtagDelete" onclick="hashtagReset();" style="display: none;">지우기</button>
+                <input type="hidden" name="hashtagArr" id="result" value="">
                 </div>
 
                 <br>
                 <div id="write6">
-                    <span id="ff4">🌄산 정보</span> <span id="mtinput"><input type="text"
-                            placeholder="입력해주세요"
-                            style="text-align: right; border-style: none; font-weight: 600; margin: 0 10px 0 0;"></span>
+                    <span id="ff4">🌄산 정보</span> 
                     <hr>
-                    <span id="ff3">산 이름</span><span
-                        style="font-size: small; font-weight: 600; color: gray;"> *종주는
+                    <span id="ff3">산 이름</span><span style="font-size: small; font-weight: 600; color: gray;"> *종주는
                         여러 산을 선택, 산이 없다면 '기타'를 선택해주세요</span>
-                    <br><input type="text" style="width: 650px; margin: 5px 0 0 0;"
-                        placeholder="산을 검색해주세요" name="mtname" value="<%= t.getTodayName() %>" required>
+                    <br><input type="text" style="width: 650px; margin: 5px 0 0 0;" placeholder="산을 검색해주세요" name="mtname" required value="<%= t.getTodayName()%>">
                     <img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
                         id="searchimg">
                     <hr>
@@ -148,66 +202,58 @@
                     <span id="ff4">📅등산일자</span>
                     <hr>
                     <h6 id="ff4">등산일자와 대략적인 출발 시간</h6>
-                    <input type="date" name="dateIn" id="dateIn" value="<%= t.getTodayDate()%>" required>
+                    <input type="date" name="dateIn" id="dateIn" required value="<%= t.getTodayDate().substring(0, 10) %>">
                     <hr>
                 </div>
                 <br>
-                <div id="write8">
-                    <span id="ff4">🕒소요시간</span><br>
-                    <input type="text" style="width: 650px; margin: 5px 0 0 0;" name="climbtime"
-                        value="<%= t.getTodayTime()%>" required><br><br>
+                    <div id="write8">
+                        <span id="ff4">🕒소요시간</span><br>
+                        <input type="number" style="width: 650px; margin: 5px 0 0 0;" name="climbtime" required value="<%= t.getTodayTime() %>"><br><br>
 
-                    <hr>
-                </div>
+                        <hr>
+                    </div>
 
-                <div id="write9">
-                    <span id="ff4">📍루트</span><br>
-                    <input type="text" style="width: 650px; margin: 5px 0 0 0;"
-                        placeholder="ex) 탐방지원센터, 연주암, 백운대" name="route"
-                        value="<%= t.getTodayCourse() %>" required><br><br>
-                    <button type="button" class="btn btn-success" style="width: 650px;">+
-                        지점추가</button>
-                    <hr>
-                </div>
+                    <div id="write9">
+                        <span id="ff4">📍루트</span><br>
+                        <input type="text" style="width: 650px; margin: 5px 0 0 0;"
+                            placeholder="ex) 탐방지원센터, 연주암, 백운대" name="route" required value="<%= t.getTodayCourse() %>"><br><br>
+                        <button type="button" class="btn btn-success" style="width: 650px;" >+ 지점추가</button>
+                        <hr>
+                    </div>
 
                 <div id="write10">
-                    <span id="ff4">🚶‍♂️레벨</span> <span id="mtinput"><input type="text"
-                            placeholder="입력해주세요" value="<%= t.getLev() %>"
-                            style="text-align: right; border-style: none; font-weight: 600; margin: 0 10px 0 0;"
-                            name="lev" required></span>
+                    <span id="ff4">🚶‍♂️레벨</span> <span id="mtinput"i><input type="text" placeholder="입력해주세요"
+                            style="text-align: right; border-style: none; font-weight: 600; margin: 0 10px 0 0;"name="lev" id="levInput" required readonly value="<%= t.getLev() %>"></span>
                     <hr>
-                    <button type="button" class="btn btn-outline-secondary">매우 쉬움</button>
-                    <button type="button" class="btn btn-outline-secondary">쉬움</button>
-                    <button type="button" class="btn btn-outline-secondary">보통</button>
-                    <button type="button" class="btn btn-outline-secondary">어려움</button>
-                    <button type="button" class="btn btn-outline-secondary">매우
-                        어려움</button>
+                    <button type="button" class="btn btn-outline-secondary" value="매우 쉬움">매우 쉬움</button>
+                    <button type="button" class="btn btn-outline-secondary" value="쉬움">쉬움</button>
+                    <button type="button" class="btn btn-outline-secondary" value="보통">보통</button>
+                    <button type="button" class="btn btn-outline-secondary" value="어려움">어려움</button>
+                    <button type="button" class="btn btn-outline-secondary" value="매우 어려움">매우 어려움</button>
                     <hr>
                 </div>
 
                 <div id="write11">
-                    <span id="ff4">🚌교통</span> <span id="mtinput"><input type="text"
-                            placeholder="입력해주세요" value="<%= t.getTodayVehicle() %>"
-                            style="text-align: right; border-style: none; font-weight: 600; margin: 0 10px 0 0;" required></span>
+                    <span id="ff4">🚌교통</span> <span id="mtinput"></span>
                     <hr>
 
-                    <div id="ff4">
-                        <input type="checkbox" name="transport" id="car"
-                            style="width: 17px; height: 17px; margin: 0 5px 0 0;">
-                        <label for="car">자차/택시</label><br>
-                        <input type="checkbox" name="transport" id="traffic"
-                            style="width: 17px; height: 17px; margin: 0 5px 0 0;">
-                        <label for="traffic">대중교통</label><br>
-                        <input type="checkbox" name="transport" id="etc"
-                            style="width: 17px; height: 17px; margin: 0 5px 0 0;">
-                        <label for="etc">기타</label><br>
+                        <div id="ff4">
+                            <input type="radio" name="transport" id="car" style="width: 17px; height: 17px; margin: 0 5px 0 0;" value="자차">
+                            <label for="car">자차</label><br>
+                            <input type="radio" name="transport" id="traffic" style="width: 17px; height: 17px; margin: 0 5px 0 0;" value="대중교통">
+                            <label for="traffic">대중교통</label><br>
+                            <input type="radio" name="transport" id="bus" style="width: 17px; height: 17px; margin: 0 5px 0 0;" value="버스대절">
+                            <label for="bus">버스대절</label><br>
+                            <input type="radio" name="transport" id="etc" style="width: 17px; height: 17px; margin: 0 5px 0 0;" value="기타">
+                            <label for="etc">기타</label><br>                 
 
-                    </div>
+                        </div>
+
                 </div>
 
                 <br>
                 <div align="right" id="write12">
-                    <button type="button" class="btn btn-light" id="ff4">취소</button>
+                    <a href="<%= contextPath %>/detail.to?bno=<%= t.getTodayNo()%>" type="button" class="btn btn-light" id="ff4">돌아가기</a>
                     <button type="button" class="btn btn-light" id="ff4">임시저장</button>
                     <button type="submit" class="btn btn-primary" id="ff4">저장</button>
                 </div>
@@ -220,6 +266,73 @@
             </a>
         </div>
         <script>
+              $("input[name=hashtag]").on("keydown",function(key){
+                        if(key.keyCode==32) {
+                            inputHashtag();
+                        }
+                    });
+					
+                	let hashatag = "<%= t.getHashtag()%>";
+                    let input = "";
+                    let result = [];
+                    function inputHashtag(){
+
+                        let ht = $("input[name=hashtag]").val();
+                        input += "<div class='inHashtag'>#" + ht + "</div>";
+                        result.push(ht);
+                        test();                        
+                    }
+                    
+                    function test(){
+                        $("#hashtagDelete").css("display", "");
+                        $("#hashtag").html(input);
+                        $("input[name=hashtag]").val("");
+                        $("#result").val(result);
+                        ($("#result").val());
+                    }
+
+                    function hashtagReset(){
+                        result=[];
+                        input="";
+                        $("#hashtag").html("");
+                        $("#hashtagDelete").css("display", "none");
+                    }
+                    
+
+                let vhc = "<%= t.getTodayVehicle() %>"; // 서버에서 가져온 값, 이 값을 설정하면 선택됨
+
+                
+                $(document).ready(function () {
+                    // 선택된 값과 value 값을 비교하여 선택 상태를 변경
+                    $("input[name='transport']").each(function () {
+                        if ($(this).val() === vhc) {
+                            $(this).prop("checked", true); // 선택
+                        }
+                    });
+                });
+                function setDifficulty(difficulty) {
+                    document.querySelector('input[name="lev"]').value = difficulty;
+                }
+
+                document.querySelectorAll('#write10 button.btn-outline-secondary').forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        const difficulty = button.value;
+                        document.querySelector('input[name="lev"]').value = difficulty;
+                    });
+                });
+
+
+                function setTransport() {
+                const selectedCheckboxes = document.querySelectorAll('input[name="transport"]:selected');
+                const transportInput = document.querySelector('input[name="transportInput"]');
+                
+                const selectedLabels = Array.from(selectedCheckboxes).map(cb => cb.nextElementSibling.textContent);
+                transportInput.value = selectedLabels.join(', ');
+            }
+
+            document.querySelectorAll('input[name="transport"]').forEach(function (checkbox) {
+                checkbox.addEventListener('selected', setTransport);
+            });
             function chooseFile(num) {
                 $("#file" + num).click();
             }

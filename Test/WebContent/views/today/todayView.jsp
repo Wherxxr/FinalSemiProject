@@ -181,7 +181,6 @@
          }
 
          .list-area>tbody>tr:hover {
-             background-color: gray;
              cursor: pointer;
          }
 
@@ -225,6 +224,12 @@
         #paging-area li a:hover {
          cursor: pointer;
         }
+        #title {
+            color: rgb(149, 193, 31);
+            font-weight: bolder;
+            margin: 70px;
+            letter-spacing: 5px;
+        }
      </style>
  </head>
 
@@ -232,6 +237,7 @@
      <%@ include file="../common/menubar.jsp" %>
          <div class="outer">
              <div class="wrap">
+                <h1 align="center" id="title">오등완 💪</h1>
                  <div id="header">
                      <div id="filter">
                     <select name="order" id="sort">
@@ -290,8 +296,8 @@
 			$.ajax({
 				url : "today.to",
 				success : function(list) {
-                    console.log(list);
-					console.log("총 length" + list.length);
+                    (list);
+					("총 length" + list.length);
 					listCount = list.length;
 					toList = list;
 
@@ -301,7 +307,7 @@
 					paging(listCount, boardLimit, pageLimit, 1);
 				},
 				error : function() {
-					console.log("실패@");
+					
 				}
 
 			});
@@ -324,7 +330,7 @@
                 
             },
             error:function(){
-                console.log("실패");
+                ;
             }
         })
         })
@@ -344,7 +350,7 @@
                         paging(listCount, boardLimit, pageLimit, 1);
                        
                     }, error: function () {
-                        console.log("ajax통신실패");
+                        ("ajax통신실패");
                     }
                 })
             })
@@ -366,7 +372,7 @@
         let day = ('0' + today.getDate()).slice(-2);			
         let dateString = year + '/' + month  + '/' + day;
 
-            for (let i = start; i < end; i++) {
+            for (let i = start; i < end  && i < toList.length; i++) {
                 tohtml += "<div class='content'>" +
                             "<div class='c1'>" +
                             "<img width='230' height='190'src=" + toList[i].titleImg + "></div>" +
@@ -400,7 +406,7 @@
 			
 			
 			maxPage = Math.ceil(listCount/boardLimit); // 총 페이징 수
-			console.log("max:"+maxPage);
+			
 			
 			if(maxPage < pageLimit){
 				pageLimit = maxPage;
@@ -408,7 +414,7 @@
 			
 			let pageGroup = Math.ceil(currentPage/pageLimit);
 			
-			console.log("페이징총개수: " + pageGroup)
+			
 			let last = pageGroup * pageLimit;
 			
 			if(last > maxPage){
@@ -422,7 +428,7 @@
 			let pageHtml = "";
 			
 			if(prev > 0){
-				console.log("prev");
+				
 				pageHtml += "<li><a id='prev'>이전</a></li>";			
 			}
 			
@@ -435,7 +441,7 @@
 			}
 			
 			if(last < maxPage){
-				console.log("last");
+				
 				pageHtml += "<li><a id='next'>다음</a></li>";	
 			}
 			
@@ -446,7 +452,7 @@
 				
 				let $id = $(this).attr("id");
 				selectedPage = $(this).text();
-				console.log("페이지번호 : " + selectedPage);
+				
 				
 				if($id == "next"){
 					selectedPage = next;

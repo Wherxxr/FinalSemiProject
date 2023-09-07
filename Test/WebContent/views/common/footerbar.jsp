@@ -39,26 +39,25 @@
     <body>
 
         <div id="ft_footer">       
-                <div id="ft_footer1">
-                    <a href="<%=contextPath %>/service.ft">서비스 소개</a> |
-                    <a href="<%=contextPath %>/terms.ft">이용약관</a> |
-                    <a href="<%=contextPath %>/policy.ft">개인정보취급방침</a> |
-                    <a href="<%=contextPath %>/advertising.ft">광고문의</a> |
-                    <a href="<%=contextPath %>/recruit.ft">인재채용</a> 
-                </div>   
-                <div id="ft_footer2">
-                    <p>
-                        사업자등록번호: 986-76-00312 | 서울 강남 제2023-07호 | 대표자 : 류현수 | 책임자 : 신혜수 | 개인정보관리책임자 : 하민정, 이호연, 최성윤
-                    </p>
-                    <p>
-                        주소: 서울특별시 강남구 테헤란로14길 남도빌딩 3F
-                    </p>
-                    <p>
-                        © 2023 (주)MOUNTAINEER, Inc. All rights reserved
-                    </p>
-                </div>
+            <div id="ft_footer1">
+                <a href="<%=contextPath %>/service.ft">서비스 소개</a> |
+                <a href="<%=contextPath %>/terms.ft">이용약관</a> |
+                <a href="<%=contextPath %>/policy.ft">개인정보취급방침</a> |
+                <a href="<%=contextPath %>/advertising.ft">광고문의</a> |
+                <a href="<%=contextPath %>/recruit.ft">인재채용</a> 
+            </div>   
+            <div id="ft_footer2">
+                <p>
+                    사업자등록번호: 986-76-00312 | 서울 강남 제2023-07호 | 대표자 : 류현수 | 책임자 : 신혜수 | 개인정보관리책임자 : 하민정, 이호연, 최성윤
+                </p>
+                <p>
+                    주소: 서울특별시 강남구 테헤란로14길 남도빌딩 3F
+                </p>
+                <p>
+                    © 2023 (주)MOUNTAINEER, Inc. All rights reserved
+                </p>
             </div>
+        </div>
     
     </body>
-
     </html>

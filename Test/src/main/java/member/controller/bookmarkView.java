@@ -1,22 +1,16 @@
 package member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-import board.model.vo.Board;
-import member.model.service.MemberService;
-
 /**
- * Servlet implementation class profileView
+ * Servlet implementation class bookmarkView
  */
-@WebServlet("/bookmark.me")
+@WebServlet("/bmView.me")
 public class bookmarkView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,13 +26,7 @@ public class bookmarkView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		BoardService bService = new BoardService();
-			
-			ArrayList<Board> list = new MemberService().selectBookmark(userNo);
-			System.out.println(list);
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/mypage/mypageBookmark.jsp").forward(request, response);
+		request.getRequestDispatcher("views/mypage/mypageBookmark.jsp").forward(request, response);
 	}
 
 	/**

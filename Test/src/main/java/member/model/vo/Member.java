@@ -72,6 +72,12 @@ public class Member {
 	}
 	
 
+	public Member(String nickname, String profileImg) {
+		super();
+		this.nickname = nickname;
+		this.profileImg = profileImg;
+	}
+
 	public Member(String completeMt) {
 		super();
 		this.completeMt = completeMt;

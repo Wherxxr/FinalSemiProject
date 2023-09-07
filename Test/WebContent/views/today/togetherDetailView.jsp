@@ -3,13 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Today t = (Today)request.getAttribute("t");
-	// 게시글번호(T1), 제목, 내용, 닉네임, 유저번호, 산이름, 작성일자, 교통수단, 코스, 모집인원수(lev), mem_count, 시간, 등산일자, 댓글수
-	
-	ArrayList<Integer> list = (ArrayList<Integer>)request.getAttribute("list");
-	// 해당 게시글에 가입한 멤버의 리스트
-	
-	int result = 0;
+   Today t = (Today)request.getAttribute("t");
+   // 게시글번호(T1), 제목, 내용, 닉네임, 유저번호, 산이름, 작성일자, 교통수단, 코스, 모집인원수(lev), mem_count, 시간, 등산일자, 댓글수
+   
+   ArrayList<Integer> list = (ArrayList<Integer>)request.getAttribute("list");
+   // 해당 게시글에 가입한 멤버의 리스트
+   
+   int result = 0;
 
 %>
 <!DOCTYPE html>
@@ -112,7 +112,7 @@
             font-family: 'NanumBarunGothic';
         }
 
-		#bar>button{
+      #bar>button{
             border: none;
             background-color: rgba(0, 0, 0, 0);
             font-size: 14px;
@@ -148,17 +148,17 @@
     </style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
-	<%
-		if(loginMember != null && list != null){
-			for(int memNo : list){
-				if(loginMember.getUserNo() == memNo){
-					result = 1;
-				}
-			}
-			
-		}
-	%>
+   <%@ include file="../common/menubar.jsp" %>
+   <%
+      if(loginMember != null && list != null){
+         for(int memNo : list){
+            if(loginMember.getUserNo() == memNo){
+               result = 1;
+            }
+         }
+         
+      }
+   %>
     <div class="outer">
         <div class="wrap">
             <div id="header">
@@ -202,16 +202,16 @@
                         <th>🙋‍♂️</th>
                         <th>명수</th>
                         <% if(Integer.parseInt(t.getLev()) == 100){ %>
-                        	<td><%= t.getMemCount() %>명/제한없음</td>
+                           <td><%= t.getMemCount() %>명/제한없음</td>
                         <%}else{ %>
-                        	<td><%= t.getMemCount() %>/<%= t.getLev() %>명</td>
+                           <td><%= t.getMemCount() %>/<%= t.getLev() %>명</td>
                         <%} %>
                     </tr>
                 </table>
                  <% if(loginMember != null && t.getMemCount() < Integer.parseInt(t.getLev()) && result!=1 && t.getUserNo() != loginMember.getUserNo()){ %>
-                	<button id="enroll-btn" onclick="enrollMember();">신청하기</button>
+                   <button id="enroll-btn" onclick="enrollMember();">신청하기</button>
                 <%}else if(result == 1 && loginMember.getUserNo() != t.getUserNo()){ %>
-                	<button id="enroll-btn" style="background-color:gray;" onclick="dropOut();">신청취소</button>
+                   <button id="enroll-btn" style="background-color:gray;" onclick="dropOut();">신청취소</button>
                 <%} %>
             </div>
                 <%if(loginMember == null){ %>
@@ -222,7 +222,7 @@
                 <div id="bar" align="right">
                     <button type="button" data-toggle="modal" data-target="#reportBoard">신고</button>
                     <button id="bookmark1" onclick="insertBook();"><img src="resources/image/bookmark_blank.png" width="25" height="25"></button>
-               		<button id="bookmark2" onclick="deleteBook();" style="display: none;"><img src="resources/image/bookmark.png" width="25" height="25"></button>
+                     <button id="bookmark2" onclick="deleteBook();" style="display: none;"><img src="resources/image/bookmark.png" width="25" height="25"></button>
                 </div>
                 <%} %>
             <div id="comment">
@@ -251,212 +251,212 @@
     </div>
     
     <script>
-    	let bno = "<%= t.getTodayNo()%>";
-    	<% if(loginMember != null){%>
-    	let userNo = "<%= loginMember.getUserNo()%>";
-    	
-	    function insertBook(){
-	        
-	           $.ajax({
-	            url:"book.bo",
-	            data:{boardNo:bno, userNo:userNo},
-	            success:function(result){
-	                if(result == 'Y'){
-	                	$("#bookmark1").css("display", "none");
-	                    $("#bookmark2").css("display", "");
-	                }
-	            },
-	            error:function(){
-	                console.log("실패")
-	            }
-	           })
-	        	
-	    }
-	
-	    function deleteBook(){
-	    
-	           $.ajax({
-	            url:"deleteBook.bo",
-	            data:{boardNo:bno, userNo:userNo},
-	            success:function(result){
-	                if(result == 'Y'){
-	                	$("#bookmark1").css("display", "");
-	                    $("#bookmark2").css("display", "none");
-	                }
-	            },
-	            error:function(){
-	                console.log("실패")
-	            }
-	           })
-	        	
-	    }
-	    
-	    $(function(){
-			if(<%= result%> == 1){
-		    	selectReplyList();
-		    	
-		    	setInterval(selectReplyList, 1000);
-				
-			}
-	    	
+       let bno = "<%= t.getTodayNo()%>";
+       <% if(loginMember != null){%>
+       let userNo = "<%= loginMember.getUserNo()%>";
+       
+       function insertBook(){
+           
+              $.ajax({
+               url:"book.bo",
+               data:{boardNo:bno, userNo:userNo},
+               success:function(result){
+                   if(result == 'Y'){
+                      $("#bookmark1").css("display", "none");
+                       $("#bookmark2").css("display", "");
+                   }
+               },
+               error:function(){
+                   
+               }
+              })
+              
+       }
+   
+       function deleteBook(){
+       
+              $.ajax({
+               url:"deleteBook.bo",
+               data:{boardNo:bno, userNo:userNo},
+               success:function(result){
+                   if(result == 'Y'){
+                      $("#bookmark1").css("display", "");
+                       $("#bookmark2").css("display", "none");
+                   }
+               },
+               error:function(){
+                   
+               }
+              })
+              
+       }
+       
+       $(function(){
+         if(<%= result%> == 1){
+             selectReplyList();
+             
+             setInterval(selectReplyList, 1000);
+            
+         }
+          
             // 북마크 체크 함수
             $.ajax({
                 url:"bookCheck.bo",
                 data:{boardNo:bno, userNo:userNo},
                 success:function(result){
                     if(result == 'Y'){
-                    	$("#bookmark2").css("display", "");
+                       $("#bookmark2").css("display", "");
                         $("#bookmark1").css("display", "none");
                     }else{
-                    	$("#bookmark2").css("display", "none");
-                        $("#bookmark1").css("display", "");                    	
+                       $("#bookmark2").css("display", "none");
+                        $("#bookmark1").css("display", "");                       
                     }
                 },
                 error:function(result){
-                    console.log("실패");
+                    ;
                 }
             })
-	            
-		    
-	            
+               
+          
+               
             
-	    })
-	    
-	    function selectReplyList(){
-	    	
-	    	// 오늘날짜
-			let today = new Date();
-			let year = today.getFullYear();
-			let month = ('0' + (today.getMonth() + 1)).slice(-2);
-			let day = ('0' + today.getDate()).slice(-2);			
-			let dateString = year + '/' + month  + '/' + day;
-	    	
-	    	// 댓글 리스트
+       })
+       
+       function selectReplyList(){
+          
+          // 오늘날짜
+         let today = new Date();
+         let year = today.getFullYear();
+         let month = ('0' + (today.getMonth() + 1)).slice(-2);
+         let day = ('0' + today.getDate()).slice(-2);         
+         let dateString = year + '/' + month  + '/' + day;
+          
+          // 댓글 리스트
             let charHtml = "";
             
             $.ajax({
-            	url:"replyList.bo",
-            	data:{boardNo:bno},
-            	success:function(list){
-            		for(let i=0; i<list.length; i++){
-            			charHtml += "<div class='comment-area1'>"
-          				  + "<span class='cmt_id'>" + list[i].replyWriter + "</span>";
-          			 if('20' + list[i].createDate.substr(0,8) == dateString){
-          		charHtml += "<span class='cmt_etc'>" + list[i].createDate.substr(9);
-          			 }else{
-          		charHtml += "<span class='cmt_etc'>" + list[i].createDate;		 
-          			 }
-          		charHtml += "</span><div class='cmt_txt'>" + list[i].replyContent + "</div>";
-      				  if(userNo == list[i].userNo){
-          				  charHtml += "<p class='deleteReply-btn' onclick='deleteReply($(this));'>삭제</p>"
-          				  		   + "<input type='hidden' value='" + list[i].replyNo + "'>"
-          					 	   + "</div></div>"; 
-      				  }else{
-      					  charHtml += "</div>";
-      				  }
-	            				  
-            		}
-            		
-            		$("#comment-list").html(charHtml);
-            		
-            	},
-            	error:function(){
-            		console.log("댓글 불러오기 실패");
-            	}
-            	
+               url:"replyList.bo",
+               data:{boardNo:bno},
+               success:function(list){
+                  for(let i=0; i<list.length; i++){
+                     charHtml += "<div class='comment-area1'>"
+                        + "<span class='cmt_id'>" + list[i].replyWriter + "</span>";
+                    if('20' + list[i].createDate.substr(0,8) == dateString){
+                charHtml += "<span class='cmt_etc'>" + list[i].createDate.substr(9);
+                    }else{
+                charHtml += "<span class='cmt_etc'>" + list[i].createDate;       
+                    }
+                charHtml += "</span><div class='cmt_txt'>" + list[i].replyContent + "</div>";
+                    if(userNo == list[i].userNo){
+                        charHtml += "<p class='deleteReply-btn' onclick='deleteReply($(this));'>삭제</p>"
+                                 + "<input type='hidden' value='" + list[i].replyNo + "'>"
+                                + "</div></div>"; 
+                    }else{
+                       charHtml += "</div>";
+                    }
+                             
+                  }
+                  
+                  $("#comment-list").html(charHtml);
+                  
+               },
+               error:function(){
+                  
+               }
+               
             })
             
             // 댓글 갯수
             $.ajax({
-            	url:"countReply.bo",
-            	data:{boardNo:bno},
-            	success:function(result){
-            		$("#countReply").text(result);
-            	},
-            	error:function(){
-            		console.log("댓글카운트 ajax 통신 실패");
-            	}
+               url:"countReply.bo",
+               data:{boardNo:bno},
+               success:function(result){
+                  $("#countReply").text(result);
+               },
+               error:function(){
+                  
+               }
             })
-       	}
-	    <%} %>
-	    
-	    // 게시글 삭제 함수
+          }
+       <%} %>
+       
+       // 게시글 삭제 함수
         function deleteBoard(){
-        	
-        	if(confirm("해당 게시글을 삭제하시겠습니까?")){
-	        	location.href = "<%= contextPath %>/delete.tg?tno=" + bno;
-        	}
-        	
+           
+           if(confirm("해당 게시글을 삭제하시겠습니까?")){
+              location.href = "<%= contextPath %>/delete.tg?tno=" + bno;
+           }
+           
         }
-	    
-	    // 모임 신청하기 버튼
-	    function enrollMember(){
-	    	
-	    	if(confirm("해당 모임에 신청하시겠습니까?")){
-	    		location.href = "<%= contextPath %>/enroll.tg?tno=" + bno + "&uno=" + userNo;
-	    		
-	    	}
-	    	
-	    }
-	    
-	 	// 모임 탈퇴
- 		function dropOut(){
-	    	
-	    	if(confirm("해당 모임에 탈퇴하시겠습니까?")){
-	    		location.href = "<%= contextPath %>/dropOut.tg?tno=" + bno + "&uno=" + userNo;
-	    	}
-	    }
-	    
-		 // 댓글 작성 함수
-	    function insertReply(){
-	    	
-	    	$.ajax({
-	    		url:"insertReply.bo",
-	    		data:{
-	    			comment:$("#rContent").val(),
-	    			boardNo:bno
-	    		},
-	    		type:"post",
-	    		success:function(result){
-	    			if(result > 0){
-	    				selectReplyList();
-	    				$("#rContent").val("");
-	    			}
-	    		}
-	    		
-	    	})
-	    }
-	    
-	    
-     	// 댓글 삭제 함수
-		function deleteReply(e){
-        	let replyNo = e.next().val();
-        	
-        	if(confirm("댓글을 삭제하시겠습니까?")){
-        		$.ajax({
-        			url:"deleteReply.bo",
-        			data:{rno:replyNo},
-        			success:function(result){
-        				if(result > 0){
-        					selectReplyList();
-        				}
-        			},
-        			error:function(){
-        				console.log("댓글작성 ajax 통신 실패");
-        			}
-        		})
-        	}
+       
+       // 모임 신청하기 버튼
+       function enrollMember(){
+          
+          if(confirm("해당 모임에 신청하시겠습니까?")){
+             location.href = "<%= contextPath %>/enroll.tg?tno=" + bno + "&uno=" + userNo;
+             
+          }
+          
+       }
+       
+       // 모임 탈퇴
+       function dropOut(){
+          
+          if(confirm("해당 모임에 탈퇴하시겠습니까?")){
+             location.href = "<%= contextPath %>/dropOut.tg?tno=" + bno + "&uno=" + userNo;
+          }
+       }
+       
+       // 댓글 작성 함수
+       function insertReply(){
+          
+          $.ajax({
+             url:"insertReply.bo",
+             data:{
+                comment:$("#rContent").val(),
+                boardNo:bno
+             },
+             type:"post",
+             success:function(result){
+                if(result > 0){
+                   selectReplyList();
+                   $("#rContent").val("");
+                }
+             }
+             
+          })
+       }
+       
+       
+        // 댓글 삭제 함수
+      function deleteReply(e){
+           let replyNo = e.next().val();
+           
+           if(confirm("댓글을 삭제하시겠습니까?")){
+              $.ajax({
+                 url:"deleteReply.bo",
+                 data:{rno:replyNo},
+                 success:function(result){
+                    if(result > 0){
+                       selectReplyList();
+                    }
+                 },
+                 error:function(){
+                    
+                 }
+              })
+           }
      
         }
-     	
-		 // 게시글 수정 함수
+        
+       // 게시글 수정 함수
         function updateBoard(){
-			location.href="<%= contextPath%>/updateView.tg?tno=<%= t.getTodayNo()%>";        	
+         location.href="<%= contextPath%>/updateView.tg?tno=<%= t.getTodayNo()%>";           
         }
-	    
-	    
-	   
-	    
+       
+       
+      
+       
     </script>
     
     <div class="modal" id="reportBoard">

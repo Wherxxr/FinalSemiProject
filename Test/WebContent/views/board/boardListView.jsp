@@ -302,7 +302,6 @@ button>img {
     		$.ajax({
     			url:"list.category",
     			success:function(list){
-    				// console.log(list);
     				let result = "<option value='0'>말머리 선택</option>";
     				for(let i=0; i<list.length; i++){
     					result += "<option value=" + list[i].categoryNo + ">"
@@ -313,7 +312,6 @@ button>img {
     				
     			}, 
     			error:function(){
-    				console.log("실패");
     			}
     		})
     	})
@@ -330,13 +328,12 @@ button>img {
 
 			// boardLimit 설정
 			boardLimit = $("#boardLimit").val();
-			console.log(boardLimit);
+			(boardLimit);
 	
 			// list 불러오기
 			$.ajax({
 				url : "list.bo",
 				success : function(list) {
-					console.log("총 length" + list.length);
 					listCount = list.length;
 					dataList = list;
 
@@ -346,7 +343,6 @@ button>img {
 					paging(listCount, boardLimit, pageLimit, 1);
 				},
 				error : function() {
-					console.log("실패@");
 				}
 
 			});
@@ -371,7 +367,6 @@ button>img {
 					
 				},
 				error:function(){
-					console.log("실패");
 				}
 			})
 		})
@@ -451,7 +446,6 @@ button>img {
 			
 			
 			maxPage = Math.ceil(listCount/boardLimit); // 총 페이징 수
-			console.log("max:"+maxPage);
 			
 			if(maxPage < pageLimit){
 				pageLimit = maxPage;
@@ -459,7 +453,7 @@ button>img {
 			
 			let pageGroup = Math.ceil(currentPage/pageLimit);
 			
-			console.log("페이징총개수: " + pageGroup)
+			
 			let last = pageGroup * pageLimit;
 			
 			if(last > maxPage){
@@ -473,7 +467,6 @@ button>img {
 			let pageHtml = "";
 			
 			if(prev > 0){
-				console.log("prev");
 				pageHtml += "<li><a id='prev'>이전</a></li>";			
 			}
 			
@@ -486,7 +479,6 @@ button>img {
 			}
 			
 			if(last < maxPage){
-				console.log("last");
 				pageHtml += "<li><a id='next'>다음</a></li>";	
 			}
 			
@@ -497,7 +489,6 @@ button>img {
 				
 				let $id = $(this).attr("id");
 				selectedPage = $(this).text();
-				console.log("페이지번호 : " + selectedPage);
 				
 				if($id == "next"){
 					selectedPage = next;
@@ -543,7 +534,6 @@ button>img {
 				data:{option:searchOpt, keyword:search},
 				success:function(list){
 					listCount = list.length;
-					
 					if(listCount == 0){
 						$(".list-area").children("tbody").html("");
 						$(".list-area").children("tfoot").html("<tr align='center';><td colspan='7'>검색된 결과가 없습니다.</td></tr>");
@@ -559,7 +549,7 @@ button>img {
 					}
 				},
 				error:function(){
-					console.log("검색 조회 ajax 실패");
+					
 				}
 			})
 		})

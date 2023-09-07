@@ -9,6 +9,7 @@ import board.model.vo.Board;
 import member.model.vo.Attachment;
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
+import today.model.vo.Today;
 
 public class MemberService {
 
@@ -180,10 +181,10 @@ public class MemberService {
 		return b;
 	}
 
-	public ArrayList<Board> selectMpList(int userNo) {
+	public ArrayList<Today> selectMpList(int userNo) {
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new MemberDao().selectMpList(conn, userNo);
+		ArrayList<Today> list = new MemberDao().selectMpList(conn, userNo);
 		
 		close(conn);
 		
@@ -200,10 +201,10 @@ public class MemberService {
 		return result;
 	}
 
-	public ArrayList<Board> selectBookmark(int userNo) {
+	public ArrayList<Today> selectBookmark(int userNo) {
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new MemberDao().selectBookmark(conn, userNo);
+		ArrayList<Today> list = new MemberDao().selectBookmark(conn, userNo);
 		
 		close(conn);
 		
@@ -302,6 +303,14 @@ public class MemberService {
 	    Member m = new MemberDao().selectProImg(conn, userNo);
 	    close(conn);
 	    return m;
+	}
+
+	public ArrayList<Member> selectTopUser() {
+		Connection conn = getConnection();
+		ArrayList<Member> list= new MemberDao().selectTopUser(conn);
+		
+		close(conn);
+		return list;
 	}
 	
 

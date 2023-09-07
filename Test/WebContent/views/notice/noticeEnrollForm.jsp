@@ -170,14 +170,14 @@
                     const nef_textArea1 = document.querySelector(".nef_textArea1");
 
                     nef_textArea1.addEventListener("keydown", () => {
-                        console.log(nef_textArea1.value);
+                        (nef_textArea1.value);
                         localStorage.setItem("textArea", nef_textArea1.value);
                     });
 
                     window.onload = () => {
                         if(localStorage.getItem("textArea")){
                             if(confirm("최근 작성한 글을 불러오시겠습니까?")){
-                                console.log(localStorage.getItem("textArea"));
+                                (localStorage.getItem("textArea"));
 
                                 document.querySelector(".nef_textArea1").innerText =
                                 localStorage.getItem("textArea");

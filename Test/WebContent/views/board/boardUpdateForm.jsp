@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>자유게시판 수정 - MOUNTAINEER</title>
+    <title>자유게시판 작성</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
     <style>
@@ -184,7 +184,7 @@
                         $("#hashtag").html(input);
                         $("input[name=hashtag]").val("");
                         $("#result").val(result);
-                        console.log($("#result").val());
+                        ($("#result").val());
                     }
 
                     function hashtagReset(){
@@ -248,7 +248,6 @@
                				
                			}, 
                			error:function(){
-               				console.log("실패");
                			}
                		})
                		
@@ -291,10 +290,8 @@
                 		url:"deleteAttachment.ajax",
                 		data:{fileNo:fileNo},
                 		success:function(){
-                			console.log("파일 삭제 ajax 통신 성공");
                 		},
                 		error:function(){
-                			console.log("파일 삭제 ajax 통신 실패");
                 		}
                 	})
                 	

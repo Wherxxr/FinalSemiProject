@@ -16,7 +16,7 @@ public class Board {
 	private int likeCount;
 	private int replyCount;
 	private int userNo;
-	
+	private String bono;
 	public Board() {}
 	
 	
@@ -95,6 +95,19 @@ public class Board {
 		this.boardWriter = boardWriter;
 		this.createDate = createDate;
 	}
+	
+	
+
+	public Board(String bono, String boardTitle, String boardContent, String boardWriter, String createDate,
+			String profileImg) {
+		super();
+		this.bono = bono;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardWriter = boardWriter;
+		this.createDate = createDate;
+		this.profileImg = profileImg;
+	}
 
 
 
@@ -131,6 +144,8 @@ public class Board {
 		this.userNo = userNo;
 	}
 
+	
+	
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -250,6 +265,18 @@ public class Board {
 
 	public void setProfileImg(String profileImg) {
 		this.profileImg = profileImg;
+	}
+
+
+
+	public String getBono() {
+		return bono;
+	}
+
+
+
+	public void setBono(String bono) {
+		this.bono = bono;
 	}
 
 	

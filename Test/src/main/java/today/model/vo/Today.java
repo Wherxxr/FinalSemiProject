@@ -18,12 +18,15 @@ public class Today {
 	private int countLike;
 	private String titleImg;
 	private String createDate;
-
+	private String profileImg;
 	private int memCount;
 	private int replyCount;
 	private int userNo;
 	private String member;
-
+	private int fileLevel;
+	private String weekClimb;
+	
+	
 	public Today() {
 	}
 
@@ -157,10 +160,11 @@ public class Today {
 		this.todayWriter = todayWriter;
 	}
 
-	public Today(String todayNo, String todayTitle, String todayContent, String todayWriter,String todayTip, String hashtag,
+	public Today(int userNo,String todayNo, String todayTitle, String todayContent, String todayWriter,String todayTip, String hashtag,
 			String todayName, String todayDate, String todayTime, String todayCourse, String lev, String todayVehicle,
 			 int count, String createDate, int replyCount,int countLike) {
 		super();
+		this.userNo = userNo;
 		this.todayNo = todayNo;
 		this.todayTitle = todayTitle;
 		this.todayContent = todayContent;
@@ -177,6 +181,42 @@ public class Today {
 		this.createDate = createDate;
 		this.replyCount = replyCount;
 		this.countLike = countLike;
+	}
+
+	
+
+	public Today(String todayNo, String todayTitle, String todayContent, String todayWriter,
+			String createDate, String profileImg, String titleImg) {
+		super();
+		this.todayNo = todayNo;
+		this.todayTitle = todayTitle;
+		this.todayContent = todayContent;
+		this.todayWriter = todayWriter;
+		this.createDate = createDate;
+		this.profileImg = profileImg;
+		this.titleImg = titleImg;
+	}
+	
+	
+	public Today(String todayNo, String todayTitle, String todayContent, String todayWriter,String createDate, String profileImg, 
+			String titleImg, int count, int countLike, int fileLevel) {
+		super();
+		this.todayNo = todayNo;
+		this.todayTitle = todayTitle;
+		this.todayContent = todayContent;
+		this.todayWriter = todayWriter;
+		this.createDate = createDate;
+		this.profileImg = profileImg;
+		this.titleImg = titleImg;
+		this.count = count;
+		this.countLike = countLike;
+		this.fileLevel = fileLevel;
+	}
+	
+	public Today(String todayNo, String weekClimb) {
+		super();
+		this.todayNo = todayNo;
+		this.weekClimb = weekClimb;
 	}
 
 	public String getTodayNo() {
@@ -339,14 +379,41 @@ public class Today {
 		this.userNo = userNo;
 	}
 
+
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
+
+	public int getFileLevel() {
+		return fileLevel;
+	}
+
+	public void setFileLevel(int fileLevel) {
+		this.fileLevel = fileLevel;
+	}
+
 	@Override
 	public String toString() {
 		return "Today [todayNo=" + todayNo + ", todayTitle=" + todayTitle + ", todayContent=" + todayContent
 				+ ", todayWriter=" + todayWriter + ", todayTip=" + todayTip + ", hashtag=" + hashtag + ", todayName="
 				+ todayName + ", todayDate=" + todayDate + ", todayTime=" + todayTime + ", todayCourse=" + todayCourse
 				+ ", lev=" + lev + ", todayVehicle=" + todayVehicle + ", todayType=" + todayType + ", count=" + count
-				+ ", countLike=" + countLike + ", titleImg=" + titleImg + ", createDate=" + createDate + ", memCount="
-				+ memCount + ", replyCount=" + replyCount + ", userNo=" + userNo + ", member=" + member + "]";
+				+ ", countLike=" + countLike + ", titleImg=" + titleImg + ", createDate=" + createDate + ", profileImg="
+				+ profileImg + ", memCount=" + memCount + ", replyCount=" + replyCount + ", userNo=" + userNo
+				+ ", member=" + member + ", fileLevel=" + fileLevel + "]";
 	}
+
+	public String getWeekClimb() {
+		return weekClimb;
+	}
+
+	public void setWeekClimb(String weekClimb) {
+		this.weekClimb = weekClimb;
+	}
+	
 
 }

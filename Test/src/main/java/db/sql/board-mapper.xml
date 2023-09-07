@@ -408,11 +408,6 @@ SELECT
 	      )
 	WHERE  ROWNUM &lt;= 5;
 </entry>
-<entry key="countLike">
-	SELECT COUNT(*) "COUNT"
-	  FROM LIKES
-	 WHERE BOARD_NO = ?
-</entry>
 <entry key="searchHashtag">
 	SELECT
 	        TO_NUMBER(SUBSTR(BOARD_NO,2)) "BOARD_NO"

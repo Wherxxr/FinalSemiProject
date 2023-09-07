@@ -10,7 +10,6 @@ import java.util.*;
 import today.model.vo.Attachment;
 import today.model.vo.Reply;
 import today.model.vo.Today;
-import common.model.vo.PageInfo;
 
 public class TodayDao {
 	
@@ -118,7 +117,8 @@ private Properties prop = new Properties();
 			
 			if(rset.next()) {
 				
-				t = new Today(rset.getString("today_no"),
+				t = new Today(rset.getInt("user_no"),
+							  rset.getString("today_no"),
 							  rset.getString("today_title"),
 							  rset.getString("today_content"),
 							  rset.getString("NICKNAME"),
@@ -1058,56 +1058,82 @@ public int insertBook(Connection conn, int userNo, String todayNo) {
 		return count;
 		
 	}
-	
-public int togetherDropOut(Connection conn, int uno, String tno) {
+
+	public ArrayList<Today> selectWeekClimb(Connection conn) {
+		ArrayList<Today> list = new ArrayList<Today>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectWeekClimb");
 		
+		try { 
+			pstmt = conn.prepareStatement(sql);
+			
+				
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Today(rset.getString("today_no"),
+						rset.getString("weekclimb")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	public int togetherDropOut(Connection conn, int uno, String tno) {
+
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("togetherDropOut");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, uno);
 			pstmt.setString(2, tno);
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
-	
+
 	public int countDecrease(Connection conn, String tno) {
-		
+
 		int result = 0;
 		PreparedStatement pstmt= null;
 		String sql = prop.getProperty("countDecrease");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tno);
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
-	
+
 	public int updateTogether(Connection conn, Today t) {
-		
+
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateTogether");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, t.getTodayTitle());
@@ -1119,16 +1145,16 @@ public int togetherDropOut(Connection conn, int uno, String tno) {
 			pstmt.setString(7, t.getLev());
 			pstmt.setString(8, t.getTodayVehicle());
 			pstmt.setString(9, t.getTodayNo());
-			
+
 			result = pstmt.executeUpdate();
-			
-			
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 }

@@ -609,13 +609,20 @@
         #iconsContainer {
           text-align: center;
         width: 1000px;
-    }
+      }
+      #title {
+        color: rgb(149, 193, 31);
+        font-weight: bolder;
+        margin: 70px;
+        letter-spacing: 5px;
+      }
         </style>
       </head>
 
       <body>
         <%@ include file="../common/menubar.jsp" %>
           <div class="wrap">
+            <h1 align="center" id="title">한국의 산</h1>
             <div id="content">
               <div id="content_2">
                 <div class="cont-wrap">
@@ -807,7 +814,7 @@
                       data: { country: $(this).children().val() },
 
                       success: function (c) {
-                        console.log(c);
+                        (c);
                         let mtlist = "";
 
                         for (var i = 0; i < c.length; i++) {
@@ -815,7 +822,7 @@
                         }
                         $(".cmt-mt-mountains-table").html(mtlist);
 
-                        console.log(ta);
+                        (ta);
 
                         var ta = [];
 
@@ -827,7 +834,7 @@
                           }
 
                         }
-                        console.log(ta);
+                        (ta);
 
                         var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div
                           mapOption2 = {
@@ -900,7 +907,7 @@
                                 $("#keyword").val(e.mtName + " 맛집");
                                 $(".mtpage").attr("href", e.mtPage);
                                 $(".mtpage").html(e.mtPage);
-                                console.log(e);
+                                (e);
 
                                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                                   mapOption = {
@@ -927,7 +934,7 @@
                                       map: map,
                                       position: coords
                                     });
-                                    console.log(e.mtName);
+                                    (e.mtName);
                                     // 인포윈도우로 장소에 대한 설명을 표시합니다
                                     var infowindow = new kakao.maps.InfoWindow({
                                       content: '<div style="width:150px;text-align:center;padding:6px 0;">' + e.mtName + '</div>'
@@ -958,7 +965,7 @@
 
                                 // 키워드로 장소를 검색합니다
                                 searchPlaces(e.mtName);
-                                console.log(e.mtName)
+                                (e.mtName)
                                 // 키워드 검색을 요청하는 함수입니다
                                 function searchPlaces() {
 
@@ -1190,14 +1197,14 @@
                                   GetInfo();
                                 });
                               }, error: function () {
-                                console.log("ajax통신실패");
+                                ("ajax통신실패");
                               }
                             })
                           })
                         });
 
                       }, error: function () {
-                        console.log("ajax통신실패");
+                        ("ajax통신실패");
                       }
                     })
                   })

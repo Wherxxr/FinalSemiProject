@@ -51,7 +51,6 @@ public class TogetherDetailViewController extends HttpServlet {
 //			request.getSession().setAttribute("alertMsg", "게시글 조회에 실패하였습니다.");
 			response.sendRedirect(request.getContextPath() + "/list.tg");
 		}
-		
 	}
 
 	/**

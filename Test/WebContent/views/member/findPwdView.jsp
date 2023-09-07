@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
-	String findPwd = (String)request.getAttribute("findPwd");
+   String findPwd = (String)request.getAttribute("findPwd");
+   String maskedPwd = findPwd.substring(0, 4) + "****";
 %>
 <!DOCTYPE html>
 <html>
@@ -53,7 +54,7 @@
            <form action="<%= contextPath %>/loginView.me" method="post">
             <div>  
                 <p>일치하는 비밀번호입니다.</p>
-                <p><%= findPwd %></p>
+                <p><%= maskedPwd %></p> <!-- 수정된 비밀번호 표시 -->
                 <button type="submit" id="btnPwd">로그인 하러가기</button>
                 <!-- <a href="<%= contextPath %>/loginView.me">로그인 하러가기</a> -->
              </div>      

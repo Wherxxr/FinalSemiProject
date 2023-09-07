@@ -102,7 +102,7 @@
                                 url: "idCheck.me",
                                 data: { checkId: $idInput.val() },
                                 success: function (result) {
-                                    console.log(result);
+                                    (result);
                                     if (result == 'NNNNN') {
                                         alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
                                         $idInput.focus();
@@ -116,7 +116,7 @@
                                     }
                                 },
                                 error: function () {
-                                    console.log("아이디 중복체크용 ajax 통신 실패!")
+                                    ("아이디 중복체크용 ajax 통신 실패!")
                                 }
                             })
                         }	
@@ -183,7 +183,7 @@
                                 url: "nickCheck.me",
                                 data: { checkNick: $nickInput.val() },
                                 success: function (result) {
-                                    console.log(result);
+                                    (result);
                                     if (result == 'NNNNN') {
                                         alert("이미 존재하는 회원의 닉네임입니다.");
                                         $nickInput.focus();
@@ -197,7 +197,7 @@
                                     }
                                 },
                                 error: function () {
-                                    console.log("닉네임 중복체크용 ajax 통신 실패!")
+                                    ("닉네임 중복체크용 ajax 통신 실패!")
                                 }
                             })
                         }	
@@ -231,7 +231,7 @@
                                     onclick="chooseFile();">
                             </label>
                             <input type="file" name="profileImg" id="profile" style="display: none;" width="150"
-                                height="150" onchange="loadImg(this);">
+                                height="150" onchange="loadImg(this);" required	>
 
                         </div>
 
@@ -270,10 +270,10 @@
                             <p class="title">등력</p>
 
                             <select name="gradeNo" class="input">
-                                <option value="10">0~1년차</option>
-                                <option value="20">1~3년차</option>
-                                <option value="30">3~5년차</option>
-                                <option value="40">5년차 이상</option>
+                                <option value="10">1~5년차</option>
+                                <option value="20">6~10년차</option>
+                                <option value="30">10~20년차</option>
+                                <option value="40">20년차 이상</option>
                             </select>
 
                         </div><br>
@@ -320,7 +320,7 @@
 
                                 /* 체크박스 전체 선택, 전체 해제 */
                                 $('.input_box').on('click', '#chk_all', function () {
-                                    console.log(this);
+                                    (this);
                                     const checked = $(this).is(':checked');
 
                                     if (checked) {

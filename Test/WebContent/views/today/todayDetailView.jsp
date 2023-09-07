@@ -5,6 +5,13 @@
 <%
 	Today t = (Today)request.getAttribute("t");
 	Attachment at = (Attachment)request.getAttribute("at");
+
+    String[] hashtagList = new String[20];
+	
+    if(t.getHashtag() != null){
+    String hashtag = t.getHashtag().trim().replaceAll(" ", "");
+    hashtagList = hashtag.split(",");				
+    }
 %>    
 <!DOCTYPE html>
 <html lang="en">
@@ -110,6 +117,37 @@
             background-color: rgba(0, 0, 0, 0);
             font-size: 14px;
         }
+        .hashtag{
+            display: inline-block;
+            border: 1px solid lightgray;
+            padding: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 10%;
+            color:white;
+            background-color: rgb(190, 188, 188);
+            margin-right: 4px;
+            font-size: 15px;
+        }
+
+        #hashtag{
+            padding-left: 10px;
+        }
+        
+        .modal-body>form>p{
+            margin: 10px;
+        }
+
+        .deleteReply-btn{
+            margin: 0;
+            color: tomato;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+        #writer:hover{
+            cursor: pointer;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -119,7 +157,7 @@
         <div class="wrap">
             <div id="header">
                 <div id="title"><%= t.getTodayTitle() %></div>
-                <div id="writer"><%= t.getTodayWriter() %></div>
+                <div id="writer"onclick="userProfile(<%= t.getUserNo()%>)"><%= t.getTodayWriter() %></div>
                 <div id="h_etc">
                     <span><%= t.getCreateDate() %></span>
                     <span><%= t.getCount() %></span>
@@ -137,7 +175,7 @@
                     
                     <tr>
                         <th>등산일자</th>
-                        <td><%= t.getTodayDate() %></td>
+                        <td><%= t.getTodayDate().substring(0, 10) %></td>
                     </tr>
                     <tr>
                         <th>소요시간</th>
@@ -176,6 +214,17 @@
                
                 <%=t.getTodayContent()%>
             </div>
+            <div id="hashtag">
+                <%if(hashtagList[0] != null){ %>
+                    <% for(int i=0; i<hashtagList.length; i++){ %>
+                        <div class="hashtag">
+                            # <%= hashtagList[i] %>
+                        </div>
+                    <%} %>
+                <%}else{ %>
+                    <div></div>
+                <%} %>
+                </div>
             <div align="center">
                 <a href="<%= contextPath %>/todayView.to" class="btn btn-sm btn-secondary">목록가기</a>
                 <% if(loginMember != null && loginMember.getNickname().equals(t.getTodayWriter())){ %>
@@ -218,6 +267,11 @@
         </div>
     </div>
     <script>
+  function userProfile(userNo) {
+    // userNo를 사용하여 URL을 생성
+    location.href = '<%= contextPath %>/feedProfile.me?userNo=' + userNo;
+
+  }
     let bno = "<%= t.getTodayNo()%>";
 	<% if(loginMember != null){%>
 		let userNo = "<%= loginMember.getUserNo()%>";
@@ -228,14 +282,14 @@
             url:"like.to",
             data:{todayNo:bno, userNo:userNo},
             success:function(result){
-                console.log("성공")
+                
                 if(result == 'Y'){
                 	$("#like1").css("display", "none");
                     $("#like2").css("display", "");
                 }
             },
             error:function(){
-                console.log("실패")
+                
             }
            })
         }
@@ -246,26 +300,26 @@
             url:"likeDelete.to",
             data:{todayNo:bno, userNo:userNo},
             success:function(result){
-                console.log("성공")
+                
                 if(result == 'Y'){
                 	$("#like2").css("display", "none");
                     $("#like1").css("display", "");
                 }
             },
             error:function(){
-                console.log("실패")
+                
             }
            })
         }
         
         $(function(){
      
-            console.log(bno);
+            (bno);
             $.ajax({
                 url:"likeCheck.to",
                 data:{todayNo:bno, userNo:userNo},
                 success:function(result){
-                    console.log("성공");
+                    ;
                     if(result == 'Y'){
                     	$("#like2").css("display", "");
                         $("#like1").css("display", "none");
@@ -275,7 +329,7 @@
                     }
                 },
                 error:function(result){
-                    console.log("실패");
+                    ;
                 }
             })
         })
@@ -288,14 +342,14 @@
             url:"book.to",
             data:{todayNo:bno, userNo:userNo},
             success:function(result){
-                console.log("성공")
+                
                 if(result == 'Y'){
                 	$("#bookmark1").css("display", "none");
                     $("#bookmark2").css("display", "");
                 }
             },
             error:function(){
-                console.log("실패")
+                
             }
            })
         }
@@ -306,14 +360,14 @@
             url:"deleteBook.to",
             data:{todayNo:bno, userNo:userNo},
             success:function(result){
-                console.log("성공")
+                
                 if(result == 'Y'){
                 	$("#bookmark1").css("display", "");
                     $("#bookmark2").css("display", "none");
                 }
             },
             error:function(){
-                console.log("실패")
+                
             }
            })
         }
@@ -325,7 +379,7 @@
                 url:"bookCheck.to",
                 data:{todayNo:bno, userNo:userNo},
                 success:function(result){
-                    console.log("성공");
+                    ;
                     if(result == 'Y'){
                     	$("#bookmark2").css("display", "");
                         $("#bookmark1").css("display", "none");
@@ -335,7 +389,7 @@
                     }
                 },
                 error:function(result){
-                    console.log("실패");
+                    ;
                 }
             })
         })
@@ -343,12 +397,12 @@
         $(function(){
             let bno = $("input[name=bno]").val();
             let userNo = $("input[name=userNo]").val();
-            console.log(bno);
+            (bno);
             $.ajax({
                 url:"likeCheck.to",
                 data:{todayNo:bno, userNo:userNo},
                 success:function(result){
-                    console.log("성공");
+                    ;
                     if(result == 'Y'){
                     	$("#like2").css("display", "");
                         $("#like1").css("display", "none");
@@ -358,7 +412,7 @@
                     }
                 },
                 error:function(result){
-                    console.log("실패");
+                    ;
                 }
             })
         })
@@ -373,14 +427,14 @@
             url:"book.to",
             data:{todayNo:bno, userNo:userNo},
             success:function(result){
-                console.log("성공")
+                
                 if(result == 'Y'){
                 	$("#bookmark1").css("display", "none");
                     $("#bookmark2").css("display", "");
                 }
             },
             error:function(){
-                console.log("실패")
+                
             }
            })
         }
@@ -393,14 +447,14 @@
             url:"deleteBook.to",
             data:{todayNo:bno, userNo:userNo},
             success:function(result){
-                console.log("성공")
+                
                 if(result == 'Y'){
                 	$("#bookmark1").css("display", "");
                     $("#bookmark2").css("display", "none");
                 }
             },
             error:function(){
-                console.log("실패")
+                
             }
            })
         }
@@ -413,7 +467,7 @@
                 url:"bookCheck.to",
                 data:{todayNo:bno, userNo:userNo},
                 success:function(result){
-                    console.log("성공");
+                    ;
                     if(result == 'Y'){
                     	$("#bookmark2").css("display", "");
                         $("#bookmark1").css("display", "none");
@@ -423,13 +477,12 @@
                     }
                 },
                 error:function(result){
-                    console.log("실패");
+                    ;
                 }
             })
         })
 
         $(function(){
-            
             selectReplyList();
             setInterval(selectReplyList,1000);
         })
@@ -458,7 +511,7 @@
                 $("#comment-area1").html(value); 
                     }, 
                 error:function(){
-                    console.log("댓글 조회용 ajax 통신실패");
+                    
                 }
             })
 
@@ -467,16 +520,16 @@
             	data:{boardNo:bno},
             	success:function(result){
             		$("#countReply").text(result);
-                    console.log(result+"댓수");
+                    (result+"댓수");
             	},
             	error:function(){
-            		console.log("댓글카운트 ajax 통신 실패");
+            		
             	}
             })
         }
         <%}%> 
         function insertReply(){
-        	console.log($("#replyContent").val());
+        	($("#replyContent").val());
             $.ajax({
                 url:"rinsert.to",
                 data:{content:$("#replyContent").val(),
@@ -489,7 +542,7 @@
                     }
                 },
                 error:function(){
-                    console.log("댓글 작성용 ajax통신 실패")
+                    
                 }
             })
         }
@@ -506,7 +559,7 @@
         				}
         			},
         			error:function(){
-        				console.log("댓글작성 ajax 통신 실패");
+        				
         			}
         		})
         	}

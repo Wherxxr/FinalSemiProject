@@ -106,9 +106,9 @@
                 <div id="content_2"> 
                     <ul id="navi">
                         <li class="mpprofile"><a href="#" onclick="submitForm('<%= contextPath %>/profile.me')">프로필</a></li>
-				        <li class="mplist"><a href="#" onclick="submitForm('<%= contextPath %>/MypageList.me')">게시물</a></li>
+				        <li class="mplist"><a href="#" onclick="submitForm('<%= contextPath %>/mplView.me')">게시물</a></li>
                         <li class="mpprofileedit"><a href="<%= contextPath%>/infoEdit.me">개인정보관리</a></li>
-				        <li class="mpbookmark"><a href="#" onclick="submitForm('<%= contextPath %>/bookmark.me')">북마크</a></li>
+				        <li class="mpbookmark"><a href="#" onclick="submitForm('<%= contextPath %>/bmView.me')">북마크</a></li>
                         <li class="mpqna"><a href="<%= contextPath %>/qna.se">문의</a></li>
     
                     </ul>

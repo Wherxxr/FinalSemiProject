@@ -1,67 +1,104 @@
 <%@ page import="java.util.ArrayList" %>
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-        <!DOCTYPE html>
-        <html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <!DOCTYPE html>
+    <html>
 
-        <head>
-            <meta charset="UTF-8">
+    <head>
+    <meta charset="UTF-8">
 
-            <title>Document</title>
+    <title>Document</title>
 
+    <style>
+        #ff1 {
+            font-family: 'NanumBarunGothicExtraLight';
+        }
+        #ff2 {
+            font-family: 'NanumBarunGothicLight';
+        }
+        #ff3 {
+            font-family: 'NanumBarunGothic';
+        }
+        #ff4 {
+            font-family: 'NanumBarunGothicBold';
+        }
+        /* div{border: 1px solid red; box-sizing: border-box;} */
+        #write {
+            width: 1200px;
+            margin: 0 auto;
+        }
+        #write1,
+        #write2,
+        #write3,
+        #write4,
+        #write5,
+        #write6,
+        #write7,
+        #write8,
+        #write9,
+        #write10,
+        #write11,
+        #write12 {
+            width: 670px;
+            margin: 0 auto;
+        }
+        #searchimg {
+            position: absolute;
+            right: 460px;
+            /* float: right; */
+            margin: 12px 0 0 0;
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+        #mtinput {
+            float: right;
+        }
+        #top {
+            width: 50px;
+            height: 50px;
+        }
+        #dateIn {
+            width: 650px;
+        }
+        .inHashtag{
+            display: inline-block;
+            border: 1px solid lightgray;
+            padding: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 10%;
+            color:white;
+            background-color: rgb(190, 188, 188);
+            margin-right: 4px;
+            font-size: 15px;
+        }
 
-
-            <style>
-                #ff1 {
-                    font-family: 'NanumBarunGothicExtraLight';
-                }
-                #ff2 {
-                    font-family: 'NanumBarunGothicLight';
-                }
-                #ff3 {
-                    font-family: 'NanumBarunGothic';
-                }
-                #ff4 {
-                    font-family: 'NanumBarunGothicBold';
-                }
-                /* div{border: 1px solid red; box-sizing: border-box;} */
-                #write {
-                    width: 1200px;
-                    margin: 0 auto;
-                }
-                #write1,
-                #write2,
-                #write3,
-                #write4,
-                #write5,
-                #write6,
-                #write7,
-                #write8,
-                #write9,
-                #write10,
-                #write11,
-                #write12 {
-                    width: 670px;
-                    margin: 0 auto;
-                }
-                #searchimg {
-                    position: absolute;
-                    right: 460px;
-                    /* float: right; */
-                    margin: 12px 0 0 0;
-                    width: 15px;
-                    height: 15px;
-                    cursor: pointer;
-                }
-                #mtinput {
-                    float: right;
-                }
-                #top {
-                    width: 50px;
-                    height: 50px;
-                }
-                #dateIn {
-                    width: 650px;
-                }
+        #hashtag{
+            padding-left: 10px;
+            display: inline-block;
+        }
+        
+        #ttl {
+			color: rgb(149, 193, 31);
+			font-weight: bolder;
+			margin: 50px;
+			letter-spacing: 5px;
+		}
+		
+		#hashtagDelete{
+			border:none;
+            height: 30px;
+            width: 50px;
+            border-radius: 3px;
+            font-size: 10px;
+            margin-left: 25px;
+		}
+		#tag{margin-bottom: 5px;}
+		#hashtag{
+            margin: 0px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+        }
             </style>
         </head>
 
@@ -99,17 +136,15 @@
                     </div>
                     <br>
                         <div id="write5">
-                            <p id="ff4">해시태그</p><input type="text" style="width: 650px; margin: 5px 0 0 0;"
-                                placeholder="# 해시태그 입력(15자),(스페이스바)를 눌러주세요." name="hash" required>
-                                <div id="hashtag">
-                               
-                                </div>
-                                <button type="button" id="hashtagDelete" onclick="hashtagReset();" style="display: none;">지우기</button>
-                                <input type="hidden" name="hashtagArr" id="result">
-                                <br><br><button class="btn btn-l"
-                                style="border: 0px; background-color: rgb(175, 212, 133);">#아차산</button>
-                            <br>
-                            <h9 style="font-size: small; color: gray;">스페이스바를 누르면 해시태그가 완성돼요. 최대 5개</h9>
+                            <div id="tag">
+                                <label>태그</label><br>
+                                <input name="hashtag" type="text" placeholder="해시태그 입력 후 스페이스바">
+                            </div>
+                            <div id="hashtag">
+                                <!-- <div class="inHashtag"></div> -->
+                            </div>
+                            <button type="button" id="hashtagDelete" onclick="hashtagReset();" style="display: none;">지우기</button>
+                            <input type="hidden" name="hashtagArr" id="result">
                         </div>
 
                     <br>
@@ -119,7 +154,7 @@
                         <span id="ff3">산 이름</span><span style="font-size: small; font-weight: 600; color: gray;"> *종주는
                             여러 산을 선택, 산이 없다면 '기타'를 선택해주세요</span>
                         <br><input type="text" style="width: 650px; margin: 5px 0 0 0;" placeholder="산을 검색해주세요" name="mtname" required >
-                        <img src="resources/image/search.png"
+                        <img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
                             id="searchimg">
                         <hr>
                     </div>
@@ -148,7 +183,7 @@
                         </div>
 
                         <div id="write10">
-                            <span id="ff4">🚶‍♂️레벨</span> <span id="mtinput"i><input type="text" placeholder="입력해주세요"
+                            <span id="ff4">🚶‍♂️레벨</span> <span id="mtinput"i><input type="text" placeholder="선택해주세요"
                                     style="text-align: right; border-style: none; font-weight: 600; margin: 0 10px 0 0;"name="lev" id="levInput" required readonly></span>
                             <hr>
                             <button type="button" class="btn btn-outline-secondary" value="매우 쉬움">매우 쉬움</button>
@@ -162,7 +197,6 @@
                         <div id="write11">
                             <span id="ff4">🚌교통</span> <span id="mtinput"></span>
                             <hr>
-
                                 <div id="ff4">
                                     <input type="radio" name="transport" id="car" style="width: 17px; height: 17px; margin: 0 5px 0 0;" value="자차" selected>
                                     <label for="car">자차</label><br>
@@ -191,16 +225,17 @@
             </div>
 
             <script>
-                $("input[name=hash]").on("keydown",function(key){
+                $("input[name=hashtag]").on("keydown",function(key){
                         if(key.keyCode==32) {
                             inputHashtag();
                         }
                     });
+
                     let input = "";
                     let result = [];
                     function inputHashtag(){
 
-                        let ht = $("input[name=hash]").val();
+                        let ht = $("input[name=hashtag]").val();
                         input += "<div class='inHashtag'>#" + ht + "</div>";
                         result.push(ht);
                         test();                        
@@ -209,9 +244,9 @@
                     function test(){
                         $("#hashtagDelete").css("display", "");
                         $("#hashtag").html(input);
-                        $("input[name=hash]").val("");
+                        $("input[name=hashtag]").val("");
                         $("#result").val(result);
-                        console.log($("#result").val());
+                        ($("#result").val());
                     }
 
                     function hashtagReset(){
@@ -219,8 +254,7 @@
                         input="";
                         $("#hashtag").html("");
                         $("#hashtagDelete").css("display", "none");
-                    }
-
+                    }   
                     
                 function setDifficulty(difficulty) {
                     document.querySelector('input[name="lev"]').value = difficulty;

@@ -132,9 +132,9 @@
 </div>
 <script>
     $(function () {
-        console.log(document.getElementsByName("originFileNo1")[0].innerHTML);
-        console.log(document.getElementsByName("originFileNo1")[0].value);
-        console.log(document.getElementsByName("originFileNo1")[0].textContent);
+        (document.getElementsByName("originFileNo1")[0].innerHTML);
+        (document.getElementsByName("originFileNo1")[0].value);
+        (document.getElementsByName("originFileNo1")[0].textContent);
         });
 
 

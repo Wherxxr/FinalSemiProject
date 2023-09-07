@@ -58,11 +58,29 @@ public class TodayUpdateController extends HttpServlet {
 			String todayNo = multiRequest.getParameter("bno");
 			String todayTitle = multiRequest.getParameter("title");
 			String todayContent = multiRequest.getParameter("content");
+			String todayWriter = multiRequest.getParameter("userNo");
+			String tip = multiRequest.getParameter("tip");
+			String hash = multiRequest.getParameter("hashtagArr");
+			String mtName = multiRequest.getParameter("mtname");
+			String dateIn = multiRequest.getParameter("dateIn");
+			String climbTime = multiRequest.getParameter("climbtime");
+			String route = multiRequest.getParameter("route");
+			String lev = multiRequest.getParameter("lev");
+			String transport = multiRequest.getParameter("transport");
 			
 			Today t = new Today();
 			t.setTodayNo(todayNo);
 			t.setTodayTitle(todayTitle);
 			t.setTodayContent(todayContent);
+			t.setTodayWriter(todayWriter);
+			t.setTodayTip(tip);
+			t.setHashtag(hash);
+			t.setTodayName(mtName);
+			t.setTodayDate(dateIn);
+			t.setTodayTime(climbTime);
+			t.setTodayCourse(route);
+			t.setLev(lev);
+			t.setTodayVehicle(transport);
 			
 			Attachment at = null; // 처음에는 null로 초기화, 넘어온 새 첨부파일이 있을경우 그때 생성
 			if(multiRequest.getOriginalFileName("upfile") != null) {
