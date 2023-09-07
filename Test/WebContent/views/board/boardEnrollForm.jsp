@@ -188,8 +188,15 @@
                			success:function(list){
                				let result = "";
                				for(let i=0; i<list.length; i++){
+               					if(list[i].categoryName == "자유"){
+               					result += "<option value=" + list[i].categoryNo + " selected >"
+               							+ list[i].categoryName + "</option>";
+               						
+               					}else{
                					result += "<option value=" + list[i].categoryNo + ">"
                							+ list[i].categoryName + "</option>"
+               						
+               					}
                				}
                				
                				$("#subject").html(result);

@@ -267,6 +267,9 @@
         </div>
     </div>
     <script>
+
+
+
   function userProfile(userNo) {
     // userNo를 사용하여 URL을 생성
     location.href = '<%= contextPath %>/feedProfile.me?userNo=' + userNo;
@@ -313,8 +316,7 @@
         }
         
         $(function(){
-     
-            (bno);
+            
             $.ajax({
                 url:"likeCheck.to",
                 data:{todayNo:bno, userNo:userNo},
@@ -397,7 +399,7 @@
         $(function(){
             let bno = $("input[name=bno]").val();
             let userNo = $("input[name=userNo]").val();
-            (bno);
+
             $.ajax({
                 url:"likeCheck.to",
                 data:{todayNo:bno, userNo:userNo},

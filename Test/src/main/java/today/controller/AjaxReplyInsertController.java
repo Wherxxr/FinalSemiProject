@@ -32,11 +32,11 @@ public class AjaxReplyInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String replyContent = request.getParameter("content");
-		System.out.println(replyContent);
+
 		String TodayNo = request.getParameter("bno");
-		System.out.println(TodayNo);
+
 		int userNo = ((Member)request.getSession().getAttribute("loginMember")).getUserNo();
-		System.out.println(userNo);
+	
 		
 		Reply r = new Reply();
 		r.setReplyContent(replyContent);

@@ -174,7 +174,7 @@ hashtagList = hashtag.split(",");
                     <input name="hashtag" type="text" placeholder="해시태그 입력 후 스페이스바">
                 </div>
                 <div id="hashtag">
-                    <!-- <div class="inHashtag"></div> -->
+                    
                     <% if(hashtagList[0] != null){%>
                         <% for(String s:hashtagList){%>
                             <div class='inHashtag'># <%= s%></div>

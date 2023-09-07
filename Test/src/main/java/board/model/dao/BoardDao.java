@@ -688,7 +688,6 @@ public class BoardDao {
 					pstmt.setString(4, list.get(i).getFilePath());
 					
 					result = pstmt.executeUpdate();
-					System.out.println("얼마나 돌아가나");
 				}
 				
 		} catch (SQLException e) {

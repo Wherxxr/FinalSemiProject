@@ -35,8 +35,7 @@ public class todayBookmark extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = Integer.parseInt(request.getParameter("userno"));
 		String boardNo = request.getParameter("bno");
-		System.out.println(userNo);
-		System.out.println(boardNo);
+
 		int result = new TodayService().todayBookmark(userNo,boardNo);
 		response.setContentType("apllication/json; charset=UTF-8");
 		new Gson().toJson(result, response.getWriter());

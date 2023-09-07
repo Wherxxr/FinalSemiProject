@@ -184,6 +184,8 @@
                 
                 const b = ["/listView.bo", "/detail.bo", "/enrollForm.bo"];
                 const c = ["/list.tg", "/detail.tg", "/enrollFormView.tg"];
+                const d = ["/todayView.to", "/detail.to", "/enrollForm.to", "/updateForm.to"];
+                const e = ["/mtInfoView.do"];
                 
                 
                 (b[1]);
@@ -198,6 +200,16 @@
                 for(let i=0; i<c.length; i++){
                 	if(a.search(c[i]) != -1){
                 		$("#mb_navi").children().eq(3).children().css("border-bottom","5px solid rgb(149, 193, 31)"); 
+                	}
+                }
+                for(let i=0; i<d.length; i++){
+                	if(a.search(d[i]) != -1){
+                		$("#mb_navi").children().eq(1).children().css("border-bottom","5px solid rgb(149, 193, 31)"); 
+                	}
+                }
+                for(let i=0; i<e.length; i++){
+                	if(a.search(e[i]) != -1){
+                		$("#mb_navi").children().eq(2).children().css("border-bottom","5px solid rgb(149, 193, 31)"); 
                 	}
                 }
                 

@@ -243,6 +243,10 @@
         background-size: 100%;
         background-position: center;
         border-style: outset;}
+
+        .topUserimg{
+            border-radius: 50%;
+        }
     </style>
     
 </head>
@@ -522,7 +526,6 @@
                             </a>
                             
                             </td>
-                            <td><%= bo.getCount()%>회 조회</td>
 						</tr>
 						<% } %>
 						<% } %>
@@ -612,7 +615,7 @@
                     userHtml += '<tr>'
                     + '<td style="color: red">' + rank + '</td>'
                     + '<td>&nbsp;</td>'
-                    + '<td><img src="' + list[i].profileImg + '" width="25px" id=""></td>'
+                    + '<td><img src="' + list[i].profileImg + '" width="25px" class="topUserimg"></td>'
                     + '<td style="font-size: small;">' + list[i].nickname + '</td>'
                     
 

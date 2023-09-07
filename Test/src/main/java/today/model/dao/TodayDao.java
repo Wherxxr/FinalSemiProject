@@ -183,7 +183,6 @@ private Properties prop = new Properties();
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertToday");
-		System.out.println(t);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -236,13 +235,20 @@ private Properties prop = new Properties();
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateToday");
-		System.out.println(t);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, t.getTodayTitle());
 			pstmt.setString(2, t.getTodayContent());
-			pstmt.setString(3, t.getTodayNo());
+			pstmt.setString(3, t.getTodayTip());
+			pstmt.setString(4, t.getHashtag());
+			pstmt.setString(5, t.getTodayName());
+			pstmt.setString(6, t.getTodayDate());
+			pstmt.setString(7, t.getTodayTime());
+			pstmt.setString(8, t.getTodayCourse());
+			pstmt.setString(9, t.getLev());
+			pstmt.setString(10, t.getTodayVehicle());
+			pstmt.setString(11, t.getTodayNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

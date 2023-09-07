@@ -32,7 +32,6 @@ public class ReplyCountController extends HttpServlet {
 		String todayNo = request.getParameter("boardNo");
 		
 		int result = new TodayService().countReply(todayNo);
-		System.out.println(result);
 		response.getWriter().print(result);
 	}
 

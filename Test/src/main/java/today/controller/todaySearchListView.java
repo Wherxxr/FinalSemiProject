@@ -42,25 +42,21 @@ public class todaySearchListView extends HttpServlet {
 		
 		if(request.getParameter("option").equals("TTTC")) {
 			ArrayList<Today> list = new TodayService().searchTodayTiCon(keyword);
-			System.out.println(list);
 			response.setContentType("apllication/json; charset=UTF-8");
 			new Gson().toJson(list, response.getWriter());
 		}
 		else if(request.getParameter("option").equals("TT")) {
 			ArrayList<Today> list = new TodayService().searchTodayTi(keyword);
-			System.out.println(list);
 			response.setContentType("apllication/json; charset=UTF-8");
 			new Gson().toJson(list, response.getWriter());
 		}
 		else if(request.getParameter("option").equals("TW")) {
 			ArrayList<Today> list = new TodayService().searchTodayWri(keyword);
-			System.out.println(list);
 			response.setContentType("apllication/json; charset=UTF-8");
 			new Gson().toJson(list, response.getWriter());
 		}
 		else if(request.getParameter("option").equals("R")) {
 			ArrayList<Today> list = new TodayService().searchTodayRep(keyword);
-			System.out.println(list);
 			response.setContentType("apllication/json; charset=UTF-8");
 			new Gson().toJson(list, response.getWriter());
 		}

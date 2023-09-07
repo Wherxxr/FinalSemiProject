@@ -51,8 +51,8 @@ SELECT USER_NO
      , TODAY_COURSE
      , LEV
      , TODAY_VEHICLE
-     , CREATE_DATE
      , COUNT
+     , CREATE_DATE
      , (SELECT COUNT(*)
 	      FROM REPLY
 	     WHERE REF_BNO = TODAY_NO
@@ -142,6 +142,14 @@ UPDATE
        TODAY
    SET TODAY_TITLE = ?
      , TODAY_CONTENT = ?
+     , TODAY_TIP = ?
+     , HASHTAG = ?
+     , TODAY_NAME = ?
+     , TODAY_DATE = ?
+     , TODAY_TIME = ?
+     , TODAY_COURSE = ?
+     , LEV = ?
+     , TODAY_VEHICLE = ?
  WHERE TODAY_NO = ?
 </entry>
 

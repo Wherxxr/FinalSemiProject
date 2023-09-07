@@ -33,7 +33,6 @@ public class TodayLikeDeleteController extends HttpServlet {
 		String todayNo = request.getParameter("todayNo");
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-//		System.out.println("boardNo" + boardNo + "userNo" + userNo);
 		
 		int result = new TodayService().deleteLike(userNo, todayNo);
 		

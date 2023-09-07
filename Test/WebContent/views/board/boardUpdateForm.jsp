@@ -154,11 +154,15 @@
                         <% for(String s:hashtagList){%>
                             <div class='inHashtag'># <%= s%></div>
                         <%} %>
-                </div>
-                    <button type="button" id="hashtagDelete" onclick="hashtagReset();" style="display:''";>지우기</button>
+                    <button type="button" id="hashtagDelete" onclick="hashtagReset();" style="display:'';">지우기</button>
                     <%}%>
+                </div>
                 <button type="button" id="hashtagDelete" onclick="hashtagReset();" style="display: none;">지우기</button>
+                <%if(hashtagList[0] != null){ %>
+                <input type="hidden" name="hashtagArr" id="result" value="<%= b.getHashtag()%>">
+                <%}else{ %>                
                 <input type="hidden" name="hashtagArr" id="result" value="">
+                <%} %>
                 <script>
                 
                 	// 해시태그 작성 함수
