@@ -437,4 +437,9 @@ SELECT
 	 ORDER
 	    BY BOARD_NO DESC
 </entry>
+<entry key="countLike">
+	SELECT COUNT(*) "COUNT"
+	  FROM LIKES
+	 WHERE BOARD_NO = ?
+</entry>
 </properties>

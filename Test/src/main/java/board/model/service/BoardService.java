@@ -353,6 +353,17 @@ public class BoardService {
 		return list;
 		
 	}
+	
+	public int countLike(String boardNo) {
+		
+		Connection conn = getConnection();
+		
+		int count = new BoardDao().countLike(conn, boardNo);
+		
+		close(conn);
+		
+		return count;
+	}
 }
 
 

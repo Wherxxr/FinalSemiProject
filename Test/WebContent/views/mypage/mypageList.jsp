@@ -176,7 +176,15 @@
 	}
 	#paging-area li a:hover {
 		cursor: pointer;
-	}	 
+	}
+	.todaycontent {
+         width: 200px;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         display: -webkit-box;
+         -webkit-line-clamp: 2;
+         -webkit-box-orient: vertical;
+         }
     </style>
 </head>
 
@@ -222,7 +230,7 @@
                     success : function(list) {
                         listCount = list.length;
                         toList = list;
-                        
+                        console.log(toList);
                         // 글 목록 불러오기 호출
                         displayData(1, boardLimit);
                         paging(listCount, boardLimit, pageLimit, 1);

@@ -124,6 +124,7 @@ button>img {
 .list-area>tbody>tr:hover {
 	background-color: rgb(242, 242, 242);
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 .paging-area>button {
@@ -176,6 +177,9 @@ button>img {
 	list-style:none;
 
 }
+#paging-area li a:hover {
+         cursor: pointer;
+        }
 
 #paging-area li a {
     display: block;

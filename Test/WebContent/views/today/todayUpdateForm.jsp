@@ -193,8 +193,7 @@ hashtagList = hashtag.split(",");
                     <span id="ff3">산 이름</span><span style="font-size: small; font-weight: 600; color: gray;"> *종주는
                         여러 산을 선택, 산이 없다면 '기타'를 선택해주세요</span>
                     <br><input type="text" style="width: 650px; margin: 5px 0 0 0;" placeholder="산을 검색해주세요" name="mtname" required value="<%= t.getTodayName()%>">
-                    <img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
-                        id="searchimg">
+                   
                     <hr>
                 </div>
                 <br>
@@ -217,7 +216,7 @@ hashtagList = hashtag.split(",");
                         <span id="ff4">📍루트</span><br>
                         <input type="text" style="width: 650px; margin: 5px 0 0 0;"
                             placeholder="ex) 탐방지원센터, 연주암, 백운대" name="route" required value="<%= t.getTodayCourse() %>"><br><br>
-                        <button type="button" class="btn btn-success" style="width: 650px;" >+ 지점추가</button>
+                        
                         <hr>
                     </div>
 

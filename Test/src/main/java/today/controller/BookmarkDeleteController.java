@@ -32,10 +32,10 @@ public class BookmarkDeleteController extends HttpServlet {
 		
 		String todayNo = request.getParameter("todayNo");
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		
+		System.out.println(todayNo);
 		
 		int result = new TodayService().deleteBook(userNo, todayNo);
-		
+		System.out.println(result);
 		if(result > 0) {
 			response.getWriter().print("Y");
 		}else {

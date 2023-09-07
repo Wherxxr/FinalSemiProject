@@ -266,16 +266,14 @@
                 </a>
             </div>
             <div id="h2">
-
-                <form action="https://www.google.com/search" method="GET" id="search_form" target="_blank">
+                <form action="#" id="search_form">
                     <div id="search_text">
-                    <input type="text" name="q">
-                </div>
-                <div id="search_btn">
-                    <input type="submit" value="" class="btn_submit">
-                    
-                </div>
-            </form>
+                        <input type="text" name="keyword">
+                    </div>
+                    <div id="search_btn">
+                        <input type="image" id="search" src="https://cdn-icons-png.flaticon.com/128/2801/2801881.png">
+                    </div>
+                </form>
             </div>
             
                    
@@ -367,6 +365,21 @@
                       src="resources/image/cha1.png"
                       alt="Third slide">
                  </div>
+                 <div class="carousel-item">
+                    <img class="d-block w-100"
+                      src="resources/image/usa.jpg"
+                      alt="fourth slide">
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100"
+                      src="resources/image/somi.jpg"
+                      alt="fifth slide">
+                 </div><div class="carousel-item">
+                    <img class="d-block w-100"
+                      src="resources/image/black.jpg"
+                      alt="sixth slide">
+                 </div>
+                 
                 </div>
                 
                
@@ -385,6 +398,9 @@
                   <li data-target="#demo" data-slide-to="0" class="active"></li> <!--0번부터시작-->
                   <li data-target="#demo" data-slide-to="1"></li>
                   <li data-target="#demo" data-slide-to="2"></li>
+                  <li data-target="#demo" data-slide-to="3"></li>
+                  <li data-target="#demo" data-slide-to="4"></li>
+                  <li data-target="#demo" data-slide-to="5"></li>
                 </ul>
                 <!-- 인디케이터 끝 -->
             </div>
@@ -575,7 +591,7 @@
                     <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA4MjVfMjE0%2FMDAxNTAzNjU1MDIwNzIy.RW86PrajpO8ARPzK0DwjI0-Fi0m7rTgrplclQhjlyGog.ySLgC_RUMUA-BbWAFKuoUJLh2L-eHiuG-nyoldYW-uEg.JPEG.caprisun_zin%2F%25B6%25F3%25C7%25AA%25B8%25B6_%25282%2529.jpg&type=a340" id="add1">
                 </div>
                 <div id="con3_2">
-                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA4MjVfMTYy%2FMDAxNTAzNjU1MDIxMzAw.g5oPjCdudOh5UUZzXZEhg3rNvFzOZLghtGz6i0wmSqIg.yBmrtGSduhGVZlF_q2nEdg0p9198raV5V3FYT1l_Jy8g.JPEG.caprisun_zin%2F%25B6%25F3%25C7%25AA%25B8%25B6_%25285%2529.jpg&type=a340" id="add2">
+                    <img src="resources/image/add3.png" id="add2">
                 </div>
                 <div id="con3_3" style="font-size: 18px; font-weight: bolder;">
                     <p id="writers">Top Writers</p>

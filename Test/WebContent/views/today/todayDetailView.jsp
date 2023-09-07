@@ -381,7 +381,7 @@
                 url:"bookCheck.to",
                 data:{todayNo:bno, userNo:userNo},
                 success:function(result){
-                    ;
+                    
                     if(result == 'Y'){
                     	$("#bookmark2").css("display", "");
                         $("#bookmark1").css("display", "none");
@@ -586,7 +586,7 @@
                 <p>작성자 : <%= t.getTodayWriter() %> </p>
                 <p>글 제목 : <%= t.getTodayTitle() %> </p>
                 
-                <input name="bno" type="hidden" value="B<%= t.getTodayNo() %>">
+                <input name="bno" type="hidden" value="<%= t.getTodayNo() %>">
                 <input name="reportedUserNo" type="hidden" value="<%= t.getUserNo()%>">
                 <% if(loginMember != null){ %>
                 <input name="reportUserNo" type="hidden" value="<%= loginMember.getUserNo()%>">

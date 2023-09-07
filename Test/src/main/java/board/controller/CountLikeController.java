@@ -1,8 +1,6 @@
-package member.controller;
+package board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,24 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import board.model.service.BoardService;
-import board.model.vo.Board;
-import member.model.service.MemberService;
-import today.model.vo.Today;
-
-
-
 
 /**
- * Servlet implementation class MypageList
+ * Servlet implementation class CountLikeController
  */
-@WebServlet("/MypageList.me")
-public class MypageList extends HttpServlet {
+@WebServlet("/countLike.bo")
+public class CountLikeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageList() {
+    public CountLikeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,18 +30,12 @@ public class MypageList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		System.out.println(userNo);
-			
-			
-		ArrayList<Today> list = new MemberService().selectMpList(userNo);
 		
-		System.out.println(list);
-		response.setContentType("application/json; charset=UTF-8");
-        new Gson().toJson(list, response.getWriter());
+		String boardNo = request.getParameter("boardNo");
 		
+		int count = new BoardService().countLike(boardNo);
 		
-		
+		new Gson().toJson(count, response.getWriter());
 			
 	}
 

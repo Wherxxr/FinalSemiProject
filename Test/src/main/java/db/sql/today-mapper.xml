@@ -468,7 +468,7 @@ SELECT
 <entry key="deleteBook">
 	DELETE BOOKMARK
 	WHERE USER_NO = ?
-	  AND BOARD_NO = 'B'|| ?
+	  AND BOARD_NO = ?
 </entry>
 <entry key="checkBook">
 	SELECT BOARD_NO
