@@ -34,7 +34,7 @@ public class myPageController extends HttpServlet {
 		ArrayList<Qna> list = new QnaService().selectList();
 		
 		request.setAttribute("list", list);
-		System.out.println(list);
+		
 		request.getRequestDispatcher("views/qBoard/qListView.jsp").forward(request, response);
 	}
 

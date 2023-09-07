@@ -38,7 +38,6 @@ public class MainPageListController extends HttpServlet {
 		
 		ArrayList<Board> list = new BestService().selectBestList();
 		
-		System.out.println(list);
 	 	request.setAttribute("list", list);
 	 	request.getRequestDispatcher("main.jsp").forward(request, response);
 	}

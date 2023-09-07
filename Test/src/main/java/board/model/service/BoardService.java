@@ -270,10 +270,8 @@ public class BoardService {
 		
 		int result2 = 1;
 		
-		System.out.println("fileList 있냐 없냐" + list.isEmpty());
 		if(!list.isEmpty()) {
 			result2 = new BoardDao().insertAttachmentList(conn, list);
-			System.out.println("result2값 : " + result2);
 		}
 		
 		if(result1 > 0 && result2 >0) {

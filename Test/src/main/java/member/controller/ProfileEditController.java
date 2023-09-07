@@ -82,7 +82,7 @@ public class ProfileEditController extends HttpServlet {
 		m.setInstaId(instaId);
 		m.setGradeNo(gradeNo);
 	
-		System.out.println(m);
+		
 		HttpSession session = request.getSession();
 		Member updateMem = new MemberService().updateProfile(m, userId);
 		request.setAttribute("userNo", userNo);

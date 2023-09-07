@@ -39,12 +39,12 @@ public class MypageList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		System.out.println(userNo);
+		
 			
 			
 		ArrayList<Today> list = new MemberService().selectMpList(userNo);
 		
-		System.out.println(list);
+		
 		response.setContentType("application/json; charset=UTF-8");
         new Gson().toJson(list, response.getWriter());
 		

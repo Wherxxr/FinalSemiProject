@@ -44,9 +44,6 @@ public class qUpdateController extends HttpServlet {
 		q.setqContent(qContent);
 		
 		int result = new QnaService().updateqBoard(q);
-		System.out.println(result);
-		System.out.println(q);
-		System.out.println(qNo);
 		
 		if(result > 0) {
 			response.sendRedirect(request.getContextPath() + "/detail.qbo?qno=" + qNo);

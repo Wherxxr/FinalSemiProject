@@ -230,7 +230,7 @@
                     success : function(list) {
                         listCount = list.length;
                         toList = list;
-                        console.log(toList);
+                       
                         // 글 목록 불러오기 호출
                         displayData(1, boardLimit);
                         paging(listCount, boardLimit, pageLimit, 1);

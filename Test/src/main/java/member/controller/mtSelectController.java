@@ -37,10 +37,10 @@ public class mtSelectController extends HttpServlet {
 		String mtlist = request.getParameter("mtname");
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		String userId = request.getParameter("userId");
-		System.out.println(mtlist);
-		System.out.println(userNo);
+	
+		
 		Member updateMem = new MemberService().updateCompleteMt(mtlist, userId);
-		System.out.println(updateMem);
+		
 		
 		HttpSession session = request.getSession();
 		if (updateMem != null) {

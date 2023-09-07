@@ -203,7 +203,6 @@ public class QnaDao {
 	public int insertReply(Connection conn, Qreply r) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		System.out.println(r);
 		String sql = prop.getProperty("insertReply");
 		
 		try {

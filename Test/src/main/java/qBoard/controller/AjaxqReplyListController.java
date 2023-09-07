@@ -37,7 +37,6 @@ public class AjaxqReplyListController extends HttpServlet {
 		int qNo = Integer.parseInt(request.getParameter("bno"));
 		
 		ArrayList<Qreply> list = new QnaService().selectqReplyList(qNo);
-		System.out.println(list.size());
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());
 	}

@@ -41,10 +41,10 @@ public class qInsertController extends HttpServlet {
 		q.setqTitle(qTitle);
 		q.setqContent(qContent);
 
-		System.out.println(q);
+		
 
 		int result = new QnaService().insertBoard(q);
-		System.out.println(result);
+		
 
 		if (result > 0) {
 //			HttpSession session = request.getSession();

@@ -64,7 +64,7 @@ public class BestDao {
 		ArrayList<Notice> nlist = new ArrayList<Notice>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		System.out.println(nlist);
+		
 		
 		String sql = prop1.getProperty("selectRecentNotice");
 		

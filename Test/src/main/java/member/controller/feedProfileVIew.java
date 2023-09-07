@@ -46,8 +46,8 @@ public class feedProfileVIew extends HttpServlet {
 		MemberService mService = new MemberService();
 		Member m = mService.selectProfile(userNo);
 		ArrayList<Attachment> list = mService.selectProfileImg(String.valueOf(userNo));
-		System.out.println(m);
-		System.out.println(list);
+		
+		
 		request.getSession().setAttribute("m", m);
 
 		request.setAttribute("m", m);

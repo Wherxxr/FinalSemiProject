@@ -346,13 +346,13 @@ public class MemberDao {
 				close(rset);
 				close(pstmt);
 			}
-			System.out.println(list);
+			
 			return list;
 			
 		}
 
 		public int selectMpListCount(Connection conn, int userNo) {
-			System.out.println(userNo);
+			
 			int result = 0;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
@@ -374,7 +374,7 @@ public class MemberDao {
 				close(rset);
 				close(pstmt);
 			}
-			System.out.println(result);
+			
 			return result;
 		}
 		public Board selectMpBoard(Connection conn, int userNo) {

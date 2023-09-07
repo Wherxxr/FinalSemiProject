@@ -371,7 +371,7 @@
         let month = ('0' + (today.getMonth() + 1)).slice(-2);
         let day = ('0' + today.getDate()).slice(-2);			
         let dateString = year + '/' + month  + '/' + day;
-        console.log(toList);
+       
             for (let i = start; i < end  && i < toList.length; i++) {
                 tohtml += "<div class='content'>" +
                             "<div class='c1'>" +

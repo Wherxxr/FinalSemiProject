@@ -89,7 +89,7 @@
 
                     <p class="title">아이디</p>
                     <div id="addon_input">
-                        <input type="text" class="input" name="userId" id="userId" placeholder="영문자, 숫자 포함하여 총 4~12자리로 입력해주세요."
+                        <input type="text" class="input" name="userId" id="userId" placeholder="영문자, 숫자 포함하여 총 6~15자리로 입력해주세요."
                             required>
                         <button type="button" onclick="idCheck();">중복확인</button>
                     </div>

@@ -54,7 +54,7 @@ public class updateProfileImgController extends HttpServlet {
 
         // 3. db에 기록할 값 뽑기
         String userNo = multiRequest.getParameter("userNo");
-        System.out.println(userNo);
+        
 
         // 이미지 업로드 가능 여부 확인
         int imageCount = new MemberService().getImageCount(userNo);
@@ -72,7 +72,6 @@ public class updateProfileImgController extends HttpServlet {
                 at.setOriginName(multiRequest.getOriginalFileName(key));
                 at.setChangeName(multiRequest.getFilesystemName(key));
                 at.setFilePath("resources/mypage_upfiles");
-                System.out.println((multiRequest.getParameter("originFileNo" + i)));
                 at.setRefNo(userNo);
                 if (multiRequest.getParameter("originFileNo" + i) != null) {
                 	String originFileNoParam = multiRequest.getParameter("originFileNo" + i);

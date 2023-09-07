@@ -250,7 +250,7 @@
                url:"like.bo",
                data:{boardNo:bno, userNo:userNo},
                success:function(result){
-                   console.log("성공")
+                   
                    if(result == 'Y'){
                       $("#like1").css("display", "none");
                        $("#like2").css("display", "");
@@ -258,7 +258,7 @@
                    }
                },
                error:function(){
-                   console.log("실패");
+                   
                }
               })
                
@@ -270,7 +270,7 @@
                      url:"likeDelete.bo",
                      data:{boardNo:bno, userNo:userNo},
                      success:function(result){
-                         console.log("성공")
+                         
                          if(result == 'Y'){
                             $("#like2").css("display", "none");
                              $("#like1").css("display", "");
@@ -278,7 +278,7 @@
                          }
                      },
                      error:function(){
-                         console.log("실패")
+                        
                      }
                     })
           
@@ -294,14 +294,14 @@
                url:"book.bo",
                data:{boardNo:bno, userNo:userNo},
                success:function(result){
-                   console.log("성공")
+                   
                    if(result == 'Y'){
                       $("#bookmark1").css("display", "none");
                        $("#bookmark2").css("display", "");
                    }
                },
                error:function(){
-                   console.log("실패")
+                  
                }
               })
                
@@ -313,14 +313,14 @@
                url:"deleteBook.bo",
                data:{boardNo:bno, userNo:userNo},
                success:function(result){
-                   console.log("성공")
+                   
                    if(result == 'Y'){
                       $("#bookmark1").css("display", "");
                        $("#bookmark2").css("display", "none");
                    }
                },
                error:function(){
-                   console.log("실패");
+                   
                }
               })
                
@@ -346,7 +346,7 @@
                    url:"likeCheck.bo",
                    data:{boardNo:bno, userNo:userNo},
                    success:function(result){
-                       console.log("성공");
+                       ;
                        if(result == 'Y'){
                           $("#like2").css("display", "");
                            $("#like1").css("display", "none");
@@ -356,7 +356,7 @@
                        }
                    },
                    error:function(result){
-                       console.log("실패");
+                       
                    }
                })
                
@@ -364,7 +364,7 @@
                    url:"bookCheck.bo",
                    data:{boardNo:bno, userNo:userNo},
                    success:function(result){
-                       console.log("성공");
+                       ;
                        if(result == 'Y'){
                           $("#bookmark2").css("display", "");
                            $("#bookmark1").css("display", "none");
@@ -374,7 +374,7 @@
                        }
                    },
                    error:function(result){
-                       console.log("실패");
+                       
                    }
                })
                
@@ -397,7 +397,7 @@
                   url:"replyList.bo",
                   data:{boardNo:bno},
                   success:function(list){
-                     console.log("댓글 메소드 탐");
+                    
                      for(let i=0; i<list.length; i++){
                         charHtml += "<div class='comment-area1'>"
                                 + "<div class='cmt_id'>" + list[i].replyWriter + "</div>"
@@ -421,7 +421,6 @@
                      
                   },
                   error:function(){
-                     console.log("댓글 불러오기 실패");
                   }
                   
                })
@@ -434,7 +433,6 @@
                      $("#countReply").text(result);
                   },
                   error:function(){
-                     console.log("댓글카운트 ajax 통신 실패");
                   }
                })
              }
@@ -477,7 +475,7 @@
                     }
                  },
                  error:function(){
-                    console.log("댓글작성 ajax 통신 실패");
+               
                  }
               })
            }
@@ -508,21 +506,17 @@
               data:{boardNo:bno},
             success:function(imgList){
                if(imgList.length > 0){
-                  console.log(imgList.length);
                   let inputHtml = "";
                   let contextPath = "<%= contextPath %>";
                   for(let i=0; i<imgList.length; i++){
-                     console.log("for문 돔");
                      inputHtml += "<img src='" + contextPath + "/" + imgList[i].filePath + "/" + imgList[i].changeName + "' width='500' height='500'>"; 
                   }
                      
                   $("#content-img").html(inputHtml);
                }else{
-                  console.log("이미지 없음");
                }
             },
             error:function(){
-               console.log("이미지 조회 ajax 통신 실패");
             }
            })
            

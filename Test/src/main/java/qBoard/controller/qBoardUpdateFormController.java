@@ -28,7 +28,7 @@ public class qBoardUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("여기까지 갔니 혹시?");
+		
 		
 		int qNo = Integer.parseInt(request.getParameter("qno"));
 		

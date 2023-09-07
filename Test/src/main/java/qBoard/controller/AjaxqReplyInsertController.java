@@ -31,10 +31,10 @@ public class AjaxqReplyInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String replyContent = request.getParameter("comment");
-		System.out.println(replyContent);
+		
 		int qNo = Integer.parseInt(request.getParameter("bno"));
 		
-		System.out.println(qNo);
+		
 		int userNo = ((Member)request.getSession().getAttribute("loginMember")).getUserNo();
 		
 		Qreply r = new Qreply();
