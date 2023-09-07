@@ -346,7 +346,6 @@ public class MemberDao {
 				close(rset);
 				close(pstmt);
 			}
-			System.out.println(list);
 			return list;
 			
 		}
@@ -559,7 +558,7 @@ public class MemberDao {
 		}
 
 
-		public int updateCompleteMt(Connection conn, String mtlist, int userNo) {
+		public int updateCompleteMt(Connection conn, String mtlist, String userId) {
 			int result = 0;
 			
 			PreparedStatement pstmt = null;
@@ -569,7 +568,7 @@ public class MemberDao {
 				pstmt = conn.prepareStatement(sql); // 미완성된 쿼리
 				
 				pstmt.setString(1, mtlist);
-				pstmt.setInt(2, userNo);			
+				pstmt.setString(2, userId);			
 				result = pstmt.executeUpdate();
 			
 			} catch (SQLException e) {

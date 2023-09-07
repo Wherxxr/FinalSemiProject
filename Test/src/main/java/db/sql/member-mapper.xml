@@ -101,7 +101,7 @@
 <entry key="updateCompleteMt">
 UPDATE MEMBER
    SET COMPLETE_MT = ?
- WHERE USER_NO = ?
+ WHERE USER_ID = ?
 </entry>
 
 <entry key="selectProfile">

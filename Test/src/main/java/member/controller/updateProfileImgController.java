@@ -96,13 +96,13 @@ public class updateProfileImgController extends HttpServlet {
 
         if (result > 0) {
         	session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
+        	response.sendRedirect(request.getContextPath() + "/profile.me");
         } else {
             session.setAttribute("errorMsg", "이미지 업로드에  실패했습니다.");
             RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
             view.forward(request, response);
         }
 
-     response.sendRedirect(request.getContextPath() + "/profile.me");
 
     }
 

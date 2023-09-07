@@ -227,15 +227,15 @@ public class MemberService {
 		return list;
 	}
 	
-	public Member updateCompleteMt(String mtlist, int userNo) {
+	public Member updateCompleteMt(String mtlist, String userId) {
 		Connection conn = getConnection();
 
-		int result = new MemberDao().updateCompleteMt(conn, mtlist, userNo);
+		int result = new MemberDao().updateCompleteMt(conn, mtlist, userId);
 		
 		Member updateMem = null;
-		
 		if (result > 0) {
 			commit(conn);
+			updateMem = new MemberDao().selectMember(conn, userId);
 		} else {
 			rollback(conn);
 		}

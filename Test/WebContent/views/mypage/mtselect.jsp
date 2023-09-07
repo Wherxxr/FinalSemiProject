@@ -70,6 +70,14 @@
             margin-left: 100px;
             margin-right: 100px;
         }
+        
+        .addmt, .mtedit {
+        font-size: 15px;
+        border: 1thin;
+        border-color: slategrey;
+        border-radius: 7%;
+        }
+
 
     </style>
 </head>
@@ -104,7 +112,7 @@
                   <option value="한라산">한라산</option>
                   <option value="황매산">황매산</option>
                 </datalist>
-            <button type="button" id="addmt">입력</button>
+            <button type="button" id="addmt" class="addmt">입력</button>
         </form>
     </div>
     <div id="itemList">등산완료 산</div>
@@ -180,12 +188,14 @@ document.addEventListener("DOMContentLoaded", function() {
 	        }).get();
 
 	        let userNo = <%= loginMember.getUserNo() %>;
+	        let userId = '<%= loginMember.getUserId() %>';
 	        
 	        // 배열을 쉼표로 연결한 문자열로 변환
 	        let mtNamesString = mtNames.join(',');
 
 	        // URL 파라미터를 포함하여 페이지 이동
-	        location.href = '<%= contextPath %>/mtselect.me?mtname=' + mtNamesString + '&userNo=' + userNo;
+	        location.href = '<%= contextPath %>/mtselect.me?mtname=' + mtNamesString + '&userNo=' + userNo +'&userId=' + userId ;
+	        
 	    });
 	});
 
