@@ -225,13 +225,18 @@
                     <div></div>
                 <%} %>
                 </div>
+                <br>
+          
             <div align="center">
                 <a href="<%= contextPath %>/todayView.to" class="btn btn-sm btn-secondary">목록가기</a>
                 <% if(loginMember != null && loginMember.getNickname().equals(t.getTodayWriter())){ %>
                 <a href="<%= contextPath %>/updateForm.to?bno=<%= t.getTodayNo() %>" class="btn btn-sm btn-warning">수정하기</a>
                 <input type="hidden" name = "bno" value="<%= t.getTodayNo() %>"/>
+            
                 <a href="<%= contextPath %>/delete.to?bno=<%= t.getTodayNo() %>" class="btn btn-sm btn-danger">삭제하기</a>
-                <% } %>
+                <% }else if(loginMember.getUserNo() == 1){ %>
+                <a href="<%= contextPath %>/delete.to?bno=<%= t.getTodayNo() %>" class="btn btn-sm btn-danger">삭제하기</a>
+                <%} %>
             </div>
             <div id="bar" align="right">
                 <button type="button" data-toggle="modal" data-target="#reportBoard">신고</button>

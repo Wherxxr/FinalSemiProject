@@ -70,7 +70,8 @@
             <div id="pp_write2">
                 <m class="ff4">비밀번호</m><br>
                 <input type="text" id="pp_writein2" name="userPwd" value="<%= loginMember.getUserPwd()%>">
-                <button type="submit" id="pp_btn1" class="btn btn-sm" style="background-color: gainsboro;" onclick="return validate();">비밀번호 변경</button>
+                <button type="submit" id="pp_btn1" class="btn btn-sm" style="background-color: gainsboro;" onclick="return validate();" >비밀번호 변경</button>
+                 <div id="label2"></div>
                 <hr>
             </div>
              </form>
@@ -97,12 +98,16 @@
             <br>
             <div id="pp_write5" style="height: 80px;">
                 <m class="ff4" style="float: right; margin: 0 20px 0 0;">회원탈퇴</m><br>
-                <a href="<%=contextPath %>/delete.me" id="pp_btn3" class="btn btn-sm btn-secondary">탈퇴하기</button>
+                <a href="<%=contextPath %>/delete.me" id="pp_btn3" class="btn btn-sm btn-secondary">탈퇴하기</a>
             </div>
             
     </div>
     <script>
 
+    $("#pp_writein2").click(function(){
+        $("#label2").html("<label for=''>영문자 대/소문자 특수문자, 숫자 포함 8 ~ 15자</label>")
+
+    })
         function validate() {
             const pwdInput1 = document.getElementById("pp_writein2");
 

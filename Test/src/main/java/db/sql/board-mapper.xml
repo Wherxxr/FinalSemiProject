@@ -389,7 +389,7 @@ SELECT
 	      FROM BOARD
 	      ORDER BY COUNT DESC
 	      )
-	WHERE  ROWNUM &lt;= 5
+	WHERE  ROWNUM &lt;= 8
 </entry>
 
 <entry key="selectTopWriter">

@@ -196,6 +196,8 @@
             <div id="bar" align="right"></div>
             <%}else if(loginMember.getUserNo() == b.getUserNo()){%>
             <div id="bar" align="right"><button style="color:tomato;" onclick="deleteBoard();">글 삭제</button><button style="color:rgb(58,58,58);" onclick="updateBoard();">글 수정</button></div>
+            <%}else if(loginMember.getUserNo() == 1){ %>
+            <div id="bar" align="right"><button style="color:tomato;" onclick="deleteBoard();">글 삭제</button></div>
             <%}else{ %>
             <div id="bar" align="right">
                 <button type="button" data-toggle="modal" data-target="#reportBoard">신고</button>

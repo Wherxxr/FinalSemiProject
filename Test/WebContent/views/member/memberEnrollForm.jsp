@@ -270,10 +270,10 @@
                             <p class="title">등력</p>
 
                             <select name="gradeNo" class="input">
-                                <option value="10">1~5년차</option>
-                                <option value="20">6~10년차</option>
-                                <option value="30">10~20년차</option>
-                                <option value="40">20년차 이상</option>
+                                <option value="10">0~2년차</option>
+                                <option value="20">2~5년차</option>
+                                <option value="30">5~10년차</option>
+                                <option value="40">10년차 이상</option>
                             </select>
 
                         </div><br>

@@ -79,21 +79,24 @@ public class updateProfileImgController extends HttpServlet {
                 	at.setFileNo(originFileNo);
                 }
                 list.add(at);
+                System.out.println(list);
             }
         }
         
         int result = new MemberService().updatePostImg(list);
         // 이미지 업로드 가능 여부에 따라 INSERT 수행
+        System.out.println(result+ "result");
+        int insertResult = 0;
         if (imageCount <= 3) {
-            int insertResult = new MemberService().insertPostImg(list);
+            insertResult = new MemberService().insertPostImg(list);
         }
-		
+		System.out.println(insertResult+"insertResult");
         int userNo2 = Integer.parseInt(userNo);
 
 		HttpSession session = request.getSession();
 		session.setAttribute("userNo", userNo2);
 
-        if (result > 0) {
+        if (result > 0 || insertResult >0 ) {
         	session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
         	response.sendRedirect(request.getContextPath() + "/profile.me");
         } else {
