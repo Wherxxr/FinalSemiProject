@@ -1,27 +1,23 @@
 <%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%
-   Board b = (Board)request.getAttribute("b");
-   // 글번호, 글제목, 글내용, 해시태그, 조회수, 닉네임, 말머리, 작성일자, 댓글수, 작성자유저번호
-   
-   String[] hashtagList = new String[20];
-   
-   if(b.getHashtag() != null){
-   String hashtag = b.getHashtag().trim().replaceAll(" ", "");
-   hashtagList = hashtag.split(",");            
-   }
-   
+	Board b = (Board)request.getAttribute("b");
+	// 글번호, 글제목, 글내용, 해시태그, 조회수, 닉네임, 말머리, 작성일자, 댓글수, 작성자유저번호
+	
+	String[] hashtagList = new String[20];
+	
+	if(b.getHashtag() != null){
+	String hashtag = b.getHashtag().trim().replaceAll(" ", "");
+	hashtagList = hashtag.split(",");            
+	}
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 - MOUNTAINEER</title>
- <!-- jQuery library -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
+<title>Insert title here</title>
 <style>
         .outer{
             width: 1200px;
@@ -158,9 +154,10 @@
     </style>
 </head>
 <body>
-    <div id="topbtn"></div>
-   <%@ include file="../common/menubar.jsp" %>
-    <div class="outer">
+	<div id="topbtn"></div>
+	<%@ include file="../common/menubar.jsp" %>
+	
+	 <div class="outer">
         <div class="wrap">
             <div id="header">
                 <div id="subject"><%= b.getCategory() %></div>
@@ -234,298 +231,7 @@
             </div>
         </div>
     </div>
-
-    <script>
-    function userProfile(userNo) {
-        // userNo를 사용하여 URL을 생성
-        location.href = '<%= contextPath %>/feedProfile.me?userNo=' + userNo;
-
-      }
-       let bno = "B<%= b.getBoardNo()%>";
-      <% if(loginMember != null){%>
-         let userNo = "<%= loginMember.getUserNo()%>";
     
-       // ----- 좋아요 관련 -----------
-        function insertLike(){
-            
-              $.ajax({
-               url:"like.bo",
-               data:{boardNo:bno, userNo:userNo},
-               success:function(result){
-                   
-                   if(result == 'Y'){
-                      $("#like1").css("display", "none");
-                       $("#like2").css("display", "");
-                      likeCount(); 
-                   }
-               },
-               error:function(){
-                   
-               }
-              })
-               
-        }
-        
-        function deleteLike(){
-            
-                $.ajax({
-                     url:"likeDelete.bo",
-                     data:{boardNo:bno, userNo:userNo},
-                     success:function(result){
-                         
-                         if(result == 'Y'){
-                            $("#like2").css("display", "none");
-                             $("#like1").css("display", "");
-                            likeCount();
-                         }
-                     },
-                     error:function(){
-                        
-                     }
-                    })
-          
-        }
-        
-        
-   
-      // ----- 북마크 관련 -----------
-
-        function insertBook(){
-            
-              $.ajax({
-               url:"book.bo",
-               data:{boardNo:bno, userNo:userNo},
-               success:function(result){
-                   
-                   if(result == 'Y'){
-                      $("#bookmark1").css("display", "none");
-                       $("#bookmark2").css("display", "");
-                   }
-               },
-               error:function(){
-                  
-               }
-              })
-               
-        }
-
-        function deleteBook(){
-            
-              $.ajax({
-               url:"deleteBook.bo",
-               data:{boardNo:bno, userNo:userNo},
-               success:function(result){
-                   
-                   if(result == 'Y'){
-                      $("#bookmark1").css("display", "");
-                       $("#bookmark2").css("display", "none");
-                   }
-               },
-               error:function(){
-                   
-               }
-              })
-               
-        }
-        
-        function likeCount(){
-           
-           $.ajax({
-              url:"countLike.bo",
-              data:{boardNo:bno},
-              success:function(count){
-                 $(".countLike").text(count);
-              }
-           })
-        }
-        
-        $(function(){
-           selectReplyList();
-           likeCount();
-               
-        // 북마크, 좋아요 체크 함수
-               $.ajax({
-                   url:"likeCheck.bo",
-                   data:{boardNo:bno, userNo:userNo},
-                   success:function(result){
-                       ;
-                       if(result == 'Y'){
-                          $("#like2").css("display", "");
-                           $("#like1").css("display", "none");
-                       }else{
-                          $("#like2").css("display", "none");
-                           $("#like1").css("display", "");                       
-                       }
-                   },
-                   error:function(result){
-                       
-                   }
-               })
-               
-               $.ajax({
-                   url:"bookCheck.bo",
-                   data:{boardNo:bno, userNo:userNo},
-                   success:function(result){
-                       ;
-                       if(result == 'Y'){
-                          $("#bookmark2").css("display", "");
-                           $("#bookmark1").css("display", "none");
-                       }else{
-                          $("#bookmark2").css("display", "none");
-                           $("#bookmark1").css("display", "");                       
-                       }
-                   },
-                   error:function(result){
-                       
-                   }
-               })
-               
-               
-        })   
-        
-          function selectReplyList(){
-             
-              // 오늘날짜
-            let today = new Date();
-            let year = today.getFullYear();
-            let month = ('0' + (today.getMonth() + 1)).slice(-2);
-            let day = ('0' + today.getDate()).slice(-2);         
-            let dateString = year + '/' + month  + '/' + day;
-           
-             // 댓글 리스트
-               let charHtml = "";
-               
-               $.ajax({
-                  url:"replyList.bo",
-                  data:{boardNo:bno},
-                  success:function(list){
-                    
-                     for(let i=0; i<list.length; i++){
-                        charHtml += "<div class='comment-area1'>"
-                                + "<div class='cmt_id'>" + list[i].replyWriter + "</div>"
-                                + "<div class='cmt_txt'>" + list[i].replyContent + "</div>";
-                            if('20' + list[i].createDate.substr(0,8) == dateString){
-                        charHtml += "<div class='cmt_etc'>" + list[i].createDate.substr(9);
-                            }else{
-                        charHtml += "<div class='cmt_etc'>" + list[i].createDate;       
-                            }
-                             if(userNo == list[i].userNo){
-                                charHtml += "<p class='deleteReply-btn' onclick='deleteReply($(this));'>삭제</p>"
-                                         + "<input type='hidden' value='" + list[i].replyNo + "'>"
-                                        + "</div></div>"; 
-                             }else{
-                                charHtml += "</div></div>";
-                             }
-                                
-                     }
-                     
-                     $("#comment-list").html(charHtml);
-                     
-                  },
-                  error:function(){
-                  }
-                  
-               })
-               
-               // 댓글 갯수
-               $.ajax({
-                  url:"countReply.bo",
-                  data:{boardNo:bno},
-                  success:function(result){
-                     $("#countReply").text(result);
-                  },
-                  error:function(){
-                  }
-               })
-             }
-          
-       
-       <%}%> 
-       
-       // 댓글 작성 함수
-       function insertReply(){
-          
-          $.ajax({
-             url:"insertReply.bo",
-             data:{
-                comment:$("#rContent").val(),
-                boardNo:bno
-             },
-             type:"post",
-             success:function(result){
-                if(result > 0){
-                   selectReplyList();
-                   $("#rContent").val("");
-                }
-             }
-             
-          })
-       }
-       
-       
-        // 댓글 삭제 함수
-      function deleteReply(e){
-           let replyNo = e.next().val();
-           
-           if(confirm("댓글을 삭제하시겠습니까?")){
-              $.ajax({
-                 url:"deleteReply.bo",
-                 data:{rno:replyNo},
-                 success:function(result){
-                    if(result > 0){
-                       selectReplyList();
-                    }
-                 },
-                 error:function(){
-               
-                 }
-              })
-           }
-     
-        }
-        
-        // 게시글 삭제 함수
-        function deleteBoard(){
-           
-           if(confirm("해당 게시글을 삭제하시겠습니까?")){
-              location.href = "<%= contextPath %>/delete.bo?bno=" + bno;
-           }
-           
-        }
-        
-        // 게시글 수정 함수
-        function updateBoard(){
-         location.href="<%= contextPath%>/updateView.bo?bno="+<%= b.getBoardNo()%>;           
-        }
-        
-        
-        
-        // 게시글 사진 불러오는 함수
-        $(function(){
-           
-           $.ajax({
-              url:"list.img",
-              data:{boardNo:bno},
-            success:function(imgList){
-               if(imgList.length > 0){
-                  let inputHtml = "";
-                  let contextPath = "<%= contextPath %>";
-                  for(let i=0; i<imgList.length; i++){
-                     inputHtml += "<img src='" + contextPath + "/" + imgList[i].filePath + "/" + imgList[i].changeName + "' width='500' height='500'>"; 
-                  }
-                     
-                  $("#content-img").html(inputHtml);
-               }else{
-               }
-            },
-            error:function(){
-            }
-           })
-           
-        })
-        
-    </script>
-
     <div class="modal" id="reportBoard">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -570,8 +276,358 @@
          </div>
             
         </div>
-    </div>
+        
+    <script>
     
+    let bno = "B<%= b.getBoardNo()%>";
+    <% if(loginMember != null){%>
+       let userNo = "<%= loginMember.getUserNo()%>";
+    <%}else{%>
+       let userNo = 0;    
+    <%}%>
+    
+    
+	function selectReplyList(){
+		
+		if(userNo != 0){
+			
+		
+        // 오늘날짜
+      let today = new Date();
+      let year = today.getFullYear();
+      let month = ('0' + (today.getMonth() + 1)).slice(-2);
+      let day = ('0' + today.getDate()).slice(-2);         
+      let dateString = year + '/' + month  + '/' + day;
+     
+       // 댓글 리스트
+         let charHtml = "";
+         
+         $.ajax({
+            url:"replyList.bo",
+            data:{boardNo:bno},
+            success:function(list){
+              
+               for(let i=0; i<list.length; i++){
+                  charHtml += "<div class='comment-area1'>"
+                          + "<div class='cmt_id'>" + list[i].replyWriter + "</div>"
+                          + "<div class='cmt_txt'>" + list[i].replyContent + "</div>";
+                      if('20' + list[i].createDate.substr(0,8) == dateString){
+                  charHtml += "<div class='cmt_etc'>" + list[i].createDate.substr(9);
+                      }else{
+                  charHtml += "<div class='cmt_etc'>" + list[i].createDate;       
+                      }
+                       if(userNo == list[i].userNo){
+                          charHtml += "<p class='deleteReply-btn' onclick='deleteReply($(this));'>삭제</p>"
+                                   + "<input type='hidden' value='" + list[i].replyNo + "'>"
+                                  + "</div></div>"; 
+                       }else{
+                          charHtml += "</div></div>";
+                       }
+                          
+               }
+               
+               $("#comment-list").html(charHtml);
+               
+            },
+            error:function(){
+            }
+            
+         })
+         
+		}
+         
+       }
+    
+ 	// 댓글 갯수
+    function countReply(){
+         $.ajax({
+            url:"countReply.bo",
+            data:{boardNo:bno},
+            success:function(result){
+               $("#countReply").text(result);
+            },
+            error:function(){
+            }
+         })
+      	   
+     }
+ 	
+ // 댓글 작성 함수
+    function insertReply(){
+    	if(userNo != 0){
+       $.ajax({
+          url:"insertReply.bo",
+          data:{
+             comment:$("#rContent").val(),
+             boardNo:bno
+          },
+          type:"post",
+          success:function(result){
+             if(result > 0){
+                selectReplyList();
+                $("#rContent").val("");
+             }
+          }
+          
+       })
+    		
+    	}
+       
+    }
+    
+    
+     // 댓글 삭제 함수
+   function deleteReply(e){
+	   if(userNo != 0){
+		   
+        let replyNo = e.next().val();
+        
+        if(confirm("댓글을 삭제하시겠습니까?")){
+           $.ajax({
+              url:"deleteReply.bo",
+              data:{rno:replyNo},
+              success:function(result){
+                 if(result > 0){
+                    selectReplyList();
+                 }
+              },
+              error:function(){
+            
+              }
+           })
+        }
+	   }
+  
+     }
+    
+    
+    $(function(){
+    	if(userNo != 0){
+    	  selectReplyList();
+          likeCount();
+          likeCheck();
+          bookCheck();
+          countReply();
+          loadImg();
+          setInterval(selectReplyList,1000);
+          setInterval(likeCount,1000);
+          setInterval(likeCheck,1000);
+          setInterval(bookCheck,1000);
+          setInterval(countReply,1000);
+          setInterval(loadImg,1000);
+    		
+    	}
+    })
+    
+    function userProfile(userNo) {
+        // userNo를 사용하여 URL을 생성
+        location.href = '<%= contextPath %>/feedProfile.me?userNo=' + userNo;
+
+      }
+    
+ // 게시글 삭제 함수
+    function deleteBoard(){
+       
+       if(confirm("해당 게시글을 삭제하시겠습니까?")){
+          location.href = "<%= contextPath %>/delete.bo?bno=" + bno;
+       }
+       
+    }
+    
+    // 게시글 수정 함수
+    function updateBoard(){
+     location.href="<%= contextPath%>/updateView.bo?bno="+<%= b.getBoardNo()%>;           
+    }
+    
+    
+    
+    // 게시글 사진 불러오는 함수
+       
+    function loadImg(){
+       $.ajax({
+          url:"list.img",
+          data:{boardNo:bno},
+        success:function(imgList){
+           if(imgList.length > 0){
+              let inputHtml = "";
+              let contextPath = "<%= contextPath %>";
+              for(let i=0; i<imgList.length; i++){
+                 inputHtml += "<img src='" + contextPath + "/" + imgList[i].filePath + "/" + imgList[i].changeName + "' width='500' height='500'>"; 
+              }
+                 
+              $("#content-img").html(inputHtml);
+           }
+        },
+        error:function(){
+        }
+       })
+    	
+    }
+       
+ 	   
+ 	// ----- 좋아요 관련 -----------
+    function insertLike(){
+    	if(userNo != 0){
+          $.ajax({
+           url:"like.bo",
+           data:{boardNo:bno, userNo:userNo},
+           success:function(result){
+               
+               if(result == 'Y'){
+                  $("#like1").css("display", "none");
+                   $("#like2").css("display", "");
+                  likeCount(); 
+               }
+           },
+           error:function(){
+               
+           }
+          })
+    		
+    	}
+           
+    }
+ 	
+    function deleteLike(){
+    	if(userNo != 0){
+    		
+        $.ajax({
+             url:"likeDelete.bo",
+             data:{boardNo:bno, userNo:userNo},
+             success:function(result){
+                 
+                 if(result == 'Y'){
+                    $("#like2").css("display", "none");
+                     $("#like1").css("display", "");
+                    likeCount();
+                 }
+             },
+             error:function(){
+                
+             }
+            })
+    	}
+  
+	}
+    
+
+ 	// ----- 북마크 관련 -----------
+    function insertBook(){
+ 		
+    	if(userNo != 0){
+    		
+        
+          $.ajax({
+           url:"book.bo",
+           data:{boardNo:bno, userNo:userNo},
+           success:function(result){
+               
+               if(result == 'Y'){
+                  $("#bookmark1").css("display", "none");
+                   $("#bookmark2").css("display", "");
+               }
+           },
+           error:function(){
+              
+           }
+          })
+           
+    	}
+    }
+ 	
+    function deleteBook(){
+        
+    	if(userNo != 0){
+    		
+    	
+        $.ajax({
+         url:"deleteBook.bo",
+         data:{boardNo:bno, userNo:userNo},
+         success:function(result){
+             
+             if(result == 'Y'){
+                $("#bookmark1").css("display", "");
+                 $("#bookmark2").css("display", "none");
+             }
+         },
+         error:function(){
+             
+         }
+        })
+         
+    	}
+  }
+    
+    function likeCount(){
+    	if(userNo != 0){
+    		
+        
+        $.ajax({
+           url:"countLike.bo",
+           data:{boardNo:bno},
+           success:function(count){
+              $(".countLike").text(count);
+           }
+        })
+    	}
+     }
+    
+ // 북마크, 좋아요 체크 함수
+   	function likeCheck(){
+   		if(userNo != 0){
+   			
+           $.ajax({
+               url:"likeCheck.bo",
+               data:{boardNo:bno, userNo:userNo},
+               success:function(result){
+                   ;
+                   if(result == 'Y'){
+                      $("#like2").css("display", "");
+                       $("#like1").css("display", "none");
+                   }else{
+                      $("#like2").css("display", "none");
+                       $("#like1").css("display", "");                       
+                   }
+               },
+               error:function(result){
+                   
+               }
+           })
+   		}
+    	
+    }
+           
+    function bookCheck(){
+    	
+    	if(userNo != 0){
+    		
+    	
+           $.ajax({
+               url:"bookCheck.bo",
+               data:{boardNo:bno, userNo:userNo},
+               success:function(result){
+                   ;
+                   if(result == 'Y'){
+                      $("#bookmark2").css("display", "");
+                       $("#bookmark1").css("display", "none");
+                   }else{
+                      $("#bookmark2").css("display", "none");
+                       $("#bookmark1").css("display", "");                       
+                   }
+               },
+               error:function(result){
+                   
+               }
+           })
+    	}
+    }
+    
+    
+    
+    </script>
+    
+    
+    </div>
     <%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

@@ -182,10 +182,10 @@ div {
 					<div id="text">등력</div>
 					
 					<select name="gradeNo" id="gradeNoSelect">
-						<option value="10">1 ~ 5년차</option>
-						<option value="20">6 ~ 10년차</option>
-						<option value="30">10 ~ 20년차</option>
-						<option value="40">20년 이상</option>
+						<option value="10">0 ~ 2년차</option>
+						<option value="20">2 ~ 5년차</option>
+						<option value="30">5 ~ 10년차</option>
+						<option value="40">10년 이상</option>
 					</select> <br>
 					<br>
 				</div>

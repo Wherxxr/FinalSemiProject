@@ -83,7 +83,7 @@
 
         .list{
             width: 100%;
-            height:100%
+            height:100%;
             /* border: 1px solid blue; */
             cursor: pointer;
         }
@@ -102,6 +102,7 @@
         .list-area>tbody>tr:hover{
             background-color: rgb(242, 242, 242);
             font-weight: bolder;
+            cursor: pointer;
         }
         .paging-area>button{
             border: none;

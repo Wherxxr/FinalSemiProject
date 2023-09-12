@@ -100,6 +100,7 @@ ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
 	font-size: 14px;
 	font-weight: 100;
 }
+
 </style>
 </head>
 <body>

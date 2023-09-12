@@ -675,7 +675,6 @@
                 $('#b2>table').html(userHtml);
             },
             error: function(xhr, status, error) {
-                console.error('Error fetching top writers:', error);
             }
         });
     });
